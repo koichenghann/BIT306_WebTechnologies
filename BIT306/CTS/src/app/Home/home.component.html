@@ -1,44 +1,52 @@
 <!-- Navbar-->
-<!--
-<nav class="nav_bar navbar navbar-expand-lg fixed-top py-3">
-  <div class="container-fluid">
-    <a href="#" class="navbar-brand text-uppercase font-weight-bold">
-      <i class="fas fa-recycle"></i>  ESWeb</a>
-      <button
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-        class="navbar-toggler navbar-toggler-right">
-          <i class="fa fa-bars"></i>
-      </button>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>CITS</span>
+    <span class="toolbar-spacer"></span>
 
-      <div id="navbarSupportedContent" class="collapse navbar-collapse">
-          <ul class="navbar-nav ml-auto">
-              <li class="nav-item active "><a routerLink="/home" routerLinkActive="active"  class="nav-link text-uppercase">Home <span class="sr-only">(current)</span></a></li>
-              <li class="nav-item "><a href="#" class="nav-link text-uppercase">About Us</a></li>
+    <button mat-button>
+      Sign up
+    </button>
 
-              <li class="nav-item ">
-                <a (click)="logout()" routerLink="/" routerLinkActive="active" class="nav-link text-uppercase" *ngIf="isAuth">logout</a>
-                <a>Logout</a>
-              </li>
+    <button mat-button>
+      Login
+    </button>
 
-              <li class="nav-item ">
-                <a routerLink="/auth/signup" routerLinkActive="active" class="nav-link text-uppercase" *ngIf="!isAuth">Sign Up</a>
-                <a>Sign Up</a>
-              </li>
+    <button mat-icon-button>
+      <mat-icon aria-hidden="false" aria-label="Example home icon">menu</mat-icon>
+    </button>
 
-              <li class="nav-item ">
-                <a routerLink="/auth/login" routerLinkActive="active" class="nav-link text-uppercase">{{isAuth ? 'go to dashboard' : 'Login'}}</a>
-                <a>Login</a>
-              </li>
-          </ul>
+
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<header>
+  <mat-grid-list cols="1" rowHeight="600px" class="bg">
+
+    <mat-grid-tile>
+      <div class="header-words">
+        <h1 class="header-title">CTIS</h1>
+        <h3 class="header-subtitle">Covid Testing Infomartion System</h3>
+        <h4 class="header-caption">Book a covid screening test with us!</h4>
+        <button mat-raised-button color="primary">
+          Book Now
+        </button>
       </div>
-  </div>
-</nav>
--->
 
-<!-- Navbar-->
-<mat-toolbar color="primary">CTS</mat-toolbar>
+
+
+
+      <mat-grid-tile-footer>
+        <div>
+          footer
+        </div>
+      </mat-grid-tile-footer>
+    </mat-grid-tile>
+
+  </mat-grid-list>
+</header>
+
+<mat-grid-list cols="1" rowHeight="600px">
+
+
+</mat-grid-list>

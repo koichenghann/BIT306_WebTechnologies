@@ -1,3 +1,53 @@
 .example-spacer {
   flex: 1 1 auto;
 }
+
+
+
+
+.toolbar-spacer{
+  flex: 1 1 auto;
+}
+
+.mat-grid-tile-footer div{
+  margin: auto;
+}
+.mat-grid-tile .mat-grid-tile-header>*, .mat-grid-tile .mat-grid-tile-footer>* {
+        padding: 0;
+        font-weight: normal;
+        font-size: inherit;
+    }
+
+
+.bg{
+  background-image: url("../image/frontliner_black.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.header-title{
+  color: white;
+  font-size: 500%;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 10px #000;
+  padding-bottom: 0.5rem;
+}
+
+.header-subtitle{
+  color: white;
+  padding-top: 1rem;
+  font-size: 250%;
+  font-weight: 300;
+}
+
+.header-caption{
+  color: white;
+  font-size: 130%;
+  font-weight: 200;
+
+}
+
+.header-words{
+  text-align: center;
+}
