@@ -50,7 +50,7 @@
 </mat-toolbar>
 
 <header>
-  <mat-grid-list cols="1" rowHeight="18:8" class="bg">
+  <mat-grid-list cols="1" rowHeight="18:7" class="bg">
 
     <mat-grid-tile>
       <div class="header-words">
@@ -67,7 +67,7 @@
 
       <mat-grid-tile-footer>
         <div>
-          Protect Yourself and Your Loved Ones from COVID-19 <button mat-stroked-button [ngStyle]="{color:'#439F9E'}">
+          Protect Yourself and Your Loved Ones from COVID-19.<button mat-stroked-button [ngStyle]="{color:'#439F9E'}">
             Learn More
           </button>
         </div>
@@ -78,11 +78,41 @@
 </header>
 
 <mat-grid-list cols="3" rowHeight="600px">
-  <mat-grid-tile>1</mat-grid-tile>
+  <mat-grid-tile>
+    <mat-card class="home-card">
+      <mat-card-header>
+        <div mat-card-avatar class="home-header-image"></div>
+        <mat-card-title>Shiba Inu</mat-card-title>
+        <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+      <mat-card-content>
+        <p>
+          The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+          A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+          bred for hunting.
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button>LIKE</button>
+        <button mat-button>SHARE</button>
+      </mat-card-actions>
+    </mat-card>
+
+  </mat-grid-tile>
   <mat-grid-tile>2</mat-grid-tile>
   <mat-grid-tile>3</mat-grid-tile>
+</mat-grid-list>
 
+<mat-divider></mat-divider>
+<mat-grid-list cols="1" rowheight="200vh">
+<mat-grid-tile>
+  <div class="center-image">
+    <h1 mat-display-1 class="font_prevent">BASIC PREVENTION</h1>
 
+    <img src="../../assets/image/advise_banner.jpg">
+  </div>
+</mat-grid-tile>
 
 
 
@@ -90,15 +120,42 @@
 
   <footer class="home_footer">
     <mat-grid-list cols="3" rowHeight="24em">
-      <mat-grid-tile>1</mat-grid-tile>
-      <mat-grid-tile>2</mat-grid-tile>
-      <mat-grid-tile>3</mat-grid-tile>
+      <mat-grid-tile>
+        <mat-list role="list">
+          <h1 mat-title>Our Sevices</h1>
+          <mat-divider></mat-divider>
+          <mat-list-item role="listitem"><a href="#" class="footer_link">Covid Screening Test Sevices</a></mat-list-item>
+          <mat-list-item role="listitem"><a href="#" class="footer_link">Drive-Thru Screening Sevices</a></mat-list-item>
+          <mat-list-item role="listitem"><a href="#" class="footer_link">Covid-19 prevention advisory</a></mat-list-item>
+        </mat-list>
+
+      </mat-grid-tile>
+
+
+      <mat-grid-tile>
+        <mat-list role="list">
+          <h1 mat-title>Our facilities</h1>
+          <mat-divider></mat-divider>
+          <mat-list-item role="listitem"><a href="#" class="footer_link">Test Centre</a></mat-list-item>
+          <mat-list-item role="listitem"><a href="#" class="footer_link">CTS Office</a></mat-list-item>
+          <mat-list-item role="listitem"><a href="#" class="footer_link">CTS laboratory</a></mat-list-item>
+        </mat-list>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-list role="list">
+          <h1 mat-title>About Us</h1>
+          <mat-divider></mat-divider>
+          <mat-list-item role="listitem"><a href="#" class="footer_link">Vision & Mission</a></mat-list-item>
+          <mat-list-item role="listitem"><a href="#" class="footer_link">Social Media</a></mat-list-item>
+          <mat-list-item role="listitem"><a href="#" class="footer_link">Contact Us</a></mat-list-item>
+        </mat-list>
+      </mat-grid-tile>
     </mat-grid-list>
 
-    <mat-grid-list cols="1" rowHeight="2.5em">
-      <mat-grid-tile>
-        <h3 mat-h3 class="footer_btm" >&copy; Team J&K | CITS 2020 </h3>
-      </mat-grid-tile>
+    <mat-grid-list cols="1" rowHeight="3em">
+      <p mat-small class="footer_btm" >&copy; Team J&K | CITS 2020 </p>
+
     </mat-grid-list>
 
 

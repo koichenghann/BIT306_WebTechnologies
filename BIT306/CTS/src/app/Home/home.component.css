@@ -65,9 +65,42 @@
 
 .footer_btm{
   text-align: center;
+  color: #373737;
+  /*#527c88*/
+}
+
+.footer_link{
+  text-decoration: none;
+  color:#373737;
+}
+
+.footer_link:hover {
+  color: #6a6d70;
 }
 
 
+.home-card {
+  max-width: 400px;
+}
+
+.home-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+
+.font_prevent{
+  color: #439F9E;
+  font-style: italic;
+  font-weight: bold;
+  font-family: "Trebuchet MS";
+  font-size: 200%;
+  /*margin-top: 2em;*/
+
+}
+.center-image{
+  text-align: center;
+  /*margin-bottom: 2em;*/
+}
 
 @media (max-width: 991.98px) {
   .header-title{

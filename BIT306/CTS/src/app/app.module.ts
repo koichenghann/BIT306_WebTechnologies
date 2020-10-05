@@ -22,6 +22,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatListModule } from '@angular/material/list';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatCardModule } from '@angular/material/card';
 
 
 @NgModule({
@@ -44,7 +46,9 @@ import { MatSelectModule } from '@angular/material/select';
     MatFormFieldModule,
     MatListModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDividerModule,
+    MatCardModule
 
   ],
   providers: [],
