@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule, Routes } from '@angular/router';
+import { routing } from './app.routing';
 
 import { AppComponent } from './app.component';
 import { sidenavComponent } from './side-nav-component/side-nav.component'
@@ -9,7 +11,8 @@ import { sidenavComponent } from './side-nav-component/side-nav.component'
 import { CtsLoginComponent } from './CTS-Login/login.component';
 import { CtsSignupComponent } from './CTS-Signup/signup.component';
 import { HomeComponent } from './Home/home.component';
-
+import { TestCentreFormComponent } from './TestCentre/test-centre-form/test-centre-form.component';
+import { TestCentreProfileComponent } from './TestCentre/test-centre-profile/test-centre-profile.component';
 
 
 //Angular Material
@@ -26,16 +29,24 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatCardModule } from '@angular/material/card';
 
 
+// const appRoutes: Routes = [
+//   {path: 'TestCentreForm', component: TestCentreFormComponent}
+//   //{path: 'list', component: PostListComponent}
+// ];
+
 @NgModule({
   declarations: [
     AppComponent,
     CtsLoginComponent,
     CtsSignupComponent,
     HomeComponent,
-    sidenavComponent
+    sidenavComponent,
+    TestCentreFormComponent,
+    TestCentreProfileComponent
 
   ],
   imports: [
+    routing,
     BrowserModule,
     BrowserAnimationsModule,
     MatToolbarModule,
