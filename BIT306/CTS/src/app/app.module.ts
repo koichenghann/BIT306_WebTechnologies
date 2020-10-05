@@ -1,12 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
+import { sidenavComponent } from './side-nav-component/side-nav.component'
+
 
 import { CtsLoginComponent } from './CTS-Login/login.component';
 import { CtsSignupComponent } from './CTS-Signup/signup.component';
 import { HomeComponent } from './Home/home.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 
 //Angular Material
@@ -14,13 +17,20 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatListModule } from '@angular/material/list';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     CtsLoginComponent,
     CtsSignupComponent,
-    HomeComponent
+    HomeComponent,
+    sidenavComponent
 
   ],
   imports: [
@@ -29,7 +39,13 @@ import { MatButtonModule } from '@angular/material/button';
     MatToolbarModule,
     MatIconModule,
     MatGridListModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSidenavModule,
+    MatFormFieldModule,
+    MatListModule,
+    MatInputModule,
+    MatSelectModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

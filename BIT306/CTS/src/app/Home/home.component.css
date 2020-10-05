@@ -2,6 +2,11 @@
   flex: 1 1 auto;
 }
 
+.logo_icon{
+  font-style: italic;
+  font-family:"Trebuchet MS";
+}
+
 
 
 
@@ -20,9 +25,10 @@
 
 
 .bg{
-  background-image: url("../image/frontliner_black.png");
+  background-image: url("../../assets/image/frontliner_black.png");
   background-repeat: no-repeat;
-  background-attachment: fixed;
+  background-position: 50% 25%;
+  background-attachment: local;
   background-size: cover;
 }
 
@@ -50,4 +56,86 @@
 
 .header-words{
   text-align: center;
+}
+
+.home_footer{
+  background-color: #A5C5C3;
+}
+
+
+.footer_btm{
+  text-align: center;
+}
+
+
+
+@media (max-width: 991.98px) {
+  .header-title{
+    font-size: 500%;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 10px #000;
+    padding-bottom: 0.5rem;
+  }
+
+  .header-subtitle{
+    padding-top: 1rem;
+    font-size: 250%;
+    font-weight: 300;
+  }
+
+  .header-caption{
+    font-size: 130%;
+    font-weight: 200;
+
+  }
+}
+
+
+@media (max-width:768px){
+  .header-title{
+    font-size: 300%;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 10px #000;
+    padding-bottom: 0.5rem;
+  }
+
+  .header-subtitle{
+    padding-top: 1rem;
+    font-size: 150%;
+    font-weight: 300;
+  }
+
+  .header-caption{
+    font-size: 80%;
+    font-weight: 200;
+    /*display: none;*/
+
+  }
+}
+
+@media (max-width:576px){
+  .header-title{
+    font-size: 150%;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 10px #000;
+    padding-bottom: 0rem;
+    /*display: none;*/
+  }
+
+  .header-subtitle{
+    padding-top: -2rem;
+    font-size: 80%;
+    font-weight: 300;
+  }
+
+  .header-caption{
+    font-size: 60%;
+    font-weight: 200;
+    /*display: none;*/
+
+  }
+
+  .bg{
+    background-position: 50% 50%;
+  }
 }

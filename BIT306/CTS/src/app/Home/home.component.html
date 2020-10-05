@@ -1,7 +1,38 @@
 <!-- Navbar-->
-<mat-toolbar color="primary">
+
+
+
+<mat-drawer-container class="example-container" [hasBackdrop]="true">
+  <mat-drawer #drawer value="over" [ngStyle]="{width: '12rem'}" > </mat-drawer>
+  <mat-drawer-content>
+    <!--
+    <mat-form-field>
+      <mat-label>Sidenav mode</mat-label>
+      <mat-select #mode value="side">
+        <mat-option value="side">Side</mat-option>
+        <mat-option value="over">Over</mat-option>
+        <mat-option value="push">Push</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Has backdrop</mat-label>
+      <mat-select #hasBackdrop>
+        <mat-option>Unset</mat-option>
+        <mat-option [value]="true">True</mat-option>
+        <mat-option [value]="false">False</mat-option>
+      </mat-select>
+    </mat-form-field>
+    -->
+
+
+
+<mat-toolbar [ngStyle]="{background:'#439F9E' , color:'#fff'}">
   <mat-toolbar-row>
-    <span>CITS</span>
+    <button mat-icon-button>
+      <mat-icon (click)="drawer.toggle()" aria-hidden="true" aria-label="homeicon">menu</mat-icon>
+    </button>
+    <span class="logo_icon"><i class="fas fa-heartbeat"></i> CITS</span>
+    <!--<img src="../../assets/image/CITS_icon.PNG">-->
     <span class="toolbar-spacer"></span>
 
     <button mat-button>
@@ -12,23 +43,21 @@
       Login
     </button>
 
-    <button mat-icon-button>
-      <mat-icon aria-hidden="false" aria-label="Example home icon">menu</mat-icon>
-    </button>
+
 
 
   </mat-toolbar-row>
 </mat-toolbar>
 
 <header>
-  <mat-grid-list cols="1" rowHeight="600px" class="bg">
+  <mat-grid-list cols="1" rowHeight="18:8" class="bg">
 
     <mat-grid-tile>
       <div class="header-words">
         <h1 class="header-title">CTIS</h1>
         <h3 class="header-subtitle">Covid Testing Infomartion System</h3>
-        <h4 class="header-caption">Book a covid screening test with us!</h4>
-        <button mat-raised-button color="primary">
+        <h4 class="header-caption">Get yourself a covid screening test with us!</h4>
+        <button mat-raised-button [ngStyle]="{background:'#439F9E' , color:'#fff'}">
           Book Now
         </button>
       </div>
@@ -38,7 +67,9 @@
 
       <mat-grid-tile-footer>
         <div>
-          footer
+          Protect Yourself and Your Loved Ones from COVID-19 <button mat-stroked-button [ngStyle]="{color:'#439F9E'}">
+            Learn More
+          </button>
         </div>
       </mat-grid-tile-footer>
     </mat-grid-tile>
@@ -46,7 +77,35 @@
   </mat-grid-list>
 </header>
 
-<mat-grid-list cols="1" rowHeight="600px">
+<mat-grid-list cols="3" rowHeight="600px">
+  <mat-grid-tile>1</mat-grid-tile>
+  <mat-grid-tile>2</mat-grid-tile>
+  <mat-grid-tile>3</mat-grid-tile>
+
+
+
 
 
 </mat-grid-list>
+
+  <footer class="home_footer">
+    <mat-grid-list cols="3" rowHeight="24em">
+      <mat-grid-tile>1</mat-grid-tile>
+      <mat-grid-tile>2</mat-grid-tile>
+      <mat-grid-tile>3</mat-grid-tile>
+    </mat-grid-list>
+
+    <mat-grid-list cols="1" rowHeight="2.5em">
+      <mat-grid-tile>
+        <h3 mat-h3 class="footer_btm" >&copy; Team J&K | CITS 2020 </h3>
+      </mat-grid-tile>
+    </mat-grid-list>
+
+
+
+
+  </footer>
+
+  </mat-drawer-content>
+</mat-drawer-container>
+
