@@ -14,6 +14,8 @@ import { HomeComponent } from './Home/home.component';
 import { TestCentreFormComponent } from './TestCentre/test-centre-form/test-centre-form.component';
 import { TestCentreProfileComponent } from './TestCentre/test-centre-profile/test-centre-profile.component';
 
+import { FormsModule }   from '@angular/forms';
+
 
 //Angular Material
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -48,6 +50,7 @@ import { MatCardModule } from '@angular/material/card';
   imports: [
     routing,
     BrowserModule,
+    FormsModule,
     BrowserAnimationsModule,
     MatToolbarModule,
     MatIconModule,
