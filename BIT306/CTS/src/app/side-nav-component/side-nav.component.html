@@ -1,4 +1,4 @@
-<mat-sidenav-container
+<!--<mat-sidenav-container
     class="example-container" (backdropClick)="close('backdrop')" *ngIf="shouldRun">
   <mat-sidenav #sidenav (keydown.escape)="close('escape')" disableClose>
     <p><button mat-button (click)="close('toggle button')">Toggle</button></p>
@@ -7,5 +7,69 @@
   <mat-sidenav-content>
     <p><button mat-button (click)="sidenav.open()">Open</button></p>
     <p>Closed due to: {{reason}}</p>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+-->
+
+<mat-sidenav-container class="sidenav-container" >
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+
+    fixedInViewport="false"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false">
+
+    <mat-toolbar class="toolbar_title" > CTIS | Admin </mat-toolbar>
+
+    <mat-nav-list>
+      <a routerLink="/patient-dashboard" routerLinkActive="active-link" class="sidenav_item" mat-list-item href="#"><mat-icon>home</mat-icon><span>&nbsp; Dashboard</span></a>
+      <a routerLink="/" routerLinkActive="active-link" class="sidenav_item" mat-list-item href="#"><mat-icon>add_location</mat-icon><span>&nbsp; Register Test Centre </span></a>
+      <a routerLink="/" routerLinkActive="active-link" class="sidenav_item" mat-list-item href="#"><mat-icon>edit</mat-icon><span>&nbsp; Record Test </span></a>
+      <a routerLink="/" routerLinkActive="active-link" class="sidenav_item" mat-list-item href="#"><mat-icon>update</mat-icon><span>&nbsp; Manage Test Kit Stock </span></a>
+      <a (click)='logout()' routerLink="/home" routerLinkActive="active-link" class="sidenav_item" mat-list-item href="#"><mat-icon>exit_to_app</mat-icon><span> &nbsp;  Logout</span></a>
+
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="toolbar_2">
+    <mat-toolbar style="color:white">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+
+      <span class="spacer">
+        <span class="logo_icon"><i class="fas fa-heartbeat"></i> CITS</span>
+      </span>
+
+    <div class="account_menu">
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="account menu button">
+          <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <mat-icon>account_circle</mat-icon>
+          <span>Admin</span>
+        </button>
+
+       <button mat-menu-item>
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Logout</span>
+      </button>
+    </mat-menu>
+   </div>
+
+
+
+    </mat-toolbar>
+  </div>
+    <!-- Add Content Here -->
+    <ng-content></ng-content>
   </mat-sidenav-content>
 </mat-sidenav-container>
