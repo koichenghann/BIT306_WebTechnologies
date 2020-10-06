@@ -60,13 +60,17 @@
 
 .home_footer{
   background-color: #A5C5C3;
+  padding-top: 2em;
+
 }
 
 
 .footer_btm{
   text-align: center;
-  color: #373737;
+  color: #000;
   font-style: italic;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
   /*#527c88*/
 }
 
@@ -81,12 +85,25 @@
 
 
 .home-card {
-  max-width: 400px;
+  margin: 2em;
+  padding-bottom: 2em;
 }
 
 .home-header-image {
   background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
   background-size: cover;
+}
+
+.card-button{
+  text-align: center;
+}
+
+.text-justify{
+  text-align: justify;
+}
+
+.element-center{
+  text-align: center;
 }
 
 .font_prevent{
@@ -95,17 +112,32 @@
   font-weight: bold;
   font-family: "Trebuchet MS";
   font-size: 200%;
-  margin-top: 2em;
-
+  padding-top: 1em;
 }
+
 .center-image{
   text-align: center;
+  margin-top: 2em;
   margin-bottom: 2em;
 }
 
 .img-size{
   max-width: 100%;
   height: auto;
+}
+
+.content{
+  padding-left: 3em;
+  margin-bottom: 3em;
+}
+.content > mat-card {
+  min-width: 48em;
+}
+
+.hr_line{
+  width:16%;
+  color: #439F9E;
+  background-color:#439F9E;
 }
 
 @media (max-width: 991.98px) {
@@ -128,6 +160,9 @@
 
   }
 }
+
+
+
 
 
 @media (max-width:768px){
@@ -158,23 +193,39 @@
     text-transform: uppercase;
     text-shadow: 1px 1px 10px #000;
     padding-bottom: 0rem;
-    /*display: none;*/
+    display: none;
   }
 
   .header-subtitle{
-    padding-top: -2rem;
-    font-size: 80%;
+    padding-top: -5em;
+    font-size: 120%;
     font-weight: 300;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 10px #000;
+    font-style: italic;
   }
 
   .header-caption{
     font-size: 60%;
     font-weight: 200;
-    /*display: none;*/
+    display: none;
 
   }
 
   .bg{
     background-position: 50% 50%;
   }
+
+  .content > mat-card {
+    min-width: 12em;
+  }
+
+  .font_prevent{
+    font-size: 120%;
+  }
+
+  .hr_line{
+    margin-top: -1em;
+  }
+
 }
