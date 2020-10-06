@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule, FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { FormsModule, FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors, FormControl } from '@angular/forms';
 import { NgForm } from '@angular/forms';
 import { User } from '../User/user.model';
 import { UserService } from '../User/user.service';
 
-function usernameIsUniqueValidator (control: AbstractControl):{[key: string]: boolean} | null {
-  var us: UserService = new UserService;
-  if(!us.checkUsernameIsUnique(control.value)){
-    return {'isUnique': true}
-  }
-  return null;
-};
+// function usernameIsUniqueValidator (control: AbstractControl):{[key: string]: boolean} | null {
+//   var us: UserService = userService;
+//   if(!us.checkUsernameIsUnique(control.value)){
+//     return {'isUnique': true}
+//   }
+//   return null;
+// };
 
 @Component({
   selector: 'app-cts-signup',
@@ -20,27 +20,26 @@ function usernameIsUniqueValidator (control: AbstractControl):{[key: string]: bo
 
 export class CtsSignupComponent {
   userForm: FormGroup;
-  constructor(public userService: UserService, private fb: FormBuilder) { }
+  constructor(public userService: UserService, private fb: FormBuilder) {
 
-
+  }
 
   ngOnInit(): void {
-
     this.userForm = this.fb.group({
       username: ['', [
-        usernameIsUniqueValidator,
+        this.usernameIsUniqueValidator.bind(this),
         Validators.required,
-        Validators.minLength(5)
+        Validators.minLength(7)
       ]],
       password: ['', [
         Validators.required,
-        Validators.minLength(5)
+        Validators.minLength(7)
       ]],
       usertype: ['', [
         Validators.required,
       ]],
       officertype: ['', [
-        Validators.required,
+        // Validators.required,
       ]],
       contact: ['', [
         // Validators.required,
@@ -49,14 +48,10 @@ export class CtsSignupComponent {
         // Validators.required,
       ]]
     })
-
-
-
   }
 
-  checkUsernameIsUnique() {
-    return this.userService.checkUsernameIsUnique(this.username.value);
-  }
+
+
 
   get username(){
     return this.userForm.get('username');
@@ -77,15 +72,6 @@ export class CtsSignupComponent {
     return this.userForm.get('address');
   }
 
-
-
-  // id = "";
-  // username = "";
-  // password = "";
-  // contact = "";
-  // address = "";
-  // usertype = "";
-  // officertype = "";
   usertypeflex = "100%";
   actualUsertype = "";
   usernameIsUnique = true;
@@ -98,6 +84,13 @@ export class CtsSignupComponent {
     {value: 'Tester', viewValue: 'Tester'},
     {value: 'TestCentreManager', viewValue: 'Test Centre Manager'}];
 
+    usernameIsUniqueValidator(control: FormControl): ValidationErrors {
+      if(!this.userService.checkUsernameIsUnique(control.value)){
+        return {isUnique: true};
+      }
+      return null;
+    }
+
   userTypeChangeHandler(){
     this.usertypeflex = "100%";
     this.officertype.reset();
@@ -107,8 +100,22 @@ export class CtsSignupComponent {
   }
 
   submitHandler(){
-    console.log(this.usertype.value);
-    this.userService.checkUsernameIsUnique('test');
+    var actualUsertype = this.usertype.value;
+    if (this.usertype.value == 'Officer') {
+      actualUsertype = this.officertype.value;
+    }
+
+    this.userService.register(
+      this.username.value,
+      this.password.value,
+      actualUsertype,
+      this.contact.value,
+      this.address.value
+    );
+    this.userForm.reset();
+    for (let name in this.userForm.controls) {
+      this.userForm.controls[name].setErrors(null);
+    }
   }
 
 

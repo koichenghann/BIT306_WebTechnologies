@@ -19,5 +19,18 @@ mat-form-field{
 }
 
 .form-button-group{
-  text-align: right;
+  text-align: center;
+}
+.form-button-group a{
+  color: blue;
+  text-decoration: none;
+}
+.form-button-group a:hover{
+  color: blue;
+  text-decoration: underline;
+}
+#submitButton{
+  width: 100%;
+  padding: 0.4em 0;
+  margin-bottom: 1em;
 }
