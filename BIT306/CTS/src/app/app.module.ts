@@ -13,6 +13,8 @@ import { CtsSignupComponent } from './CTS-Signup/signup.component';
 import { HomeComponent } from './Home/home.component';
 import { TestCentreFormComponent } from './TestCentre/test-centre-form/test-centre-form.component';
 import { TestCentreProfileComponent } from './TestCentre/test-centre-profile/test-centre-profile.component';
+import { PatientDashboardComponent } from'./Patient/Patient-dashboard/patient-dashboard.component';
+import { PatientNavComponent } from'./Patient/Patient-nav/patient-nav.component';
 
 import { FormsModule }   from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -30,6 +32,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatCardModule } from '@angular/material/card';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatMenuModule } from '@angular/material/menu';
+
 
 
 // const appRoutes: Routes = [
@@ -45,7 +49,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     HomeComponent,
     sidenavComponent,
     TestCentreFormComponent,
-    TestCentreProfileComponent
+    TestCentreProfileComponent,
+    PatientDashboardComponent,
+    PatientNavComponent
 
   ],
   imports: [
@@ -65,7 +71,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatSelectModule,
     MatDividerModule,
     MatCardModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatMenuModule
 
   ],
   providers: [],

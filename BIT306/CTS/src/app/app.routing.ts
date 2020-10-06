@@ -4,6 +4,7 @@ import { TestCentreProfileComponent } from './TestCentre/test-centre-profile/tes
 import { HomeComponent } from './Home/home.component';
 import { CtsLoginComponent } from './CTS-Login/login.component';
 import { CtsSignupComponent } from './CTS-Signup/signup.component';
+import { PatientDashboardComponent } from './Patient/Patient-dashboard/patient-dashboard.component';
 
 
 const APP_ROUTES: Routes = [
@@ -16,7 +17,8 @@ const APP_ROUTES: Routes = [
   {path:'test-centre-forms', component: TestCentreFormComponent},
   {path:'test-centre-profile', component: TestCentreProfileComponent},
   {path:'signup', component: CtsSignupComponent},
-  {path:'login', component: CtsLoginComponent}
+  {path:'login', component: CtsLoginComponent},
+  {path:'patient-dashboard', component: PatientDashboardComponent}
 ];
 
 export const routing = RouterModule.forRoot(APP_ROUTES);

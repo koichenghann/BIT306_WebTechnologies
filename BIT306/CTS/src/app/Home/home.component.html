@@ -1,15 +1,5 @@
 <!-- Navbar-->
 
-
-<!--
-<mat-drawer-container class="example-container" [hasBackdrop]="true">
-  <mat-drawer #drawer value="over" [ngStyle]="{width: '12rem'}" > </mat-drawer>
-  <mat-drawer-content>
-
-  </mat-drawer-content>
-</mat-drawer-container>
--->
-
 <mat-toolbar [ngStyle]="{background:'#439F9E' , color:'#fff'}">
   <mat-toolbar-row>
     <!--
@@ -18,15 +8,15 @@
     </button>
     -->
     <span class="logo_icon"><i class="fas fa-heartbeat"></i> CITS</span>
-    <!--<img src="../../assets/image/CITS_icon.PNG">-->
+    
     <span class="toolbar-spacer"></span>
 
     <button mat-button>
-      Sign up
+      <i class="fas fa-user-plus"></i> Sign Up
     </button>
 
     <button mat-button>
-      Login
+      <i class="fas fa-sign-in-alt"></i> Login
     </button>
 
 
@@ -50,9 +40,11 @@
 
       <mat-grid-tile-footer>
         <div>
-          Protect Yourself and Your Loved Ones from COVID-19.<button mat-stroked-button [ngStyle]="{color:'#439F9E'}">
+          Protect Yourself and Your Loved Ones from COVID-19.
+          <a href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019/question-and-answers-hub/q-a-detail/q-a-on-covid-19-and-masks"
+            mat-stroked-button [ngStyle]="{color:'#439F9E'}">
             Learn More
-          </button>
+          </a>
         </div>
       </mat-grid-tile-footer>
     </mat-grid-tile>
@@ -76,9 +68,9 @@
         <mat-card-content>
           <h1>Covid Screening Test</h1>
           <p class="text-justify">
-            The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-            A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-            bred for hunting.
+            CTIS is offering COVID-19 nasal and throat swab test at RM250 for self-paying patients.
+            Appointment must be made at least 24 hours prior to the test date. Result will be made available within 24 - 72 hours.
+            All tests will be conducted in-house at CTIS Test Centre.
           </p>
 
         </mat-card-content>
@@ -97,16 +89,16 @@
           <mat-card-content>
             <h1>Drive-Thru Screening Services</h1>
             <p class="text-justify">
-              The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-              A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-              bred for hunting.
+              CITS is providing COVID-19 Drive-Thru Screening Services. All screening services is available by appointments only.
+              Appointment must be made at least 24 hours prior to the test date. Result will be made available within 24 - 72 hours.
+              All tests will be conducted drive-Thru at CTIS Test Centre.
             </p>
 
           </mat-card-content>
 
           <mat-card-actions>
             <div class="card-button">
-              <a mat-raised-button [ngStyle]="{background:'#439F9E' , color:'#fff'}">Learn More</a>
+              <a mat-raised-button [ngStyle]="{background:'#439F9E' , color:'#fff'}">Book Appointment</a>
             </div>
           </mat-card-actions>
 
@@ -120,9 +112,10 @@
             <mat-card-content>
               <h1>Covid-19 prevention advisory</h1>
               <p class="text-justify">
-                The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-                A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-                bred for hunting.
+                Protect yourself and others from COVID-19.
+                Learn when and how you should wear a mask, what type of masks is recommended.
+                CTIS provides guidance and resources for employers and workers on the control and prevention of COVID-19.
+                Find out more about the coronavirus with us.
               </p>
 
             </mat-card-content>
