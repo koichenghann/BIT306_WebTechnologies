@@ -1,10 +1,17 @@
-.form-card{
-  margin: auto;
-  margin: 10% auto;
-  padding: 0;
-  width: 35em;
+.wrapper{
+  background-color: #439F9E;/*#A5C5C3*/
+  height: 100%;
+  max-height: 100%;
+  max-width: 100%;
 }
-
+mat-card{
+  margin: auto;
+  /* margin: 10% auto; */
+  padding: 0;
+  max-width: 35em;
+  max-height: 100%;
+  display: block;
+}
 
 mat-card-header{
   background-color: grey;

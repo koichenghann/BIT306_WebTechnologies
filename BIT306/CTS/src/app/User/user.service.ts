@@ -52,5 +52,10 @@ export class UserService {
     return this.users;
   }
 
-  
+  synceUsers(){
+
+  }
+  downloadUsers(){
+
+  }
 }
