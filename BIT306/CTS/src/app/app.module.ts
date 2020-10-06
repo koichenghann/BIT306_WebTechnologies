@@ -14,6 +14,7 @@ import { HomeComponent } from './Home/home.component';
 import { TestCentreFormComponent } from './TestCentre/test-centre-form/test-centre-form.component';
 import { TestCentreProfileComponent } from './TestCentre/test-centre-profile/test-centre-profile.component';
 import { PatientDashboardComponent } from'./Patient/Patient-dashboard/patient-dashboard.component';
+import { PatientNavComponent } from'./Patient/Patient-nav/patient-nav.component';
 
 import { FormsModule }   from '@angular/forms';
 
@@ -49,7 +50,8 @@ import { MatMenuModule } from '@angular/material/menu';
     sidenavComponent,
     TestCentreFormComponent,
     TestCentreProfileComponent,
-    PatientDashboardComponent
+    PatientDashboardComponent,
+    PatientNavComponent
 
   ],
   imports: [
