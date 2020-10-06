@@ -1,18 +1,23 @@
 .form-card{
   margin: auto;
   margin: 20%;
-  padding: 2%;
-}
-
-mat-card-content{
-
+  padding: 0;
 }
 
 mat-card-header{
-  padding-bottom: 2%;
+  padding: 1em 0 0.2em 1em;
+  text-align:center;
+
+  background-color: grey;
+  border-radius: 4px 4px 0 0;
 }
+mat-card-content{
+  padding: 2em;
+}
+
+
 mat-form-field{
- width: 100%;
+  width: 100%;
 }
 
 .form-button-group{

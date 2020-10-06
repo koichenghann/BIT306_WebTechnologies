@@ -56,7 +56,7 @@ export class TestCentreFormComponent implements OnInit {
       return;
     }
 
-    this.testCentreService.addTestCentre(form.value.id, form.value.officer, form.value.state, form.value.address, form.value.contact, form.value.copacity);
+    this.testCentreService.addTestCentre(form.value.id, form.value.officer, form.value.state, form.value.address, form.value.contact, form.value.capacity);
     form.resetForm();
     this.tcid = this.testCentreService.generateNewId();
     this.tcofficer = this.currentOfficer;
