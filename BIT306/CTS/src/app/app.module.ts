@@ -18,6 +18,14 @@ import { PatientNavComponent } from'./Patient/Patient-nav/patient-nav.component'
 import { PatientViewHistoryComponent } from './Patient/Patient-view-history/patient-view-history.component';
 import { UserService } from './User/user.service';
 
+
+import { TesterDashboardComponent } from './Tester/Tester-dashboard/tester-dashboard.component';
+import { TesterNavComponent } from './Tester/Tester-nav/tester-nav.component';
+import { TesterNewTestComponent } from './Tester/Tester-new-test/tester-new-test.component';
+import { TesterUpdateTestComponent } from './Tester/Tester-update-test/tester-update-test.component';
+
+
+
 import { FormsModule }   from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -41,6 +49,7 @@ import { MatTableModule } from '@angular/material/table';
 
 
 
+
 // const appRoutes: Routes = [
 //   {path: 'TestCentreForm', component: TestCentreFormComponent}
 //   //{path: 'list', component: PostListComponent}
@@ -57,7 +66,11 @@ import { MatTableModule } from '@angular/material/table';
     TestCentreProfileComponent,
     PatientDashboardComponent,
     PatientNavComponent,
-    PatientViewHistoryComponent
+    PatientViewHistoryComponent,
+    TesterDashboardComponent,
+    TesterNavComponent,
+    TesterNewTestComponent,
+    TesterUpdateTestComponent
 
   ],
   imports: [
