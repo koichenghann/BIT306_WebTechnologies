@@ -33,7 +33,7 @@ const ELEMENT_DATA: TestElement[] = [
   {
     name: 'Lionel Messi',
     testID: '00001',
-    testStatus: 'Negative',
+    testStatus: 'Completed',
     patientType: 'Returnee',
     description: `Hydrogen is a chemical element with symbol H and atomic number 1. With a standard
         atomic weight of 1.008, hydrogen is the lightest element on the periodic table.`,
@@ -41,7 +41,7 @@ const ELEMENT_DATA: TestElement[] = [
   }, {
     name: 'Sadio Mane',
     testID: '00002',
-    testStatus: 'Positive',
+    testStatus: 'Completed',
     patientType: 'Infected',
     description: `Helium is a chemical element with symbol He and atomic number 2. It is a
         colorless, odorless, tasteless, non-toxic, inert, monatomic gas, the first in the noble gas
@@ -51,7 +51,7 @@ const ELEMENT_DATA: TestElement[] = [
 
     name: 'Mo Salah',
     testID: '00003',
-    testStatus: 'Negative',
+    testStatus: 'Pending',
     patientType: 'Suspected',
     description: `Lithium is a chemical element with symbol Li and atomic number 3. It is a soft,
         silvery-white alkali metal. Under standard conditions, it is the lightest metal and the

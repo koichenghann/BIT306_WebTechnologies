@@ -47,6 +47,14 @@
   <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
 </table>
 </mat-card-content>
+
+<mat-card-actions>
+  <mat-paginator [length]="100"
+              [pageSize]="10"
+              [pageSizeOptions]="[5, 10, 25, 100]">
+</mat-paginator>
+
+</mat-card-actions>
 </mat-card>
 </main>
 </patient-nav>

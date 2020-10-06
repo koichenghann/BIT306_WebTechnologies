@@ -15,7 +15,7 @@ import { TestCentreFormComponent } from './TestCentre/test-centre-form/test-cent
 import { TestCentreProfileComponent } from './TestCentre/test-centre-profile/test-centre-profile.component';
 import { PatientDashboardComponent } from'./Patient/Patient-dashboard/patient-dashboard.component';
 import { PatientNavComponent } from'./Patient/Patient-nav/patient-nav.component';
-
+import { PatientViewHistoryComponent } from './Patient/Patient-view-history/patient-view-history.component';
 import { UserService } from './User/user.service';
 
 import { FormsModule }   from '@angular/forms';
@@ -35,8 +35,9 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatCardModule } from '@angular/material/card';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatMenuModule } from '@angular/material/menu';
-import { PatientViewHistoryComponent } from './Patient/Patient-view-history/patient-view-history.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
+
 
 
 
@@ -78,7 +79,8 @@ import { MatTableModule } from '@angular/material/table';
     MatCardModule,
     FlexLayoutModule,
     MatMenuModule,
-    MatTableModule
+    MatTableModule,
+    MatPaginatorModule
 
   ],
   providers: [
