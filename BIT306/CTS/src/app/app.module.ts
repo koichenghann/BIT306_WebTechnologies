@@ -15,7 +15,7 @@ import { TestCentreFormComponent } from './TestCentre/test-centre-form/test-cent
 import { TestCentreProfileComponent } from './TestCentre/test-centre-profile/test-centre-profile.component';
 
 import { FormsModule }   from '@angular/forms';
-
+import { ReactiveFormsModule } from '@angular/forms';
 
 //Angular Material
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -52,6 +52,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     routing,
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     MatToolbarModule,
     MatIconModule,

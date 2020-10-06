@@ -26,7 +26,7 @@ export class TestCentreService {
     console.log('add ran' + this.getTestCentres());
   }
 
-  saveTestCentre(){
+  updateTestCentre(){
 
   }
 }
