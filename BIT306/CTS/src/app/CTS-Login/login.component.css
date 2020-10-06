@@ -1,0 +1,36 @@
+.form-card{
+  margin: auto;
+  margin: 20%;
+  padding: 0;
+}
+
+mat-card-header{
+  padding: 1em 0 0.2em 1em;
+  background-color: grey;
+  border-radius: 4px 4px 0 0;
+}
+mat-card-content{
+  padding: 2em;
+}
+
+
+mat-form-field{
+  width: 100%;
+}
+
+.form-button-group{
+  text-align: center;
+}
+.form-button-group a{
+  color: blue;
+  text-decoration: none;
+}
+.form-button-group a:hover{
+  color: blue;
+  text-decoration: underline;
+}
+#submitButton{
+  width: 100%;
+  padding: 0.4em 0;
+  margin-bottom: 1em;
+}

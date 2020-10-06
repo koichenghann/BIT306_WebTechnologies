@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule, FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors, FormControl } from '@angular/forms';
-import { NgForm } from '@angular/forms';
-import { User } from '../User/user.model';
+import { FormBuilder, FormGroup, Validators, ValidationErrors, FormControl } from '@angular/forms';
 import { UserService } from '../User/user.service';
 
 // function usernameIsUniqueValidator (control: AbstractControl):{[key: string]: boolean} | null {
@@ -20,9 +18,7 @@ import { UserService } from '../User/user.service';
 
 export class CtsSignupComponent {
   userForm: FormGroup;
-  constructor(public userService: UserService, private fb: FormBuilder) {
-
-  }
+  constructor(public userService: UserService, private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.userForm = this.fb.group({
@@ -49,6 +45,7 @@ export class CtsSignupComponent {
       ]]
     })
   }
+
 
 
 
@@ -94,6 +91,7 @@ export class CtsSignupComponent {
   userTypeChangeHandler(){
     this.usertypeflex = "100%";
     this.officertype.reset();
+    this.officertype.setErrors(null);
     if (this.usertype.value == 'Officer') {
       this.usertypeflex = "50%";
     }
@@ -116,6 +114,7 @@ export class CtsSignupComponent {
     for (let name in this.userForm.controls) {
       this.userForm.controls[name].setErrors(null);
     }
+    this.userForm.setErrors({ 'invalid': true });
   }
 
 
