@@ -7,6 +7,7 @@ import { HomeComponent } from './Home/home.component';
 const APP_ROUTES: Routes = [
   {path:'', redirectTo: '/home', pathMatch: 'full'},
   {path:'1', redirectTo: '/test-centre-forms', pathMatch: 'full'},
+  {path:'2', redirectTo: '/test-centre-profile', pathMatch: 'full'},
   {path:'home', component: HomeComponent},
   {path:'test-centre-forms', component: TestCentreFormComponent},
   {path:'test-centre-profile', component: TestCentreProfileComponent}

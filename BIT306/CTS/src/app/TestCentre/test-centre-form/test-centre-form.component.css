@@ -15,6 +15,6 @@ mat-form-field{
  width: 100%;
 }
 
-mat-card-actions{
+.form-button-group{
   text-align: right;
 }

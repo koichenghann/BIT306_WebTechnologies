@@ -1,26 +1,48 @@
-<p>test-centre-form works!</p>
-
 <mat-card class="example-card form-card">
-
   <mat-card-header>
-    <mat-card-title>Shiba Inu</mat-card-title>
+    <mat-card-title>Test Centre Details</mat-card-title>
     <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
   </mat-card-header>
 
   <mat-card-content>
-    <form #TestCentreFomr="ngForm">
+    <form (submit)="onAddTestCentre(TestCentreForm)" #TestCentreForm="ngForm">
       <mat-form-field appearance="outline">
-        <mat-label>ID</mat-label>
+        <mat-label>Centre ID</mat-label>
         <input
           name="id"
           placeholder="ID should be auto generated"
           type="text"
           matInput
-          ngModel
-          #id="ngModel">
+          [(ngModel)]="tcid"
+          #id="ngModel"
+          disabled>
         <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
         <mat-error *ngIf="id.invalid">Please enter a post title</mat-error>
-        <mat-hint>Hint</mat-hint>
+        <!-- <mat-hint>Hint</mat-hint> -->
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Responsible Officer</mat-label>
+        <input
+          name="officer"
+          placeholder="Placeholder"
+          type="text"
+          matInput
+          [(ngModel)]="tcofficer"
+          #officer="ngModel"
+          disabled>
+        <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+        <mat-error *ngIf="officer.invalid">Please enter a post title</mat-error>
+        <!-- <mat-hint>Hint</mat-hint> -->
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>State</mat-label>
+          <mat-select name="state" #state="ngModel" [(ngModel)]="tcstate" required>
+             <mat-option *ngFor="let state of states" [value]="state.value">
+               {{state.viewValue}}
+             </mat-option>
+           </mat-select>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
@@ -30,31 +52,13 @@
           placeholder="Enter Address"
           rows="2"
           matInput
-          ngModel
-          #address="ngModel">
+          [(ngModel)]="tcaddress"
+          #address="ngModel"
+          required>
         </textarea>
         <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
         <mat-error *ngIf="address.invalid">Please enter a post title</mat-error>
-        <mat-hint>Hint</mat-hint>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label>State</mat-label>
-          <mat-select>
-             <mat-option *ngFor="let food of foods" [value]="food.value">
-               {{food.viewValue}}
-             </mat-option>
-           </mat-select>
-        <!-- <input
-          name="input3"
-          placeholder="Placeholder"
-          type="text"
-          matInput
-          ngModel
-          #input3="ngModel"> -->
-        <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
-        <!-- <mat-error *ngIf="input3.invalid">Please enter a post title</mat-error>
-        <mat-hint>Hint</mat-hint> -->
+        <!-- <mat-hint>Hint</mat-hint> -->
       </mat-form-field>
 
       <mat-form-field appearance="outline">
@@ -64,49 +68,42 @@
           placeholder="Placeholder"
           type="text"
           matInput
-          ngModel
-          #input4="ngModel">
+          [(ngModel)]="tccontact"
+          #input4="ngModel"
+          required>
         <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
         <mat-error *ngIf="input4.invalid">Please enter a post title</mat-error>
-        <mat-hint>Hint</mat-hint>
+        <!-- <mat-hint>Hint</mat-hint> -->
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>Officer</mat-label>
-        <input
-          name="officer"
-          placeholder="Placeholder"
-          type="text"
-          matInput
-          ngModel
-          #officer="ngModel">
-        <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
-        <mat-error *ngIf="officer.invalid">Please enter a post title</mat-error>
-        <mat-hint>Hint</mat-hint>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label>Cpacity</mat-label>
+        <mat-label>Capacity</mat-label>
         <input
           name="input1"
           placeholder="Placeholder"
           type="number"
           matInput
-          ngModel
-          #input1="ngModel">
+          [(ngModel)]="tccapacity"
+          #input1="ngModel"
+          required>
         <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
         <mat-error *ngIf="input1.invalid">Please enter a post title</mat-error>
-        <mat-hint>Hint</mat-hint>
+        <!-- <mat-hint>Hint</mat-hint> -->
       </mat-form-field>
+
+      <div class="form-button-group">
+        <button mat-button color="warn" click="cancel()">Cancel</button>
+        <button mat-raised-button color="primary" type="submit">{{mode === 'add' ? 'add' : 'save'}}</button>
+      </div>
     </form>
-
-
   </mat-card-content>
 
-  <mat-card-actions>
-    <button mat-button>Add</button>
-    <button mat-button>Save</button>
-    <button mat-button>Cancel</button>
-  </mat-card-actions>
+  List:
+  <div>
+    {{state}}
+    {{testCentres.length}}
+    {{testCentres}}
+  </div>
+  end of list
 
 </mat-card>
