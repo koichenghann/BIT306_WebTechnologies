@@ -13,6 +13,7 @@ import { CtsSignupComponent } from './CTS-Signup/signup.component';
 import { HomeComponent } from './Home/home.component';
 import { TestCentreFormComponent } from './TestCentre/test-centre-form/test-centre-form.component';
 import { TestCentreProfileComponent } from './TestCentre/test-centre-profile/test-centre-profile.component';
+import { PatientDashboardComponent } from'./Patient/Patient-dashboard/patient-dashboard.component';
 
 import { FormsModule }   from '@angular/forms';
 
@@ -32,6 +33,7 @@ import { MatCardModule } from '@angular/material/card';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 
+
 // const appRoutes: Routes = [
 //   {path: 'TestCentreForm', component: TestCentreFormComponent}
 //   //{path: 'list', component: PostListComponent}
@@ -45,7 +47,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     HomeComponent,
     sidenavComponent,
     TestCentreFormComponent,
-    TestCentreProfileComponent
+    TestCentreProfileComponent,
+    PatientDashboardComponent
 
   ],
   imports: [
