@@ -1,14 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ValidationErrors, FormControl } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, ValidationErrors, FormControl, FormGroupDirective  } from '@angular/forms';
 import { UserService } from '../User/user.service';
-
-// function usernameIsUniqueValidator (control: AbstractControl):{[key: string]: boolean} | null {
-//   var us: UserService = userService;
-//   if(!us.checkUsernameIsUnique(control.value)){
-//     return {'isUnique': true}
-//   }
-//   return null;
-// };
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cts-signup',
@@ -18,7 +11,8 @@ import { UserService } from '../User/user.service';
 
 export class CtsSignupComponent {
   userForm: FormGroup;
-  constructor(public userService: UserService, private fb: FormBuilder) {}
+  @ViewChild(FormGroupDirective) formGroupDirective: FormGroupDirective;
+  constructor(public userService: UserService, private fb: FormBuilder, private route:Router) {}
 
   ngOnInit(): void {
     this.userForm = this.fb.group({
@@ -46,10 +40,6 @@ export class CtsSignupComponent {
     })
   }
 
-
-
-
-
   get username(){
     return this.userForm.get('username');
   }
@@ -70,8 +60,6 @@ export class CtsSignupComponent {
   }
 
   usertypeflex = "100%";
-  actualUsertype = "";
-  usernameIsUnique = true;
 
   userTypeChoices = [
     {value: 'Patient', viewValue: 'Patient'},
@@ -111,45 +99,8 @@ export class CtsSignupComponent {
       this.address.value
     );
     this.userForm.reset();
-    for (let name in this.userForm.controls) {
-      this.userForm.controls[name].setErrors(null);
-    }
-    this.userForm.setErrors({ 'invalid': true });
+    this.formGroupDirective.resetForm();
+    this.userForm.setErrors({ 'invalid': true }); //to make the submit button disabled again
+    this.route.navigate(['/login']);
   }
-
-
-  // onRegister(form: NgForm){
-  //   console.log('register clicked');
-  //   if (form.invalid){
-  //     console.log('form invalid');
-  //     return;
-  //   }
-  //
-  //   console.log('form valid');
-  //
-  //   this.actualUsertype = this.usertype;
-  //   if (this.usertype == 'Officer') {
-  //     this.actualUsertype = this.officertype;
-  //   }
-  //
-  //   console.log('form valid 2');
-  //
-  //   this.usernameIsUnique = true;
-  //   if(this.userService.register(this.username, this.password, this.actualUsertype, this.contact, this.address) != undefined){
-  //     this.usernameIsUnique = false;
-  //     console.log('invalid 2');
-  //     return;
-  //   }
-  //
-  //   form.resetForm();
-  //   console.log('user registered');
-  // }
-  //
-  // onUserTypeChange(){
-  //   if (this.usertype == 'Patient') {
-  //     this.usertypeflex = "100%";
-  //   } else {
-  //     this.usertypeflex = "50%";
-  //   }
-  // }
 }

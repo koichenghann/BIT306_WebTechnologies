@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ValidationErrors, FormControl } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, ValidationErrors, FormControl, FormGroupDirective } from '@angular/forms';
 import { UserService } from '../User/user.service';
+import { Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-cts-login',
@@ -9,8 +12,10 @@ import { UserService } from '../User/user.service';
 })
 export class CtsLoginComponent {
   userForm: FormGroup;
-  constructor(public userService: UserService, private fb: FormBuilder) {}
+  @ViewChild(FormGroupDirective) formGroupDirective: FormGroupDirective;
+  constructor(public userService: UserService, private fb: FormBuilder, private route:Router) {}
 
+  users = [];
   ngOnInit(): void {
     this.userForm = this.fb.group({
       username: ['', [
@@ -20,7 +25,27 @@ export class CtsLoginComponent {
         Validators.required
       ]]
     })
+    console.log('list of users: ', this.userService.getUsers());
+    //this.users=this.userService.getUsers();
   }
 
 
+  get username(){
+    return this.userForm.get('username');
+  }
+  get password(){
+    return this.userForm.get('password');
+  }
+
+  submitHandler(){
+    if(!this.userService.login(this.username.value, this.password.value)){
+      for (let name in this.userForm.controls) {
+        this.userForm.controls[name].setErrors({invalidCredential: true});
+      }
+      return;
+    }
+    this.userForm.reset();
+    this.formGroupDirective.resetForm();
+    this.route.navigate(['/signup']);
+  }
 }

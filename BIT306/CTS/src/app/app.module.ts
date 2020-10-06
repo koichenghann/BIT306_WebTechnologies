@@ -16,6 +16,8 @@ import { TestCentreProfileComponent } from './TestCentre/test-centre-profile/tes
 import { PatientDashboardComponent } from'./Patient/Patient-dashboard/patient-dashboard.component';
 import { PatientNavComponent } from'./Patient/Patient-nav/patient-nav.component';
 
+import { UserService } from './User/user.service';
+
 import { FormsModule }   from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -75,7 +77,9 @@ import { MatMenuModule } from '@angular/material/menu';
     MatMenuModule
 
   ],
-  providers: [],
+  providers: [
+    UserService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
