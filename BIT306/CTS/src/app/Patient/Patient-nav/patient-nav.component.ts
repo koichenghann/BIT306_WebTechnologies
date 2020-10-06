@@ -58,12 +58,12 @@ export class PatientNavComponent {
         //this.list_item_5 = 'Add New Collection';
         this.list_item_6 = 'Logout';
 
-        this.route1 = '/dashboard-collector';
-        this.route2 = '/manage-profile';
-        this.route3 = '/history';
-        this.route4 = '/record-submission';
-        this.route5 = '/add-submission';
-        this.route6 = '';
+        this.route1 = '/patient-dashboard';
+        this.route2 = '/patient-manage-profile';
+        this.route3 = '/patient-view-history';
+        //this.route4 = '/record-submission';
+        //this.route5 = '/add-submission';
+        //this.route6 = '';
 
       }
 

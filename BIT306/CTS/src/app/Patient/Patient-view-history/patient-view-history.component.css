@@ -1,0 +1,70 @@
+.page-header {
+	background-repeat:no-repeat;
+  position: relative;
+  background-size: cover;
+  background-position:50% 30%;
+  background-image: url('../../../assets/image/patient-dashboard_green.png');
+}
+.page-caption {
+  padding-top: 5rem;
+  padding-bottom: 4rem;
+}
+.page-title { font-size: 3.5em;
+  line-height: 1;
+  color: #ffffff;
+  font-weight: 320;
+  text-align: center;
+}
+
+.box_shadow{
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+}
+
+table {
+  width: 100%;
+}
+
+tr.example-detail-row {
+  height: 0;
+}
+
+tr.example-element-row:not(.example-expanded-row):hover {
+  background: whitesmoke;
+}
+
+tr.example-element-row:not(.example-expanded-row):active {
+  background: #efefef;
+}
+
+.example-element-row td {
+  border-bottom-width: 0;
+}
+
+.example-element-detail {
+  overflow: hidden;
+  display: flex;
+}
+
+.example-element-diagram {
+  min-width: 80px;
+  border: 2px solid black;
+  padding: 8px;
+  font-weight: lighter;
+  margin: 8px 0;
+  height: 104px;
+}
+
+.example-element-symbol {
+  font-weight: bold;
+  font-size: 40px;
+  line-height: normal;
+}
+
+.example-element-description {
+  padding: 16px;
+}
+
+.example-element-description-attribution {
+  opacity: 0.5;
+}
+

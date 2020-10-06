@@ -5,7 +5,7 @@ import { HomeComponent } from './Home/home.component';
 import { CtsLoginComponent } from './CTS-Login/login.component';
 import { CtsSignupComponent } from './CTS-Signup/signup.component';
 import { PatientDashboardComponent } from './Patient/Patient-dashboard/patient-dashboard.component';
-
+import { PatientViewHistoryComponent } from './Patient/Patient-view-history/patient-view-history.component'
 
 const APP_ROUTES: Routes = [
   {path:'', redirectTo: '/home', pathMatch: 'full'},
@@ -18,7 +18,8 @@ const APP_ROUTES: Routes = [
   {path:'test-centre-profile', component: TestCentreProfileComponent},
   {path:'signup', component: CtsSignupComponent},
   {path:'login', component: CtsLoginComponent},
-  {path:'patient-dashboard', component: PatientDashboardComponent}
+  {path:'patient-dashboard', component: PatientDashboardComponent},
+  {path:'patient-view-history', component: PatientViewHistoryComponent}
 ];
 
 export const routing = RouterModule.forRoot(APP_ROUTES);

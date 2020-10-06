@@ -22,11 +22,13 @@ mat-nav-list a:hover{
 .sidenav .mat-toolbar {
   background: inherit;
   background-color:#439F9E;
+
 }
 
 .toolbar_2 .mat-toolbar{
   background: inherit;
   background-color:#439F9E;
+  display: none;
 }
 
 .mat-toolbar.mat-primary {
@@ -34,6 +36,7 @@ mat-nav-list a:hover{
   top: 0;
   z-index: 1;
   background-color: #439F9E;
+
 }
 
 .spacer {
@@ -41,14 +44,32 @@ mat-nav-list a:hover{
   text-align: center;
 }
 
-@media(max-width:768px){
+.logo_icon{
+  font-style: italic;
+  font-family:"Trebuchet MS";
+}
 
+@media(max-width:980px){
+  .mat-toolbar.mat-primary {
+    display: none;
+    }
+    .toolbar_2 .mat-toolbar{
+
+      display: inline-flex;
+
+    }
 }
 
 
-@media(min-width:768px){
+
+@media(max-width:768px){
   .mat-toolbar.mat-primary {
     display: none;
+    }
+    .toolbar_2 .mat-toolbar{
+
+      display: inline-flex;
+
     }
 }
 

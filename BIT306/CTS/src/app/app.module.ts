@@ -35,6 +35,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatCardModule } from '@angular/material/card';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatMenuModule } from '@angular/material/menu';
+import { PatientViewHistoryComponent } from './Patient/Patient-view-history/patient-view-history.component';
+import { MatTableModule } from '@angular/material/table';
 
 
 
@@ -53,7 +55,8 @@ import { MatMenuModule } from '@angular/material/menu';
     TestCentreFormComponent,
     TestCentreProfileComponent,
     PatientDashboardComponent,
-    PatientNavComponent
+    PatientNavComponent,
+    PatientViewHistoryComponent
 
   ],
   imports: [
@@ -74,7 +77,8 @@ import { MatMenuModule } from '@angular/material/menu';
     MatDividerModule,
     MatCardModule,
     FlexLayoutModule,
-    MatMenuModule
+    MatMenuModule,
+    MatTableModule
 
   ],
   providers: [
