@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TestKitTableComponent } from './test-kit-table.component';
+import { TestKitStockFormComponent } from './test-kit-stock-form.component';
 
-describe('TestKitTableComponent', () => {
-  let component: TestKitTableComponent;
-  let fixture: ComponentFixture<TestKitTableComponent>;
+describe('TestKitStockFormComponent', () => {
+  let component: TestKitStockFormComponent;
+  let fixture: ComponentFixture<TestKitStockFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TestKitTableComponent ]
+      declarations: [ TestKitStockFormComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TestKitTableComponent);
+    fixture = TestBed.createComponent(TestKitStockFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

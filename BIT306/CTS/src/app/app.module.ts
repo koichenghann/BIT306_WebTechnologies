@@ -45,8 +45,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
-import { TestKitTableComponent } from './TestKit/test-kit-table/test-kit-table.component';
-import { TestKitFormComponent } from './TestKit/test-kit-form/test-kit-form.component';
+import { TestKitStockTableComponent } from './TestKitStock/test-kit-stock-table/test-kit-stock-table.component';
+import { TestKitStockFormComponent } from './TestKitStock/test-kit-stock-form/test-kit-stock-form.component';
 
 
 
@@ -73,8 +73,8 @@ import { TestKitFormComponent } from './TestKit/test-kit-form/test-kit-form.comp
     TesterNavComponent,
     TesterNewTestComponent,
     TesterUpdateTestComponent,
-    TestKitTableComponent,
-    TestKitFormComponent
+    TestKitStockTableComponent,
+    TestKitStockFormComponent
 
   ],
   imports: [
