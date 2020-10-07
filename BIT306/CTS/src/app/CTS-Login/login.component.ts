@@ -56,7 +56,7 @@ export class CtsLoginComponent {
         break;
 
       case 'TestCentreManager':
-        this.route.navigate(['/test-centre-profile']);
+        this.route.navigate(['/test-centre-form']);
         break;
     }
     //this.route.navigate(['/signup']);

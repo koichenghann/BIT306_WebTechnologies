@@ -33,12 +33,14 @@ export class UserService {
     var currentUser = this.users.find(user => user.username == username && user.password == password);
     if(currentUser!=undefined){
       this.setCurrentUser(currentUser);
+      this.uploadCurrentUser();
       return true;
     }
     return false;
   }
 
   getCurrentUser(){
+    this.downloadCurrentUser();
     return this.currentUser;
   }
   setCurrentUser(user: User){
@@ -46,6 +48,7 @@ export class UserService {
   }
   logout(){
     this.currentUser = undefined;
+    this.clearCurrentUser();
   }
   updateCurrentUser(username: string, password: string, usertype: string, contact: string, address: string){
     var id = this.getCurrentUser().id;
@@ -61,4 +64,14 @@ export class UserService {
     this.users = JSON.parse(localStorage.getItem('user'));
     console.log("downloaded users: ",this.users);
   }
+  uploadCurrentUser(){
+    localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+  }
+  downloadCurrentUser(){
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  }
+  clearCurrentUser(){
+    localStorage.setItem('currentUser', null);
+  }
+
 }

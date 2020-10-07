@@ -21,7 +21,7 @@ const APP_ROUTES: Routes = [
   {path:'3', redirectTo: '/signup', pathMatch: 'full'},
   {path:'4', redirectTo: '/login', pathMatch: 'full'},
   {path:'home', component: HomeComponent},
-  {path:'test-centre-forms', component: TestCentreFormComponent/*, canActivate: [TestCentreManagerGuard]*/},
+  {path:'test-centre-form', component: TestCentreFormComponent/*, canActivate: [TestCentreManagerGuard]*/},
   {path:'test-centre-profile', component: TestCentreProfileComponent/*, canActivate: [TestCentreManagerGuard]*/},
   {path:'signup', component: CtsSignupComponent},
   {path:'login', component: CtsLoginComponent},

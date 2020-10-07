@@ -20,8 +20,7 @@ export class TestCentreFormComponent implements OnInit {
   constructor(public testCentreService: TestCentreService, public userService: UserService, private fb: FormBuilder, private route:Router) { }
 
   ngOnInit(): void {
-    this.testCentres = this.testCentreService.getTestCentres();
-    console.log(this.testCentres.length);
+    //this.testCentres = this.testCentreService.getTestCentres();
 
     this.testCentreForm = this.fb.group({
       id: ['', [
@@ -41,7 +40,9 @@ export class TestCentreFormComponent implements OnInit {
       ]]
     })
     this.id.disable();
-    //this.currentOfficer = this.userService.getCurrentUser().username;
+    this.officer.disable();
+    this.currentOfficer = this.userService.getCurrentUser().username;
+    console.log('currentUser: ', this.userService.getCurrentUser());
     this.officer.setValue(this.currentOfficer);
     this.setMode();
   }
@@ -65,7 +66,7 @@ export class TestCentreFormComponent implements OnInit {
   currentOfficer = "Norhisshan";
   currentTestCentre;
   mode = "add";
-  @Input() testCentres: TestCentre[] = [];
+//@Input() testCentres: TestCentre[] = [];
 
 
   states = [
@@ -91,20 +92,12 @@ export class TestCentreFormComponent implements OnInit {
     if (this.testCentreForm.invalid){
       return;
     }
-    this.testCentreService.addTestCentre(this.id.value, this.officer.value, this.state.value, this.address.value, this.contact.value)
+    this.testCentreService.addTestCentre(this.id.value, this.officer.value, this.contact.value, this.state.value, this.address.value)
   }
-  // onAddTestCentre(form: NgForm){
-  //   console.log('ran');
-  //   if (form.invalid){
-  //     return;
-  //   }
-  //
-  //   this.testCentreService.addTestCentre(form.value.id, form.value.officer, form.value.state, form.value.address, form.value.contact, form.value.capacity);
-  //   form.resetForm();
-  //   this.tcid = this.testCentreService.generateNewId();
-  //   this.tcofficer = this.currentOfficer;
-  // }
 
+  //check whether to initiate add mode or edit mode
+  //if there is no test centre bound to current officer, create new test centre
+  //else, load the test centre bound to current officer.
   setMode(){
     this.mode = 'add';
     this.currentTestCentre = this.testCentreService.getTestCentre(this.currentOfficer);
@@ -120,12 +113,13 @@ export class TestCentreFormComponent implements OnInit {
       this.officer.setValue(this.currentOfficer);
     }
   }
-  populateTestCentre(){
 
-  }
-
+  //clear form and go back to test centre profile
   cancel(){
-
+    this.testCentreForm.reset();
+    this.formGroupDirective.resetForm();
+    this.testCentreForm.setErrors({'invalid': true});
+    this.route.navigate(['/test-centre-profile']);
   }
 
 }
