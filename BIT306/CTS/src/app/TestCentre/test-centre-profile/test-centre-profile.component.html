@@ -14,7 +14,7 @@
 
     <mat-card-content>
       <div *ngIf="mode=='new'" id="noEntryMessage">
-        Test centre not found. Click <a (click)="addNewEntry()">here</a> to set up test centre.
+        Test centre not found. Click <a routerLink="/test-centre-form">here</a> to set up test centre.
       </div>
 
       <div fxLayout="row wrap">
