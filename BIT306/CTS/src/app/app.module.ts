@@ -17,13 +17,14 @@ import { PatientDashboardComponent } from'./Patient/Patient-dashboard/patient-da
 import { PatientNavComponent } from'./Patient/Patient-nav/patient-nav.component';
 import { PatientViewHistoryComponent } from './Patient/Patient-view-history/patient-view-history.component';
 import { UserService } from './User/user.service';
-
+import { TestKitStockTableComponent } from './TestKitStock/test-kit-stock-table/test-kit-stock-table.component';
+import { TestKitStockFormComponent } from './TestKitStock/test-kit-stock-form/test-kit-stock-form.component';
 
 import { TesterDashboardComponent } from './Tester/Tester-dashboard/tester-dashboard.component';
 import { TesterNavComponent } from './Tester/Tester-nav/tester-nav.component';
 import { TesterNewTestComponent } from './Tester/Tester-new-test/tester-new-test.component';
 import { TesterUpdateTestComponent } from './Tester/Tester-update-test/tester-update-test.component';
-
+import { TesterFormComponent } from'./Tester/Tester-form/tester-form.component';
 
 
 import { FormsModule }   from '@angular/forms';
@@ -45,8 +46,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
-import { TestKitStockTableComponent } from './TestKitStock/test-kit-stock-table/test-kit-stock-table.component';
-import { TestKitStockFormComponent } from './TestKitStock/test-kit-stock-form/test-kit-stock-form.component';
+
 
 
 
@@ -74,7 +74,8 @@ import { TestKitStockFormComponent } from './TestKitStock/test-kit-stock-form/te
     TesterNewTestComponent,
     TesterUpdateTestComponent,
     TestKitStockTableComponent,
-    TestKitStockFormComponent
+    TestKitStockFormComponent,
+    TesterFormComponent
 
   ],
   imports: [

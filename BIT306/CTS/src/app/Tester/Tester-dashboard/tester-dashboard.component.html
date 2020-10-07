@@ -13,7 +13,67 @@
   </div>
 
   <main>
-    
+    <mat-grid-list cols="1" rowsHeight="1:1">
+
+
+      <div class="content" fxLayout="row wrap">
+      <!--first row-->
+      <mat-card class="card_1 mat-elevation-z4">
+        <mat-card-header>
+          <mat-card-title>Welcome Back!</mat-card-title>
+        <mat-card-subtitle>Tester</mat-card-subtitle>
+        </mat-card-header>
+
+       <mat-card-actions>
+        <div class="btn_manage">
+          <button routerLink="/manage-profile" mat-stroked-button
+          [ngStyle]="{background:'#ffffff' , color:'#439F9E'}">Manage Profile</button>
+        </div>
+        </mat-card-actions>
+      </mat-card>
+
+
+      <!--second row-->
+
+        <!--Second row-->
+
+        <div fxFlex="32%" fxFlex.xs="100%" fxFlex.sm="30%">
+            <mat-card class="card_2 mat-elevation-z4">
+              <mat-card-header>
+                <mat-card-title>Update Test Result:</mat-card-title>
+                <mat-card-subtitle>Review and update exisiting test results here. Keep our precious patient posed with the latest test results and updates.</mat-card-subtitle>
+              </mat-card-header>
+
+
+              <mat-card-actions>
+                <div class="btn_history">
+                  <button routerLink="/tester-update-test" class="btn_color" mat-raised-button
+                  [ngStyle]="{background:'#439F9E' , color:'#ffffff'}">Update Results</button>
+              </div>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+
+          <div fxFlex="32%" fxFlex.xs="100%" fxFlex.sm="30%">
+            <mat-card class="card_3 mat-elevation-z4">
+              <mat-card-header>
+                <mat-card-title>Add New Test:</mat-card-title>
+                <mat-card-subtitle>Record or add a Covid-19 screening test or drive-thru test results here.</mat-card-subtitle>
+              </mat-card-header>
+
+              <mat-card-actions>
+                <div  class="btn_add">
+                  <button routerLink="/tester-new-test" mat-fab
+                  [ngStyle]="{background:'#439F9E' , color:'#fff'}"><i class="fas fa-plus"></i></button>
+                </div>
+
+              </mat-card-actions>
+
+
+            </mat-card>
+          </div>
+          </div>
+      </mat-grid-list>
   </main>
 
 

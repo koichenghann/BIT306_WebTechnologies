@@ -19,3 +19,42 @@
 .box_shadow{
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
 }
+
+.card_1{
+  margin: 1em;
+  height: 8em;
+  width: 100%;
+
+}
+.btn_manage{
+  text-align: right;
+  margin-right: 1em;
+}
+
+
+.card_2{
+  margin: 1em;
+  height: 10em;
+
+
+}
+
+
+.btn_add{
+  text-align: right;
+  margin-right: 1em;
+}
+
+.card_3{
+  margin: 1em;
+  height: 10em;
+
+}
+
+.btn_history{
+  text-align: center;
+}
+
+.btn_history button{
+  min-width: 50%;
+}
