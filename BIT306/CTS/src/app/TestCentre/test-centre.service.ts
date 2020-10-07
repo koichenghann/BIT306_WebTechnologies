@@ -19,7 +19,6 @@ export class TestCentreService {
 
   getTestCentre(officer: string){
     this.downloadTestCentres();
-    console.log('test centre', this.testCentres);
     return this.testCentres.find(testCentre => testCentre.officer == officer);
   }
 
@@ -29,13 +28,19 @@ export class TestCentreService {
   }
 
   addTestCentre(id: string,  officer: string, contact: string, state: string, address: string){
+    this.downloadTestCentres();
     const testCentre: TestCentre = { id: id, state: state, address: address, officer: officer, contact: contact};
     this.testCentres.push(testCentre);
     this.uploadTestCentres()
   }
 
-  updateTestCentre(){
-
+  updateTestCentre(id: string,  officer: string, contact: string, state: string, address: string){
+    this.downloadTestCentres();
+    var testCentre = this.testCentres.find(testCentre => testCentre.officer == officer);
+    testCentre.contact = contact;
+    testCentre.state = state;
+    testCentre.address = address;
+    this.uploadTestCentres();
   }
 
   uploadTestCentres(){

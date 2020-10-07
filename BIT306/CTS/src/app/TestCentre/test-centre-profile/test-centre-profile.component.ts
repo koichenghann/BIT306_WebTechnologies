@@ -1,5 +1,6 @@
 import { Input } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../../User/user.service';
 import { TestCentre } from '../test-centre.model';
 import { TestCentreService } from '../test-centre.service';
 
@@ -10,20 +11,25 @@ import { TestCentreService } from '../test-centre.service';
 })
 export class TestCentreProfileComponent implements OnInit {
 
-  constructor(public testCentreService: TestCentreService) { }
+  constructor(public testCentreService: TestCentreService, public userService: UserService) { }
 
   ngOnInit(): void {
-    this.testCentres = this.testCentreService.getTestCentres();
+    this.currentTestCentre = this.testCentreService.getTestCentre(this.userService.getCurrentUser().username);
+    this.setMode();
   }
 
-  @Input() testCentres: TestCentre[] = [];
+  //@Input() testCentres: TestCentre[] = [];
 
-  currentOfficer = 'Norhisshan';
+  currentTestCentre;
+  mode = 'new';
 
-  tcid = this.testCentreService.generateNewId();
-  tcofficer = this.currentOfficer;
-  tcstate = null;
-  tcaddress = null;
-  tccontact = null;
-  tccapacity = null;
+  setMode() {
+    this.mode = 'new';
+    if( this.currentTestCentre != undefined ) {
+      this.mode = 'exist';
+    } else {
+
+    }
+  }
+
 }

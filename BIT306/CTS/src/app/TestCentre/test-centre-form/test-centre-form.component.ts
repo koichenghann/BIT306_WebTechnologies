@@ -92,26 +92,55 @@ export class TestCentreFormComponent implements OnInit {
     if (this.testCentreForm.invalid){
       return;
     }
-    this.testCentreService.addTestCentre(this.id.value, this.officer.value, this.contact.value, this.state.value, this.address.value)
+    if ( this.mode == 'add' ) {
+      this.testCentreService.addTestCentre(this.id.value, this.officer.value, this.contact.value, this.state.value, this.address.value);
+    } else {
+      this.testCentreService.updateTestCentre(this.id.value, this.officer.value, this.contact.value, this.state.value, this.address.value);
+    }
+    this.mode = 'view';
+    //this.setMode();
+    this.route.navigate(['/test-centre-profile']);
+
   }
 
   //check whether to initiate add mode or edit mode
   //if there is no test centre bound to current officer, create new test centre
   //else, load the test centre bound to current officer.
   setMode(){
-    this.mode = 'add';
+    this.mode = 'add'; //change this value to 'new' if you want to replace the profile page with this page
     this.currentTestCentre = this.testCentreService.getTestCentre(this.currentOfficer);
     if ( this.currentTestCentre != undefined ) {
-      this.mode = 'edit';
+      this.mode = 'edit'; //change this value to 'view' if you want to replace the profile page with this page
+      this.populateForm();
+
+      // this.contact.disable();
+      // this.state.disable();
+      // this.address.disable();
+    } else {
+      this.id.setValue(this.testCentreService.generateNewId());
+      this.officer.setValue(this.currentOfficer);
+    }
+  }
+
+  populateForm(){
+    if ( this.currentTestCentre != undefined ) {
       this.id.setValue(this.currentTestCentre.id);
       this.officer.setValue(this.currentTestCentre.officer);
       this.contact.setValue(this.currentTestCentre.contact);
       this.state.setValue(this.currentTestCentre.state);
       this.address.setValue(this.currentTestCentre.address);
-    } else {
-      this.id.setValue(this.testCentreService.generateNewId());
-      this.officer.setValue(this.currentOfficer);
     }
+  }
+
+  addNewEntry(){
+    this.mode = 'add';
+  }
+
+  editForm(){
+    this.mode = 'edit';
+    this.contact.enable();
+    this.state.enable();
+    this.address.enable();
   }
 
   //clear form and go back to test centre profile
@@ -119,6 +148,7 @@ export class TestCentreFormComponent implements OnInit {
     this.testCentreForm.reset();
     this.formGroupDirective.resetForm();
     this.testCentreForm.setErrors({'invalid': true});
+    // this.setMode();
     this.route.navigate(['/test-centre-profile']);
   }
 

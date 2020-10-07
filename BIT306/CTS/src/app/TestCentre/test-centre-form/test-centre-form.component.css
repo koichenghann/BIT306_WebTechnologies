@@ -4,17 +4,29 @@
   max-height: 100%;
   max-width: 100%;
 }
+#noEntryMessage{
+  width: 100%;
+  text-align: center;
+  margin-bottom: 1em;
+}
+#noEntryMessage a{
+  color: blue;
+}
+#noEntryMessage a:hover{
+  text-decoration: underline;
+}
 mat-card{
   margin: auto;
   /* margin: 10% auto; */
   padding: 0;
+  width: 90%;
   max-width: 60em;
   max-height: 100%;
   display: block;
 }
 
 mat-card-header{
-  background-color: grey;
+  background-color: #40c4de;
   background-image: url("/assets/image/Teal_gradient_background_3.jpg");
   border-radius: 4px 4px 0 0;
   padding: 1em 0 0.2em 1em;
@@ -54,7 +66,7 @@ mat-form-field{
   margin-bottom: 1em;
 } */
 .mat-raised-button{
-  background-color: #40c4de !important;
+  background-color: #40c9de !important; /*#40c4de*/
   color: white !important;
   width: 7em;
 }

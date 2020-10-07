@@ -1,61 +1,68 @@
-<mat-card class="form-card mat-elevation-z10">
-  <mat-card-header>
-    <mat-card-title>
-      Test Centre Profile
-      <!-- <span class="material-icons">create</span> -->
-    </mat-card-title>
-    <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
-  </mat-card-header>
+<div class="wrapper" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
+  <mat-card class="form-card mat-elevation-z10">
+    <mat-card-header>
+      <mat-card-title>
+        Test Centre Profile
+      </mat-card-title>
+      <div fxFlex></div>
+      <div class="header-button-group">
+         <a routerLink="/test-centre-form"><span class="material-icons">create</span></a>
+      </div>
 
-  <mat-card-content>
-    <div fxLayout="row wrap">
-       <div class="cell" fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
-         <div class="cell-header">
-           TCID
-         </div>
-         <div class="cell-body">
-           body
-         </div>
-       </div>
+      <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+    </mat-card-header>
 
-       <div class="cell" fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
-         <div class="cell-header">
-           Responsible Officer
-         </div>
-         <div class="cell-body">
-           body
-         </div>
-       </div>
+    <mat-card-content>
+      <div *ngIf="mode=='new'" id="noEntryMessage">
+        Test centre not found. Click <a (click)="addNewEntry()">here</a> to set up test centre.
+      </div>
 
-       <div class="cell" fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
-         <div class="cell-header">
-           Contact
+      <div fxLayout="row wrap">
+         <div class="cell" fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="0%">
+           <div class="cell-header">
+             TCID
+           </div>
+           <div class="cell-body">
+             {{currentTestCentre.id}}
+           </div>
          </div>
-         <div class="cell-body">
-           body
-         </div>
-       </div>
 
-       <div class="cell" fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
-         <div class="cell-header">
-           State
+         <div class="cell" fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="50%">
+           <div class="cell-header">
+             Manager
+           </div>
+           <div class="cell-body">
+             {{currentTestCentre.officer}}
+           </div>
          </div>
-         <div class="cell-body">
-           body
+
+         <div class="cell" fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="50%">
+           <div class="cell-header">
+             Contact
+           </div>
+           <div class="cell-body">
+             {{currentTestCentre.contact}}
+           </div>
          </div>
-       </div>
 
-       <div class="cell" fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="100%">
-         <div class="cell-header">
-           Address
+         <div class="cell" fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="50%">
+           <div class="cell-header">
+             State
+           </div>
+           <div class="cell-body">
+             {{currentTestCentre.state}}
+           </div>
          </div>
-         <div class="cell-body">
-           body
+
+         <div class="cell" fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="100%">
+           <div class="cell-header">
+             Address
+           </div>
+           <div class="cell-body">
+             {{currentTestCentre.address}}
+           </div>
          </div>
-       </div>
-    </div>
-
-
-
-  </mat-card-content>
-</mat-card>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
