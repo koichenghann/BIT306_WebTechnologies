@@ -4,5 +4,4 @@ export interface TestCentre {
   address: string;
   officer: string;
   contact: string;
-  capacity: number;
 }

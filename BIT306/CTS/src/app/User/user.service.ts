@@ -25,9 +25,11 @@ export class UserService {
     const id = "U"+(this.users.length + 1);
     const user: User = {id:id, username:username, password:password, usertype:usertype, contact:contact, address:address};
     this.users.push(user);
+    this.uploadUsers();
   }
 
   login(username: string, password: string){
+    this.downloadUsers();
     var currentUser = this.users.find(user => user.username == username && user.password == password);
     if(currentUser!=undefined){
       this.setCurrentUser(currentUser);
@@ -52,10 +54,11 @@ export class UserService {
     return this.users;
   }
 
-  synceUsers(){
-
+  uploadUsers(){
+    localStorage.setItem('user', JSON.stringify(this.users));
   }
   downloadUsers(){
-
+    this.users = JSON.parse(localStorage.getItem('user'));
+    console.log("downloaded users: ",this.users);
   }
 }

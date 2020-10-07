@@ -1,4 +1,8 @@
 import { Routes, RouterModule } from "@angular/router";
+import { PatientGuard } from "./User/RouteGuard/patient.guard";
+import { TesterGuard } from "./User/RouteGuard/tester.guard";
+import { TestCentreManagerGuard } from "./User/RouteGuard/test-centre-manager.guard";
+
 import { TestCentreFormComponent } from './TestCentre/test-centre-form/test-centre-form.component';
 import { TestCentreProfileComponent } from './TestCentre/test-centre-profile/test-centre-profile.component';
 import { HomeComponent } from './Home/home.component';
@@ -17,8 +21,8 @@ const APP_ROUTES: Routes = [
   {path:'3', redirectTo: '/signup', pathMatch: 'full'},
   {path:'4', redirectTo: '/login', pathMatch: 'full'},
   {path:'home', component: HomeComponent},
-  {path:'test-centre-forms', component: TestCentreFormComponent},
-  {path:'test-centre-profile', component: TestCentreProfileComponent},
+  {path:'test-centre-forms', component: TestCentreFormComponent/*, canActivate: [TestCentreManagerGuard]*/},
+  {path:'test-centre-profile', component: TestCentreProfileComponent/*, canActivate: [TestCentreManagerGuard]*/},
   {path:'signup', component: CtsSignupComponent},
   {path:'login', component: CtsLoginComponent},
   {path:'patient-dashboard', component: PatientDashboardComponent},

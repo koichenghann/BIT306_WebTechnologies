@@ -26,7 +26,7 @@ export class CtsSignupComponent {
         Validators.minLength(7)
       ]],
       usertype: ['', [
-        Validators.required,
+        Validators.required
       ]],
       officertype: ['', [
         // Validators.required,
