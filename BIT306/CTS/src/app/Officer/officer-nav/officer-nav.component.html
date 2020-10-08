@@ -1,16 +1,3 @@
-<!--<mat-sidenav-container
-    class="example-container" (backdropClick)="close('backdrop')" *ngIf="shouldRun">
-  <mat-sidenav #sidenav (keydown.escape)="close('escape')" disableClose>
-    <p><button mat-button (click)="close('toggle button')">Toggle</button></p>
-  </mat-sidenav>
-
-  <mat-sidenav-content>
-    <p><button mat-button (click)="sidenav.open()">Open</button></p>
-    <p>Closed due to: {{reason}}</p>
-  </mat-sidenav-content>
-</mat-sidenav-container>
--->
-
 <mat-sidenav-container class="sidenav-container" >
   <mat-sidenav
     #drawer
@@ -21,13 +8,11 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="(isHandset$ | async) === false">
 
-    <mat-toolbar class="toolbar_title" ><span><i class="fas fa-heartbeat"></i> CTIS | Manager</span></mat-toolbar>
+    <mat-toolbar class="toolbar_title" ><span><i class="fas fa-heartbeat"></i> CTIS | Officer</span></mat-toolbar>
 
     <mat-nav-list>
-      <a routerLink="/manager-dashboard" routerLinkActive="active-link" class="sidenav_item" mat-list-item href="#"><mat-icon>home</mat-icon><span>&nbsp; Dashboard</span></a>
-      <a routerLink="/test-centre-profile" routerLinkActive="active-link" class="sidenav_item" mat-list-item href="#"><mat-icon>add_location</mat-icon><span>&nbsp; Register Test Centre </span></a>
-      <a routerLink="/tester-management-table" routerLinkActive="active-link" class="sidenav_item" mat-list-item href="#"><mat-icon>edit</mat-icon><span>&nbsp; Record Test Centre Officer </span></a>
-      <a routerLink="/test-kit-table" routerLinkActive="active-link" class="sidenav_item" mat-list-item href="#"><mat-icon>update</mat-icon><span>&nbsp; Manage Test Kit Stock </span></a>
+      <a routerLink="/officer-dashboard" routerLinkActive="active-link" class="sidenav_item" mat-list-item href="#"><mat-icon>home</mat-icon><span>&nbsp; Dashboard</span></a>
+      <a routerLink="/test-centre-profile" routerLinkActive="active-link" class="sidenav_item" mat-list-item href="#"><mat-icon>assignment_turned_in</mat-icon><span>&nbsp; Generate Test Report </span></a>
       <a (click)='logout()' routerLink="/home" routerLinkActive="active-link" class="sidenav_item" mat-list-item href="#"><mat-icon>exit_to_app</mat-icon><span> &nbsp;  Logout</span></a>
 
     </mat-nav-list>

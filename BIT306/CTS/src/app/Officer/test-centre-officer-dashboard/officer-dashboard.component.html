@@ -1,4 +1,4 @@
-<side-nav>
+<officer-nav>
   <!--title bar with pic-->
   <div class="page-header">
    <div class="container-fluid ">
@@ -40,58 +40,21 @@
        <div fxFlex="32%" fxFlex.xs="100%" fxFlex.sm="30%">
            <mat-card class="card_2 mat-elevation-z4">
              <mat-card-header>
-               <mat-card-title>Manage Test Kit Stock:</mat-card-title>
-               <mat-card-subtitle>Review and manage test kit stock so it won't be running out of supply.</mat-card-subtitle>
+               <mat-card-title>Generate Test Report:</mat-card-title>
+               <mat-card-subtitle>Review and generate all test report of our test centre here.</mat-card-subtitle>
              </mat-card-header>
 
 
              <mat-card-actions>
                <div class="btn_history">
                  <button routerLink="/test-kit-table" class="btn_color" mat-raised-button
-                 [ngStyle]="{background:'#439F9E' , color:'#ffffff'}">Manage</button>
+                 [ngStyle]="{background:'#439F9E' , color:'#ffffff'}">Generate</button>
              </div>
              </mat-card-actions>
-           </mat-card>
-         </div>
-
-         <div fxFlex="32%" fxFlex.xs="100%" fxFlex.sm="30%">
-           <mat-card class="card_3 mat-elevation-z4">
-             <mat-card-header>
-               <mat-card-title>Register Test Centre:</mat-card-title>
-               <mat-card-subtitle>Ensure a better control of covid crisis. Register new test centre location here.</mat-card-subtitle>
-             </mat-card-header>
-
-             <mat-card-actions>
-               <div  class="btn_add">
-                 <button routerLink="/test-centre-profile" mat-fab
-                 [ngStyle]="{background:'#439F9E' , color:'#fff'}"><i class="fas fa-plus"></i></button>
-               </div>
-
-             </mat-card-actions>
-
-
-           </mat-card>
-         </div>
-         <div fxFlex="32%" fxFlex.xs="100%" fxFlex.sm="30%">
-           <mat-card class="card_3 mat-elevation-z4">
-             <mat-card-header>
-               <mat-card-title>Record Test Centre Officer:</mat-card-title>
-               <mat-card-subtitle>Officer of test centre. Record new appointed test centre officer here.</mat-card-subtitle>
-             </mat-card-header>
-
-             <mat-card-actions>
-               <div  class="btn_add">
-                 <button routerLink="/tester-management-table" mat-fab
-                 [ngStyle]="{background:'#439F9E' , color:'#fff'}"><i class="fas fa-plus"></i></button>
-               </div>
-
-             </mat-card-actions>
-
-
            </mat-card>
          </div>
          </div>
      </mat-grid-list>
  </main>
 
-</side-nav>
+</officer-nav>
