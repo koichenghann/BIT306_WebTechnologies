@@ -13,19 +13,21 @@
 
 
   <mat-card-content>
-    <form>
+    <form [formGroup]="testForm">
       <mat-form-field appearance="outline">
         <mat-label>Username</mat-label>
         <input matInput placeholder="Enter Username">
 
       </mat-form-field>
-
-      <mat-form-field appearance="fill">
+      <br>
+      <mat-form-field appearance="outline">
         <mat-label>Patient Type</mat-label>
         <mat-select>
           <mat-option value="Refurnee">Refurnee</mat-option>
-          <mat-option value="Refurnee">Refurnee</mat-option>
-
+          <mat-option value="Quarantined">Quarantined</mat-option>
+          <mat-option value="Close contact">Close contact</mat-option>
+          <mat-option value="Infected">Infected</mat-option>
+          <mat-option value="Suspected">Suspected</mat-option>
         </mat-select>
 
       </mat-form-field>
