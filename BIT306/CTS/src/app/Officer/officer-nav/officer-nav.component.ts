@@ -3,15 +3,15 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import { UserService } from '../User/user.service';
+import { UserService } from '../../User/user.service';
 
 @Component({
-  selector:'side-nav',
-  templateUrl:'side-nav.component.html',
-  styleUrls: ['side-nav.component.css']
+  selector:'officer-nav',
+  templateUrl:'officer-nav.component.html',
+  styleUrls: ['officer-nav.component.css']
 })
 
-export class sidenavComponent {
+export class OfficerNavComponent {
   //@ViewChild('sidenav') sidenav: MatSidenav;
   //reason = '';
   //close(reason: string) {

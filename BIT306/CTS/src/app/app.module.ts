@@ -9,6 +9,7 @@ import { sidenavComponent } from './side-nav-component/side-nav.component'
 
 import { UserService } from './User/user.service';
 
+import { OfficerNavComponent } from './Officer/officer-nav/officer-nav.component'
 import { OfficerDashboardComponent } from './Officer/test-centre-officer-dashboard/officer-dashboard.component';
 import { ManagerDashboardComponent } from './TestCentre/test-centre-manager-dashboard/manager-dashboard.component';
 import { CtsLoginComponent } from './CTS-Login/login.component';
@@ -87,7 +88,8 @@ import { TestReportTableComponent } from './TestReport/test-report-table/test-re
     TesterManagementTableComponent,
     TesterManagementFormComponent,
     TestReportTableComponent,
-    OfficerDashboardComponent
+    OfficerDashboardComponent,
+    OfficerNavComponent
 
 
   ],
