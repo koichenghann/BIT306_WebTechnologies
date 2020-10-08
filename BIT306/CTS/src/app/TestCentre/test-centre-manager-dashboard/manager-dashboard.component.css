@@ -2,8 +2,8 @@
 	background-repeat:no-repeat;
   position: relative;
   background-size: cover;
-  background-position:50% 30%;
-  background-image: url('../../../assets/image/patient-dashboard_green.png');
+  background-position:50% 43%;
+  background-image: url('../../../assets/image/manager-dashboard_green.png');
 }
 .page-caption {
   padding-top: 5rem;
