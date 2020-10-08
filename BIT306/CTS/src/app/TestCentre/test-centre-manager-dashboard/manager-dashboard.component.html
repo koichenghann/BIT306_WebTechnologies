@@ -1,3 +1,97 @@
 <side-nav>
-  
+   <!--title bar with pic-->
+   <div class="page-header">
+    <div class="container-fluid ">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="page-caption">
+                <h1 class="page-title">Dashboard</h1>
+              </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <main>
+    <mat-grid-list cols="1" rowsHeight="1:1">
+
+
+      <div class="content" fxLayout="row wrap">
+      <!--first row-->
+      <mat-card class="card_1 mat-elevation-z4">
+        <mat-card-header>
+          <mat-card-title>Welcome Back!</mat-card-title>
+        <mat-card-subtitle>Test Centre Manager</mat-card-subtitle>
+        </mat-card-header>
+
+       <mat-card-actions>
+        <div class="btn_manage">
+          <button routerLink="/manage-profile" mat-stroked-button
+          [ngStyle]="{background:'#ffffff' , color:'#424242'}">Manage Profile</button>
+        </div>
+        </mat-card-actions>
+      </mat-card>
+
+
+      <!--second row-->
+
+        <!--Second row-->
+
+        <div fxFlex="32%" fxFlex.xs="100%" fxFlex.sm="30%">
+            <mat-card class="card_2 mat-elevation-z4">
+              <mat-card-header>
+                <mat-card-title>Manage Test Kit Stock:</mat-card-title>
+                <mat-card-subtitle>Review and manage test kit stock so it won't be running out of supply.</mat-card-subtitle>
+              </mat-card-header>
+
+
+              <mat-card-actions>
+                <div class="btn_history">
+                  <button routerLink="/patient-view-history" class="btn_color" mat-raised-button
+                  [ngStyle]="{background:'#439F9E' , color:'#ffffff'}">Manage</button>
+              </div>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+
+          <div fxFlex="32%" fxFlex.xs="100%" fxFlex.sm="30%">
+            <mat-card class="card_3 mat-elevation-z4">
+              <mat-card-header>
+                <mat-card-title>Register Test Centre:</mat-card-title>
+                <mat-card-subtitle>Ensure a better control of covid crisis. Register new test centre location here.</mat-card-subtitle>
+              </mat-card-header>
+
+              <mat-card-actions>
+                <div  class="btn_add">
+                  <button routerLink="/add-submission" mat-fab
+                  [ngStyle]="{background:'#439F9E' , color:'#fff'}"><i class="fas fa-plus"></i></button>
+                </div>
+
+              </mat-card-actions>
+
+
+            </mat-card>
+          </div>
+          <div fxFlex="32%" fxFlex.xs="100%" fxFlex.sm="30%">
+            <mat-card class="card_3 mat-elevation-z4">
+              <mat-card-header>
+                <mat-card-title>Record Test Centre Officer:</mat-card-title>
+                <mat-card-subtitle>Officer of test centre. Record new appointed test centre officer here.</mat-card-subtitle>
+              </mat-card-header>
+
+              <mat-card-actions>
+                <div  class="btn_add">
+                  <button routerLink="/add-submission" mat-fab
+                  [ngStyle]="{background:'#439F9E' , color:'#fff'}"><i class="fas fa-plus"></i></button>
+                </div>
+
+              </mat-card-actions>
+
+
+            </mat-card>
+          </div>
+          </div>
+      </mat-grid-list>
+  </main>
+
 </side-nav>

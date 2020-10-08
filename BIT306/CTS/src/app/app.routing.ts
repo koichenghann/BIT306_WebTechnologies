@@ -28,7 +28,7 @@ const APP_ROUTES: Routes = [
   {path:'home', component: HomeComponent},
   {path:'test-centre-form', component: TestCentreFormComponent/*, canActivate: [TestCentreManagerGuard]*/},
   {path:'test-centre-profile', component: TestCentreProfileComponent/*, canActivate: [TestCentreManagerGuard]*/},
-  {path:'test-centre-dashboard', component: ManagerDashboardComponent},
+  {path:'manager-dashboard', component: ManagerDashboardComponent},
   {path:'signup', component: CtsSignupComponent},
   {path:'login', component: CtsLoginComponent},
   {path:'patient-dashboard', component: PatientDashboardComponent},
