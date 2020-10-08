@@ -1,80 +1,45 @@
+<div class="content" fxLayout="row wrap">
+
+
+
+<div fxFlex="30%" fxFlex.xs="100%" fxFlex.sm="100%">
 <mat-card class="mat-elevation-z8"  class="card-form">
-  <!--
-  <mat-card-header>
-   <mat-card-title>
-      New Test Result
-    </mat-card-title>
-
-    <mat-card-subtitle>
-      Please enter the detail for new test result.
-    </mat-card-subtitle>
-  </mat-card-header>
-    -->
-
-
   <mat-card-content>
 
     <form [formGroup] ="testUpdateForm" (ngSubmit)="onSubmit()">
       <div class="content" fxLayout="row wrap">
 
         <div fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="100%">
-          <mat-label><h3 mat-h3 mat-subheading-2>Patient details:</h3></mat-label>
+          <mat-label><h3 mat-h3 mat-subheading-2>Update results:</h3></mat-label>
         </div>
 
-      <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
+      <div fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="100%">
 
       <mat-form-field appearance="outline" class="input-username">
         <mat-label>Username</mat-label>
-        <input formControlName="username" matInput placeholder="Enter Username">
+        <input class="full-width" formControlName="username" matInput>
 
       </mat-form-field>
     </div>
 
-      <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
-      <mat-form-field appearance="outline" class="input-patientType">
-        <mat-label mat-body>Patient Type</mat-label>
-        <mat-select formControlName="patientType">
-          <mat-option value="Refurnee">Refurnee</mat-option>
-          <mat-option value="Quarantined">Quarantined</mat-option>
-          <mat-option value="Close contact">Close contact</mat-option>
-          <mat-option value="Infected">Infected</mat-option>
-          <mat-option value="Suspected">Suspected</mat-option>
+    <div fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="100%">
+    <mat-form-field appearance="outline" class="input-date">
+      <mat-label>Result Date</mat-label>
+      <input formControlName="resultDate" matInput>
+
+    </mat-form-field>
+  </div>
+
+      <div fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="100%">
+      <mat-form-field appearance="outline" class="input-result">
+        <mat-label mat-body>Test Results</mat-label>
+        <mat-select formControlName="testResult">
+          <mat-option value="Posivite">Posivite</mat-option>
+          <mat-option value="Negative">Negative</mat-option>
         </mat-select>
 
       </mat-form-field>
       </div>
-
-      <div fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="100%">
-        <mat-form-field class="full-width" appearance="outline">
-          <mat-label>Description</mat-label>
-          <textarea matInput></textarea>
-        </mat-form-field>
-      </div>
-
-      <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
-
-      <mat-label><h3 mat-h3 mat-subheading-2>Symptoms:</h3></mat-label>
-      <section class="symptoms-section">
-        <div class="checkGroup" formGroupName="symptoms">
-          <mat-checkbox formControlName="fever" class="symptoms-margin" >Fever</mat-checkbox>
-          <mat-checkbox formControlName="soreThroat" class="symptoms-margin"  >Sore Throat</mat-checkbox>
-          <mat-checkbox  formControlName="cough" class="symptoms-margin" >Cough</mat-checkbox>
-          <mat-checkbox  formControlName="shortnessOfBreath" class="symptoms-margin">Shortness of breath</mat-checkbox>
-          <mat-checkbox  formControlName="noSymptom" class="symptoms-margin noSymptom">No Symptom</mat-checkbox>
-        </div>
-      </section>
-
-
-
-      <section class="symptoms-section">
-        <mat-form-field class="symptoms-margin">
-          <mat-label>Other Symptoms:</mat-label>
-          <input formControlName="otherSymptoms"  matInput placeholder="Enter Username">
-        </mat-form-field>
-      </section>
-    </div>
-
-
 
     <div class="form-button-group" fxFlex="100%">
     <button mat-raised-button [ngStyle]="{background:'#439F9E' , color:'#fff'}">
@@ -88,3 +53,12 @@
   </mat-card-content>
 
 </mat-card>
+</div>
+
+<div fxFlex="70%" fxFlex.xs="100%" fxFlex.sm="100%">
+
+
+</div>
+
+
+</div>

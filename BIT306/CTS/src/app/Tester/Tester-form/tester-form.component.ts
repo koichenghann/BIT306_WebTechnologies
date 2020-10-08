@@ -4,13 +4,20 @@ import { TesterService } from '../tester.service';
 import { Router } from '@angular/router';
 import { UserService } from '../../User/user.service';
 import { TestCentreService } from '../../TestCentre/test-centre.service';
-
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
 
 @Component({
   selector:'tester-form',
   templateUrl:'tester-form.component.html',
-  styleUrls: ['tester-form.component.css']
+  styleUrls: ['tester-form.component.css'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ]
 })
 
 export class TesterFormComponent implements OnInit{

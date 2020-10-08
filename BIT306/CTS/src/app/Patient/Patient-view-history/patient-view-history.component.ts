@@ -26,7 +26,6 @@ export interface TestElement {
   patientType: string;
   testStatus: string;
   description: string;
-
 }
 
 const ELEMENT_DATA: TestElement[] = [
