@@ -5,6 +5,7 @@ import { TestCentreManagerGuard } from "./User/RouteGuard/test-centre-manager.gu
 
 import { TestCentreFormComponent } from './TestCentre/test-centre-form/test-centre-form.component';
 import { TestCentreProfileComponent } from './TestCentre/test-centre-profile/test-centre-profile.component';
+import { ManagerDashboardComponent } from './TestCentre/test-centre-manager-dashboard/manager-dashboard.component'
 import { HomeComponent } from './Home/home.component';
 import { CtsLoginComponent } from './CTS-Login/login.component';
 import { CtsSignupComponent } from './CTS-Signup/signup.component';
@@ -27,6 +28,7 @@ const APP_ROUTES: Routes = [
   {path:'home', component: HomeComponent},
   {path:'test-centre-form', component: TestCentreFormComponent/*, canActivate: [TestCentreManagerGuard]*/},
   {path:'test-centre-profile', component: TestCentreProfileComponent/*, canActivate: [TestCentreManagerGuard]*/},
+  {path:'test-centre-dashboard', component: ManagerDashboardComponent},
   {path:'signup', component: CtsSignupComponent},
   {path:'login', component: CtsLoginComponent},
   {path:'patient-dashboard', component: PatientDashboardComponent},

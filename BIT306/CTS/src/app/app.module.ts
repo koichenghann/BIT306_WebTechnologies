@@ -7,7 +7,7 @@ import { routing } from './app.routing';
 import { AppComponent } from './app.component';
 import { sidenavComponent } from './side-nav-component/side-nav.component'
 
-
+import { ManagerDashboardComponent } from './TestCentre/test-centre-manager-dashboard/manager-dashboard.component';
 import { CtsLoginComponent } from './CTS-Login/login.component';
 import { CtsSignupComponent } from './CTS-Signup/signup.component';
 import { HomeComponent } from './Home/home.component';
@@ -69,6 +69,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     sidenavComponent,
     TestCentreFormComponent,
     TestCentreProfileComponent,
+    ManagerDashboardComponent,
     PatientDashboardComponent,
     PatientNavComponent,
     PatientViewHistoryComponent,
