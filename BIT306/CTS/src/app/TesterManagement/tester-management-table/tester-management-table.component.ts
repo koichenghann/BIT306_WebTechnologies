@@ -27,7 +27,7 @@ export class TesterManagementTableComponent implements OnInit {
 
   editClickedHandler(row: User){
     this.userService.setSelectedTester(row);
-    this.route.navigate(['/tester-management-form']);
+    this.route.navigate(['/tester-management-table/form']);
   }
   deleteClickedHandler(row: User){
     if ( confirm('Do you want to delete Tester ' + row.id + ' ' + row.username)) {

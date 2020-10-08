@@ -34,7 +34,7 @@ export class TestKitTableComponent implements OnInit {
 
   editClickedHandler(row: TestKit) {
     this.testKitService.setSelectedTestKit(row);
-    this.route.navigate(['/test-kit-form']);
+    this.route.navigate(['/test-kit-table/form']);
   }
   deleteClickedHandler(row: TestKit) {
     if (confirm('Do you want to delete Test Kit '+ row.id + ' ' + row.name)) {

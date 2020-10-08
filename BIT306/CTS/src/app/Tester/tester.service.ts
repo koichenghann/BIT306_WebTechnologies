@@ -11,6 +11,7 @@ export class TesterService {
   constructor(){}
 
   private tests: Test[] = [];
+  private selectedTest: Test;
 
   testID: string;
   username: string;
@@ -21,7 +22,17 @@ export class TesterService {
 
   getTests(){
     this.downloadTests();
-    return this.getTests;
+    return this.tests;
+  }
+
+  getTestsByCentre(centre: string) {
+
+    this.downloadTests();
+    // console.log('downloaded test: ', this.tests);
+    if ( this.tests.length != 0 ) {
+      return this.tests.filter(test => test.centre == centre);
+    }
+    return [];
   }
 
 
@@ -76,14 +87,36 @@ export class TesterService {
 
   //retrieve data from localstorage
   downloadTests(){
-    this.tests = JSON.parse(localStorage.getItem('item'));
+    this.tests = JSON.parse(localStorage.getItem('test'));
     if (this.tests == null){
       this.tests = [];
     }
   }
 
 
-
+  //methods related to handling selected test
+  setSelectedTest(test: Test) {
+    this.selectedTest = test;
+    this.uploadSelectedTest();
+  }
+  getSelectedTest() {
+    this.downloadSelectedTest();
+    console.log('selected test: ',this.selectedTest);
+    return this.selectedTest;
+  }
+  clearSelectedTest() {
+    this.selectedTest = undefined;
+    this.removeSelectedTester();
+  }
+  uploadSelectedTest() {
+    localStorage.setItem('selectedTest', JSON.stringify(this.selectedTest));
+  }
+  downloadSelectedTest() {
+    this.selectedTest = JSON.parse(localStorage.getItem('selectedTest'));
+  }
+  removeSelectedTester() {
+    localStorage.removeItem('selectedTest');
+  }
 
 
 }

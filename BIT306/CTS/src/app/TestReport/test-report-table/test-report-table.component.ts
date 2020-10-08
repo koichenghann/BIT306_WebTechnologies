@@ -13,7 +13,17 @@ import { TesterService } from '../../Tester/tester.service';
 export class TestReportTableComponent implements OnInit {
   currentTestReports: Test[] = [];
 
-  displayedColumns = ['id', 'name', 'stock', 'action'];
+  displayedColumns = ['testID',
+                      'username',
+                      'patientType',
+                      // 'symptoms',
+                      // 'description',
+                      // 'otherSymptoms',
+                      'testStatus',
+                      'date',
+                      // 'tester',
+                      'action'
+                    ];
   dataSource = this.currentTestReports;
 
   tables = [0];
@@ -24,28 +34,34 @@ export class TestReportTableComponent implements OnInit {
   constructor(public testCentreService: TestCentreService, public userService: UserService, public testerService: TesterService, private route:Router) { }
 
   ngOnInit(): void {
+    this.setmode();
   }
 
   setmode() {
-    this.mode = 'new';
-    if (this.checkTestCentreExist()) {
-      this.mode = 'exist';
-      this.loadTestReports();
-      console.log(this.testerService.getTests());
-      if (this.currentTestReports.length == 0) {
-        this.mode = 'empty';
-      }
+    this.mode = 'exist';
+    this.loadTestReports();
+    console.log(this.testerService.getTests());
+    if (this.currentTestReports.length == 0) {
+      this.mode = 'empty';
     }
   }
-  checkTestCentreExist() {
-    return this.testCentreService.getTestCentre(this.userService.getCurrentUser().id) != undefined
-  }
+  // checkTestCentreExist() {
+  //   return this.testCentreService.getTestCentre(this.userService.getCurrentUser().id) != undefined
+  // }
   loadTestReports() {
-    // this.currentTestReports = this.testCentreService.
-    // this.dataSource = this.currentTestReports;
+    // console.log('currentUser: ', this.userService.getCurrentUser())
+    // console.log('test centre: ', this.userService.getCurrentUser().centre);
+    // console.log('all test: ', this.testerService.getTests());
+    // console.log('test by centre: ', this.testerService.getTestsByCentre(this.userService.getCurrentUser().centre));
+
+    this.currentTestReports = this.testerService.getTestsByCentre('TC1');
+    this.dataSource = this.currentTestReports;
   }
 
-
+  viewClickedHandler(row: Test) {
+    this.testerService.setSelectedTest(row);
+    this.route.navigate(['/test-report/detail'])
+  }
 
 
   //method for search feature
@@ -57,14 +73,18 @@ export class TestReportTableComponent implements OnInit {
     }
   }
   onSearchHandler(criteria: string) {
-    console.log('seach triggered: ', this.searchCriteria);
     if ( criteria == '' ) {
       this.dataSource = this.currentTestReports;
       this.search = false;
       return;
     }
     this.search = true;
-    this.dataSource = this.currentTestReports.filter(item => item.testID == criteria || item.username.includes(criteria));
+    this.dataSource = this.currentTestReports.filter(
+      item => item.testID.includes(criteria) ||
+      item.username.includes(criteria) ||
+      item.patientType.includes(criteria) ||
+      item.testStatus.includes(criteria) ||
+      item.date.includes(criteria));
   }
   onBlurHandler(criteria: string) {
     console.log('blur handler ran: ', criteria);

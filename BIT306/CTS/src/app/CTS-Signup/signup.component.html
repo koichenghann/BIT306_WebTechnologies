@@ -26,7 +26,7 @@
 
         <mat-form-field appearance="outline" fxFlex={{usertypeflex}} fxFlex.xs="100%" fxFlex.sm="100%">
           <mat-label>User Type</mat-label>
-          <mat-select formControlName="usertype" <!--(selectionChange)="userTypeChangeHandler()"--> required> <!--(selectionChange)="onUserTypeChange()">-->
+          <mat-select formControlName="usertype" required> <!--(selectionChange)="onUserTypeChange()">-->
              <mat-option *ngFor="let userTypeChoice of userTypeChoices" [value]="userTypeChoice.value">
                {{userTypeChoice.viewValue}}
              </mat-option>

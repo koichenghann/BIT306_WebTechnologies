@@ -21,6 +21,8 @@ import { TestKitFormComponent } from './TestKit/test-kit-form/test-kit-form.comp
 import { TesterManagementTableComponent } from './TesterManagement/tester-management-table/tester-management-table.component';
 import { TesterManagementFormComponent } from './TesterManagement/tester-management-form/tester-management-form.component';
 import { TestReportTableComponent } from './TestReport/test-report-table/test-report-table.component';
+import { TestReportDetailComponent } from './TestReport/test-report-detail/test-report-detail.component';
+
 
 
 const APP_ROUTES: Routes = [
@@ -32,13 +34,14 @@ const APP_ROUTES: Routes = [
   {path:'5', redirectTo: '/test-kit-table', pathMatch: 'full'},
   {path:'6', redirectTo: '/test-kit-form', pathMatch: 'full'},
   {path:'7', redirectTo: '/tester-management-table', pathMatch: 'full'},
-  {path:'8', redirectTo: '/tester-management-form', pathMatch: 'full'},
+  {path:'8', redirectTo: '/tester-management-table/form', pathMatch: 'full'},
   {path:'9', redirectTo: '/test-report', pathMatch: 'full'},
 
   {path:'home', component: HomeComponent},
   {path:'signup', component: CtsSignupComponent},
   {path:'login', component: CtsLoginComponent},
   {path:'test-report', component: TestReportTableComponent},
+  {path:'test-report/detail', component: TestReportDetailComponent},
 
   {path:'patient-dashboard', component: PatientDashboardComponent},
   {path:'patient-view-history', component: PatientViewHistoryComponent},

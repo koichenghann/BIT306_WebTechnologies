@@ -1,1 +1,109 @@
-<p>test-report-table works!</p>
+<side-nav>
+   <!--title bar with pic-->
+   <div class="page-header">
+    <div class="container-fluid ">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="page-caption">
+                <h1 class="page-title"></h1>
+              </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  <main>
+    <mat-grid-list cols="1" rowsHeight="1:1">
+      <div class="content" fxLayout="row wrap">
+
+
+
+        <div class="wrapper" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
+          <mat-card class="form-card mat-elevation-z10">
+            <mat-card-header>
+              <mat-card-title>Test Reports</mat-card-title>
+              <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+              <div fxFlex></div>
+              <div  *ngIf="mode=='exist'" class="searchbar">
+                <input #searchbar matInput (input)="onSearchHandler(searchCriteria)" (blur)="onBlurHandler(searchCriteria)" placeholder="search" type="text" [(ngModel)]="searchCriteria">
+              </div>
+              <div *ngIf="mode=='exist'" class="searchicon">
+                <span (click)="searchClickedHandler()" class="material-icons">{{search ? 'close' : 'search' }}</span>
+              </div>
+
+              <div class="header-button-group">
+                 <a *ngIf="mode!='new'" routerLink="/tester-new-test"><span class="material-icons">add</span></a>
+              </div>
+
+            </mat-card-header>
+
+            <mat-card-content>
+              <div *ngIf="mode=='empty'" id="noEntryMessage">
+                No test kit recorded. <!--Click <a routerLink="/test-kit-table/form">here</a> to add new test kit.-->
+              </div>
+
+              <div *ngIf="mode=='exist'" class="table-container mat-elevation-z0">
+                <table mat-table [dataSource]="dataSource">
+
+                  <ng-container matColumnDef="testID">
+                    <th mat-header-cell *matHeaderCellDef> TestID </th>
+                    <td mat-cell *matCellDef="let test"> {{test.testID}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="username">
+                    <th mat-header-cell *matHeaderCellDef> Patient </th>
+                    <td mat-cell *matCellDef="let test"> {{test.username}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="patientType">
+                    <th mat-header-cell *matHeaderCellDef> Patient Type </th>
+                    <td mat-cell *matCellDef="let test"> {{test.patientType}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="symptoms">
+                    <th mat-header-cell *matHeaderCellDef> Symptoms </th>
+                    <td mat-cell *matCellDef="let test"> {{test.Symptoms}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="description">
+                    <th mat-header-cell *matHeaderCellDef> Description </th>
+                    <td mat-cell *matCellDef="let test"> {{test.description}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="otherSymptoms">
+                    <th mat-header-cell *matHeaderCellDef> Other Symptoms </th>
+                    <td mat-cell *matCellDef="let test"> {{test.otherSymptoms}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="date">
+                    <th mat-header-cell *matHeaderCellDef> Date </th>
+                    <td mat-cell *matCellDef="let test"> {{test.date}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="testStatus">
+                    <th mat-header-cell *matHeaderCellDef> Status</th>
+                    <td mat-cell *matCellDef="let test"> {{test.testStatus}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef> Action </th>
+                    <td mat-cell *matCellDef="let test" >
+                      <span (click)="viewClickedHandler(test)" class="material-icons">read_more</span>
+                      <!-- <span (click)="editClickedHandler(testKit)" class="material-icons">create</span> -->
+                      <!-- <span (click)="deleteClickedHandler(testKit)"class="material-icons">delete</span> -->
+                    </td>
+                  </ng-container>
+
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+
+
+
+      </div>
+    </mat-grid-list>
+  </main>
+</side-nav>

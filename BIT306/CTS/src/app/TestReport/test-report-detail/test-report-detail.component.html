@@ -1,0 +1,139 @@
+<side-nav>
+   <!--title bar with pic-->
+   <div class="page-header">
+    <div class="container-fluid ">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="page-caption">
+                <h1 class="page-title"></h1>
+              </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  <main>
+    <mat-grid-list cols="1" rowsHeight="1:1">
+      <div class="content" fxLayout="row wrap">
+
+
+
+        <div class="wrapper" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
+          <mat-card class="form-card mat-elevation-z10">
+            <mat-card-header>
+              <mat-card-title>
+                Detail Test Report
+              </mat-card-title>
+              <div fxFlex></div>
+              <div class="header-button-group">
+                 <a routerLink="/test-report"><span class="material-icons">close</span></a>
+              </div>
+
+              <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+            </mat-card-header>
+
+            <mat-card-content>
+              <div *ngIf="mode=='new'" id="noEntryMessage">
+                No test report selected. Click <a routerLink="/test-report">here</a> to set select.
+              </div>
+
+              <div *ngIf="mode!='new'" fxLayout="row wrap">
+                 <div class="cell" fxFlex="30%" fxFlex.xs="100%" fxFlex.sm="0%">
+                   <div class="cell-header">
+                     TestID
+                   </div>
+                   <div class="cell-body">
+                     {{selectedTest.testID}}
+                   </div>
+                 </div>
+
+                 <div class="cell" fxFlex="30%" fxFlex.xs="100%" fxFlex.sm="50%">
+                   <div class="cell-header">
+                     Patient
+                   </div>
+                   <div class="cell-body">
+                     {{selectedTest.username}}
+                   </div>
+                 </div>
+
+                 <div class="cell" fxFlex="30%" fxFlex.xs="100%" fxFlex.sm="50%">
+                   <div class="cell-header">
+                     Patient Type
+                   </div>
+                   <div class="cell-body">
+                     {{selectedTest.patientType}}
+                   </div>
+                 </div>
+
+                 <div class="cell" fxFlex="30%" fxFlex.xs="100%" fxFlex.sm="50%">
+                   <div class="cell-header">
+                     Date
+                   </div>
+                   <div class="cell-body">
+                     {{selectedTest.date}}
+                   </div>
+                 </div>
+
+                 <div class="cell" fxFlex="30%" fxFlex.xs="100%" fxFlex.sm="100%">
+                   <div class="cell-header">
+                     Test Status
+                   </div>
+                   <div class="cell-body">
+                     {{selectedTest.testStatus}}
+                   </div>
+                 </div>
+
+                 <div class="cell" fxFlex="30%" fxFlex.xs="100%" fxFlex.sm="0%">
+                   <div class="cell-header">
+                     Tester
+                   </div>
+                   <div class="cell-body">
+                     {{selectedTest.tester}}
+                   </div>
+                 </div>
+
+                 <div class="cell" fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="50%">
+                   <div class="cell-header">
+                     Centre ID
+                   </div>
+                   <div class="cell-body">
+                     {{selectedTest.centre}}
+                   </div>
+                 </div>
+
+                 <div class="cell" fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="50%">
+                   <div class="cell-header">
+                     Description
+                   </div>
+                   <div class="cell-body">
+                     {{selectedTest.description}}
+                   </div>
+                 </div>
+
+                 <div class="cell" fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="50%">
+                   <div class="cell-header">
+                     Symptoms
+                   </div>
+                   <div class="cell-body">
+                     {{selectedTest.symptoms}}
+                   </div>
+                 </div>
+
+                 <div class="cell" fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="100%">
+                   <div class="cell-header">
+                     Other Symptoms
+                   </div>
+                   <div class="cell-body">
+                     {{selectedTest.otherSymptoms}}
+                   </div>
+                 </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+
+
+
+      </div>
+    </mat-grid-list>
+  </main>
+</side-nav>

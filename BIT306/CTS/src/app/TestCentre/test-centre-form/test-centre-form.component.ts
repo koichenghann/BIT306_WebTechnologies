@@ -96,7 +96,7 @@ export class TestCentreFormComponent implements OnInit {
       this.testCentreService.addTestCentre(this.id.value, this.currentOfficer.id, this.contact.value, this.state.value, this.address.value);
 
       //assign the test centre to the currentOfficer
-      var updatedOfficer = this.currentOfficer();
+      var updatedOfficer = this.currentOfficer;
       this.userService.updateUser(this.currentOfficer.id,
                                   this.currentOfficer.username,
                                   this.currentOfficer.password,
