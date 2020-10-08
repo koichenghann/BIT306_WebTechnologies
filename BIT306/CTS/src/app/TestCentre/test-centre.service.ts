@@ -24,7 +24,11 @@ export class TestCentreService {
 
   generateNewId(){
     this.downloadTestCentres();
-    return "TC"+(this.getTestCentres().length+1);
+    // return "TC"+(this.getTestCentres().length+1);
+    if ( this.testCentres.length > 0) {
+      return 'TC' + (parseInt(this.testCentres[this.testCentres.length-1].id.replace('TC',''), 10)+1);
+    }
+    return 'TC1'
   }
 
   addTestCentre(id: string,  officer: string, contact: string, state: string, address: string){

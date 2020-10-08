@@ -94,6 +94,16 @@ export class TestCentreFormComponent implements OnInit {
     }
     if ( this.mode == 'add' ) {
       this.testCentreService.addTestCentre(this.id.value, this.currentOfficer.id, this.contact.value, this.state.value, this.address.value);
+
+      //assign the test centre to the currentOfficer
+      var updatedOfficer = this.currentOfficer();
+      this.userService.updateUser(this.currentOfficer.id,
+                                  this.currentOfficer.username,
+                                  this.currentOfficer.password,
+                                  this.currentOfficer.usertype,
+                                  this.currentOfficer.contact,
+                                  this.currentOfficer.address,
+                                  this.id.value);
     } else {
       this.testCentreService.updateTestCentre(this.id.value, this.officer.value, this.contact.value, this.state.value, this.address.value);
     }

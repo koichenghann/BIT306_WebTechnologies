@@ -34,7 +34,10 @@ export class TestKitService {
   }
 
   generateID() {
-    return 'TK'+ (this.testKits.length + 1);
+    if ( this.testKits.length > 0 ) {
+      return 'TK' + (parseInt(this.testKits[this.testKits.length-1].id.replace('TK',''), 10)+1);
+    }
+    return 'TK1';
   }
   addTestKit(id: string, centre: string, name: string, stock: number) {
     const newId = this.generateID();

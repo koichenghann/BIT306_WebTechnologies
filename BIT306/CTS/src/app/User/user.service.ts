@@ -45,10 +45,10 @@ export class UserService {
     if(this.users.find(user => user.username == username)){
       return false;
     }
-    const id = "U"+(this.users.length + 1);
+    const id = this.generateID();
     const user: User = {id:id, username:username, password:password, usertype:usertype, contact:contact, address:address, centre:centre};
     this.users.push(user);
-    console.log(this.users);
+    // console.log(this.users);
     this.uploadUsers();
   }
   login(username: string, password: string){
@@ -71,7 +71,11 @@ export class UserService {
   generateID() {
     this.downloadUsers();
     //return "U"+(this.users.length + 1);
-    return "U" + (parseInt(this.users[this.users.length].id.replace('U',''))+1);
+    // console.log(this.users[this.users.length]);
+    if ( this.users.length > 0 ) {
+      return "U" + (parseInt(this.users[this.users.length-1].id.replace('U',''), 10)+1);
+    }
+    return 'U1';
   }
 
 

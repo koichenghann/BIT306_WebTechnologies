@@ -32,7 +32,11 @@ export class TesterService {
 
   generateTestID(){
     this.downloadTests();
-    return "TRD"+(this.getTests().length+1);
+    // return "TRD"+(this.getTests().length+1);
+    if ( this.tests.length > 0 ) {
+      return "TRD" + (parseInt(this.tests[this.tests.length-1].testID.replace('TRD',''), 10)+1);
+    }
+    return 'TRD1';
   }
 
   addTest(username: string, patientType: string, symptoms: string, otherSymptoms:string, description: string, testStatus: string, date: string, tester: string){
