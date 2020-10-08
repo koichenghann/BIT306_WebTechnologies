@@ -35,8 +35,9 @@ export class TesterService {
     return "TRD"+(this.getTests().length+1);
   }
 
-  addTest(testID: string, username: string, patientType: string, symptoms: string, otherSymptoms:string, description: string, testStatus: string, date: string, tester: string){
+  addTest(username: string, patientType: string, symptoms: string, otherSymptoms:string, description: string, testStatus: string, date: string, tester: string){
     this.downloadTests();
+    var testID = this.generateTestID();
     const test: Test = { testID: testID, username: username, patientType: patientType,  symptoms: symptoms, description:description, otherSymptoms:otherSymptoms, testStatus: testStatus, date: date, tester: tester};
     this.tests.push(test);
     this.uploadTests();

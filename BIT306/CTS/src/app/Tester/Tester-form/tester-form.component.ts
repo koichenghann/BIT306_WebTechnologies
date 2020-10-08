@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { UserService } from '../../User/user.service';
 
 
+
 @Component({
   selector:'tester-form',
   templateUrl:'tester-form.component.html',
@@ -92,9 +93,10 @@ export class TesterFormComponent implements OnInit{
   onSubmit(): void {
     console.log(this.testForm.value);
     console.log(this.symptoms.value);
+    //this.testID.setValue(this.testerService.generateTestID());
 
 
-    var testStatus= 'pending'
+    var testStatus= 'pending';
     var today = new Date();
     var day = String(today.getDate()).padStart(2, '0');
     var month = String(today.getMonth() + 1).padStart(2, '0');
@@ -108,8 +110,8 @@ export class TesterFormComponent implements OnInit{
     var a = ' Fever';
     var b = ' Sore throat';
     var c = ' Cough';
-    var d = ' Shortness of breath'
-    var e = ' No Symptoms'
+    var d = ' Shortness of breath';
+    var e = ' No Symptoms';
 
     if (allSymptoms.fever != true){
       a = '';
@@ -137,7 +139,19 @@ export class TesterFormComponent implements OnInit{
     }
 
     else{
-      this.testerService.addTest(this.testID.value, this.username.value, this.patientType.value, strAllSymptoms, this.otherSymptoms.value, this.description.value, testStatus, todayDate, this.currentTester);
+      //console.log(this.testID.value);
+      console.log(this.username.value);
+      console.log(this.patientType.value);
+      console.log(strAllSymptoms);
+      console.log(this.otherSymptoms.value);
+      console.log(this.description.value);
+      console.log(testStatus);
+      console.log(todayDate);
+      console.log(this.currentTester);
+
+
+      this.testerService.addTest(this.username.value, this.patientType.value,
+        strAllSymptoms, this.otherSymptoms.value, this.description.value, testStatus, todayDate, this.currentTester);
    }
 
 
