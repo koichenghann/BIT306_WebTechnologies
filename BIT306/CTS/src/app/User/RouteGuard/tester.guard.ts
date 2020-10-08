@@ -12,7 +12,7 @@ export class TesterGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    if (this.userService.getCurrentUser() != undefined && this.userService.getCurrentUser().usertype == 'tester') {
+    if (this.userService.getCurrentUser() != undefined && this.userService.getCurrentUser().usertype == 'Tester') {
       return true;
     }
     alert('Sorry, you are not authorized for this part of the system.');

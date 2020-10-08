@@ -12,6 +12,8 @@ export class UserService {
   private currentUser: User;
   private selectedTester: User;
 
+
+  //methods related to selected User
   setSelectedTester(tester: User){
     this.selectedTester = tester;
     this.uploadSelectedTester();
@@ -24,7 +26,6 @@ export class UserService {
     this.selectedTester = undefined;
     this.RemoveSelectedTester();
   }
-
   uploadSelectedTester(){
     localStorage.setItem('selectedTester', JSON.stringify(this.selectedTester));
   }
@@ -35,13 +36,9 @@ export class UserService {
     localStorage.removeItem('selectedTester')
   }
 
-  checkUsernameIsUnique(username: string){
-    this.downloadUsers();
-    if(this.users.find(user => user.username == username)){
-      return false;
-    }
-    return true;
-  }
+
+
+
 
   register(username: string, password: string, usertype: string, contact: string, address: string, centre: string){
     this.downloadUsers();
@@ -54,7 +51,6 @@ export class UserService {
     console.log(this.users);
     this.uploadUsers();
   }
-
   login(username: string, password: string){
     this.downloadUsers();
     var currentUser = this.users.find(user => user.username == username && user.password == password);
@@ -65,11 +61,23 @@ export class UserService {
     }
     return false;
   }
-
+  checkUsernameIsUnique(username: string){
+    this.downloadUsers();
+    if(this.users.find(user => user.username == username)){
+      return false;
+    }
+    return true;
+  }
   generateID() {
     this.downloadUsers();
-    return "U"+(this.users.length + 1);
+    //return "U"+(this.users.length + 1);
+    return "U" + (parseInt(this.users[this.users.length].id.replace('U',''))+1);
   }
+
+
+
+
+
   getCurrentUser(){
     this.downloadCurrentUser();
     return this.currentUser;

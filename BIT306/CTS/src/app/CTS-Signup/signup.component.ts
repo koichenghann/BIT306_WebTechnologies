@@ -63,7 +63,7 @@ export class CtsSignupComponent {
 
   userTypeChoices = [
     {value: 'Patient', viewValue: 'Patient'},
-    {value: 'Officer', viewValue: 'Test Centre Officer'},
+    {value: 'TestCentreOfficer', viewValue: 'Test Centre Officer'},
     {value: 'TestCentreManager', viewValue: 'Test Centre Manager'}];
 
   officerTypeChoices = [

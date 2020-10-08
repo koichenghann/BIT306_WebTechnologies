@@ -83,9 +83,9 @@ export class TesterManagementFormComponent implements OnInit {
       return;
     }
     if ( this.mode == 'add' ) {
-      this.userService.register(this.username.value, this.password.value, 'tester', '', '', this.currentTestCentre.id);
+      this.userService.register(this.username.value, this.password.value, 'Tester', '', '', this.currentTestCentre.id);
     } else {
-      this.userService.updateUser(this.id.value, this.username.value, this.password.value, 'tester', '', '', this.centre.value);
+      this.userService.updateUser(this.id.value, this.username.value, this.password.value, 'Tester', '', '', this.centre.value);
       this.userService.clearSelectedTester();
     }
     this.close();

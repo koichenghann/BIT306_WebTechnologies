@@ -3,16 +3,15 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } fro
 import { Observable } from 'rxjs';
 import { UserService } from '../user.service';
 
-
 @Injectable({
   providedIn: 'root'
 })
-export class PatientGuard implements CanActivate {
+export class TestCentreOfficerGuard implements CanActivate {
   constructor(public userService: UserService){}
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      if (this.userService.getCurrentUser() != undefined && this.userService.getCurrentUser().usertype == 'Patient') {
+      if (this.userService.getCurrentUser() != undefined && this.userService.getCurrentUser().usertype == 'TestCentreOfficer') {
         return true;
       }
       alert('Sorry, you are not authorized for this part of the system.');

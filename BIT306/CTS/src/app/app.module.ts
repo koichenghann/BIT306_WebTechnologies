@@ -51,6 +51,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { TesterManagementTableComponent } from './TesterManagement/tester-management-table/tester-management-table.component';
 import { TesterManagementFormComponent } from './TesterManagement/tester-management-form/tester-management-form.component';
+import { TestReportTableComponent } from './TestReport/test-report-table/test-report-table.component';
 
 
 
@@ -83,7 +84,8 @@ import { TesterManagementFormComponent } from './TesterManagement/tester-managem
     TestKitFormComponent,
     TestKitTableComponent,
     TesterManagementTableComponent,
-    TesterManagementFormComponent
+    TesterManagementFormComponent,
+    TestReportTableComponent
 
   ],
   imports: [

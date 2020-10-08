@@ -2,6 +2,7 @@ import { Routes, RouterModule } from "@angular/router";
 import { PatientGuard } from "./User/RouteGuard/patient.guard";
 import { TesterGuard } from "./User/RouteGuard/tester.guard";
 import { TestCentreManagerGuard } from "./User/RouteGuard/test-centre-manager.guard";
+import { TestCentreOfficerGuard } from "./User/RouteGuard/test-centre-officer.guard";
 
 import { TestCentreFormComponent } from './TestCentre/test-centre-form/test-centre-form.component';
 import { TestCentreProfileComponent } from './TestCentre/test-centre-profile/test-centre-profile.component';
@@ -18,6 +19,8 @@ import { TestKitTableComponent } from './TestKit/test-kit-table/test-kit-table.c
 import { TestKitFormComponent } from './TestKit/test-kit-form/test-kit-form.component';
 import { TesterManagementTableComponent } from './TesterManagement/tester-management-table/tester-management-table.component';
 import { TesterManagementFormComponent } from './TesterManagement/tester-management-form/tester-management-form.component';
+import { TestReportTableComponent } from './TestReport/test-report-table/test-report-table.component';
+
 
 const APP_ROUTES: Routes = [
   {path:'', redirectTo: '/home', pathMatch: 'full'},
@@ -29,10 +32,12 @@ const APP_ROUTES: Routes = [
   {path:'6', redirectTo: '/test-kit-form', pathMatch: 'full'},
   {path:'7', redirectTo: '/tester-management-table', pathMatch: 'full'},
   {path:'8', redirectTo: '/tester-management-form', pathMatch: 'full'},
+  {path:'9', redirectTo: '/test-report', pathMatch: 'full'},
 
   {path:'home', component: HomeComponent},
   {path:'signup', component: CtsSignupComponent},
   {path:'login', component: CtsLoginComponent},
+  {path:'test-report', component: TestReportTableComponent},
 
   {path:'patient-dashboard', component: PatientDashboardComponent},
   {path:'patient-view-history', component: PatientViewHistoryComponent},
