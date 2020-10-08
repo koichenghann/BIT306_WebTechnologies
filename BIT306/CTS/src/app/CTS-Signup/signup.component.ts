@@ -59,7 +59,7 @@ export class CtsSignupComponent {
     return this.userForm.get('address');
   }
 
-  // usertypeflex = "100%";
+  usertypeflex = "100%";
 
   userTypeChoices = [
     {value: 'Patient', viewValue: 'Patient'},
