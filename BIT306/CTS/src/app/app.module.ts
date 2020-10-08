@@ -99,7 +99,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     FlexLayoutModule,
     MatMenuModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatCheckboxModule
 
   ],
   providers: [

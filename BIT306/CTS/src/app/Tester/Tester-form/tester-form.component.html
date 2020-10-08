@@ -13,12 +13,16 @@
 
 
   <mat-card-content>
+
     <form [formGroup]="testForm">
+      <div class="content" fxLayout="row wrap">
+      <div fxFlex="32%" fxFlex.xs="100%" fxFlex.sm="30%">
       <mat-form-field appearance="outline">
         <mat-label>Username</mat-label>
         <input matInput placeholder="Enter Username">
 
       </mat-form-field>
+    </div>
       <br>
       <mat-form-field appearance="outline">
         <mat-label>Patient Type</mat-label>
@@ -31,6 +35,22 @@
         </mat-select>
 
       </mat-form-field>
+
+      <section class="symptoms-section">
+        <mat-label>Symptoms:</mat-label>
+        <mat-checkbox [formControl] class="symptoms-margin" [(ngModel)] ="fever">Fever</mat-checkbox>
+        <mat-checkbox [formControl] class="symptoms-margin" [(ngModel)] ="soreThroat">Sore Throat</mat-checkbox>
+        <mat-checkbox [formControl] class="symptoms-margin" [(ngModel)] ="cough">Cough</mat-checkbox>
+        <mat-checkbox [formControl] class="symptoms-margin" [(ngModel)] ="shortnessOfBreath">Shortness of breath</mat-checkbox>
+      </section>
+
+
+
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Description</mat-label>
+        <textarea matInput></textarea>
+      </mat-form-field>
+    </div>
     </form>
 
   </mat-card-content>

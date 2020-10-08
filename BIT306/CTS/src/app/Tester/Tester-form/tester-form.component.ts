@@ -9,4 +9,14 @@ import { Component, OnInit } from '@angular/core';
 
 export class TesterFormComponent {
   testForm;
+
+
+
+  fever= false;
+  soreThroat = false;
+  cough = true;
+  shortnessOfBreath = true;
+
+
+
 }
