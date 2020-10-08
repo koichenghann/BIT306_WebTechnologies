@@ -56,7 +56,8 @@ setmode() {
 }
 
 loadTestReports() {
-  this.currentTestReports = this.testerService.getTestsByCentre(this.userService.getCurrentUser().centre);
+  //this.currentTestReports = this.testerService.getTestsByCentre(this.userService.getCurrentUser().centre);
+  this.currentTestReports = this.testerService.getTests();
     this.dataSource = this.currentTestReports;
 }
 
