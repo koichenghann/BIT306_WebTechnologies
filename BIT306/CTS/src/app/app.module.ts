@@ -13,12 +13,14 @@ import { CtsSignupComponent } from './CTS-Signup/signup.component';
 import { HomeComponent } from './Home/home.component';
 import { TestCentreFormComponent } from './TestCentre/test-centre-form/test-centre-form.component';
 import { TestCentreProfileComponent } from './TestCentre/test-centre-profile/test-centre-profile.component';
+import { TestKitFormComponent } from './TestKit/test-kit-form/test-kit-form.component';
+import { TestKitTableComponent } from './TestKit/test-kit-table/test-kit-table.component';
+
+
 import { PatientDashboardComponent } from'./Patient/Patient-dashboard/patient-dashboard.component';
 import { PatientNavComponent } from'./Patient/Patient-nav/patient-nav.component';
 import { PatientViewHistoryComponent } from './Patient/Patient-view-history/patient-view-history.component';
 import { UserService } from './User/user.service';
-import { TestKitStockTableComponent } from './TestKitStock/test-kit-stock-table/test-kit-stock-table.component';
-import { TestKitStockFormComponent } from './TestKitStock/test-kit-stock-form/test-kit-stock-form.component';
 
 import { TesterDashboardComponent } from './Tester/Tester-dashboard/tester-dashboard.component';
 import { TesterNavComponent } from './Tester/Tester-nav/tester-nav.component';
@@ -73,9 +75,9 @@ import { MatTableModule } from '@angular/material/table';
     TesterNavComponent,
     TesterNewTestComponent,
     TesterUpdateTestComponent,
-    TestKitStockTableComponent,
-    TestKitStockFormComponent,
-    TesterFormComponent
+    TesterFormComponent,
+    TestKitFormComponent,
+    TestKitTableComponent
 
   ],
   imports: [
