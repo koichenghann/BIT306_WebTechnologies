@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import { TesterService } from '../../Tester/tester.service';
+import { Test } from '../../Tester/test.model';
+import { UserService } from '../../User/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector:'patient-view-history',
@@ -14,47 +18,51 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
   ]
 })
 
-export class PatientViewHistoryComponent {
-  dataSource = ELEMENT_DATA;
-  columnsToDisplay = ['name', 'testID', 'patientType', 'testStatus'];
-  expandedElement: TestElement | null;
-}
+export class PatientViewHistoryComponent implements OnInit {
+  currentTestReports: Test[] = [];
+  displayedColumns = ['testID',
+                      'username',
+                      'patientType',
+                      // 'symptoms',
+                      // 'description',
+                      // 'otherSymptoms',
+                      'testStatus',
+                      'date',
+                      // 'tester',
+                      'action'
+                    ];
 
-export interface TestElement {
-  name: string;
-  testID: string;
-  patientType: string;
-  testStatus: string;
-  description: string;
-}
+                    dataSource = this.currentTestReports;
 
-const ELEMENT_DATA: TestElement[] = [
-  {
-    name: 'Lionel Messi',
-    testID: '00001',
-    testStatus: 'Completed',
-    patientType: 'Returnee',
-    description: `Hydrogen is a chemical element with symbol H and atomic number 1. With a standard
-        atomic weight of 1.008, hydrogen is the lightest element on the periodic table.`,
+  tables = [0];
+  search = false;
+  searchCriteria;
+  mode = 'new';
 
-  }, {
-    name: 'Sadio Mane',
-    testID: '00002',
-    testStatus: 'Completed',
-    patientType: 'Infected',
-    description: `Helium is a chemical element with symbol He and atomic number 2. It is a
-        colorless, odorless, tasteless, non-toxic, inert, monatomic gas, the first in the noble gas
-        group in the periodic table. Its boiling point is the lowest among all the elements.`,
+  constructor(public userService: UserService, public testerService: TesterService, private route:Router){
 
-  }, {
-
-    name: 'Mo Salah',
-    testID: '00003',
-    testStatus: 'Pending',
-    patientType: 'Suspected',
-    description: `Lithium is a chemical element with symbol Li and atomic number 3. It is a soft,
-        silvery-white alkali metal. Under standard conditions, it is the lightest metal and the
-        lightest solid element.`
   }
-];
 
+ngOnInit(): void{
+  this.setmode();
+}
+setmode() {
+  this.mode = 'exist';
+  this.loadTestReports();
+  console.log(this.testerService.getTests());
+  if (this.currentTestReports.length == 0) {
+    this.mode = 'empty';
+  }
+}
+
+loadTestReports() {
+  this.currentTestReports = this.testerService.getTestsByCentre(this.userService.getCurrentUser().centre);
+    this.dataSource = this.currentTestReports;
+}
+
+viewClickedHandler(row: Test) {
+  this.testerService.setSelectedTest(row);
+  this.route.navigate(['patient-view-history/detail'])
+}
+
+}

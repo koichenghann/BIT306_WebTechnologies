@@ -9,5 +9,7 @@ export interface Test {
   date: string;
   tester: string;
   centre: string;
+  testResult: string;
+  resultDate: string;
 
 }

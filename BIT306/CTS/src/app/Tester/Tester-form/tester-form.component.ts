@@ -141,6 +141,9 @@ export class TesterFormComponent implements OnInit{
     var strAllSymptoms = a + b + c + d + e;
     console.log(strAllSymptoms);
 
+    var testResult = '';
+    var resultDate = '';
+
 
 
     if(this.testForm.invalid){
@@ -166,7 +169,7 @@ export class TesterFormComponent implements OnInit{
                                   this.description.value,
                                   testStatus, todayDate,
                                   this.currentTester,
-                                  this.currentTestCentreID);
+                                  this.currentTestCentreID, testResult, resultDate);
    }
 
 

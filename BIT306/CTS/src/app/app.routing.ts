@@ -12,7 +12,8 @@ import { HomeComponent } from './Home/home.component';
 import { CtsLoginComponent } from './CTS-Login/login.component';
 import { CtsSignupComponent } from './CTS-Signup/signup.component';
 import { PatientDashboardComponent } from './Patient/Patient-dashboard/patient-dashboard.component';
-import { PatientViewHistoryComponent } from './Patient/Patient-view-history/patient-view-history.component'
+import { PatientViewHistoryComponent } from './Patient/Patient-view-history/patient-view-history.component';
+import { PatientTableDetailsComponent } from './Patient/Patient-table-details/patient-table-details.component';
 import { TesterDashboardComponent } from './Tester/Tester-dashboard/tester-dashboard.component';
 import { TesterNewTestComponent } from './Tester/Tester-new-test/tester-new-test.component';
 import { TesterUpdateTestComponent } from './Tester/Tester-update-test/tester-update-test.component';
@@ -45,6 +46,7 @@ const APP_ROUTES: Routes = [
 
   {path:'patient-dashboard', component: PatientDashboardComponent},
   {path:'patient-view-history', component: PatientViewHistoryComponent},
+  {path:'patient-view-history/detail', component: PatientTableDetailsComponent},
 
   {path:'tester-dashboard', component: TesterDashboardComponent},
   {path:'tester-new-test', component: TesterNewTestComponent},

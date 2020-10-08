@@ -50,7 +50,8 @@ export class TesterService {
     return 'TRD1';
   }
 
-  addTest(username: string, patientType: string, symptoms: string, otherSymptoms:string, description: string, testStatus: string, date: string, tester: string, centre: string){
+  addTest(username: string, patientType: string, symptoms: string, otherSymptoms:string, description: string, testStatus: string, date: string, tester: string
+    , centre: string, testResult: string, resultDate: string){
     this.downloadTests();
     var testID = this.generateTestID();
     const test: Test = {  testID: testID,
@@ -62,14 +63,18 @@ export class TesterService {
                           testStatus: testStatus,
                           date: date,
                           tester: tester,
-                          centre: centre};
+                          centre: centre,
+                          testResult: testResult,
+                          resultDate: resultDate
+                          };
     this.tests.push(test);
     this.uploadTests();
   }
 
 
   //update exisitng test data
-  updateTest(testID: string, username: string, patientType: string, symptoms: string, otherSymptoms: string, description: string, testStatus: string, date: string, tester: string){
+  updateTest(testID: string, username: string, patientType: string, symptoms: string, otherSymptoms: string, description: string, testStatus: string
+    , date: string, tester: string, centre: string, testResult: string, resultDate: string ){
     this.uploadTests();
     var test = this.tests.find(test => test.tester == tester);
     //test.username= username;
@@ -77,6 +82,8 @@ export class TesterService {
     test.symptoms = symptoms;
     test.testStatus = testStatus;
     test.otherSymptoms = otherSymptoms;
+    test.resultDate = resultDate;
+    test.testResult = testResult;
    }
 
 

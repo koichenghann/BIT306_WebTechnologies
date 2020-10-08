@@ -23,6 +23,7 @@ import { TestKitTableComponent } from './TestKit/test-kit-table/test-kit-table.c
 import { PatientDashboardComponent } from'./Patient/Patient-dashboard/patient-dashboard.component';
 import { PatientNavComponent } from'./Patient/Patient-nav/patient-nav.component';
 import { PatientViewHistoryComponent } from './Patient/Patient-view-history/patient-view-history.component';
+import { PatientTableDetailsComponent } from './Patient/Patient-table-details/patient-table-details.component';
 
 import { TesterDashboardComponent } from './Tester/Tester-dashboard/tester-dashboard.component';
 import { TesterNavComponent } from './Tester/Tester-nav/tester-nav.component';
@@ -79,6 +80,7 @@ import { TestReportDetailComponent } from './TestReport/test-report-detail/test-
     PatientDashboardComponent,
     PatientNavComponent,
     PatientViewHistoryComponent,
+    PatientTableDetailsComponent,
     TesterDashboardComponent,
     TesterNavComponent,
     TesterNewTestComponent,
