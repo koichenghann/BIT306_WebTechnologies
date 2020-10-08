@@ -25,7 +25,7 @@ export class TestKitService {
 
   clearSelectedTestKit() {
     this.selectedTestKit = undefined;
-    this.uploadSelectedTestKit();
+    this.removeSelectedTestKit();
   }
 
   getTestKits() {
@@ -74,5 +74,9 @@ export class TestKitService {
 
   downloadSelectedTestKit() {
     this.selectedTestKit = JSON.parse(localStorage.getItem('selectedTestKit'));
+  }
+
+  removeSelectedTestKit() {
+    localStorage.removeItem('selectedTestKit');
   }
 }

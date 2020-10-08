@@ -26,6 +26,7 @@ export class TestKitTableComponent implements OnInit {
 
   ngOnInit(): void {
     this.setmode()
+    this.testKitService.clearSelectedTestKit();
   }
 
   editClickedHandler(row: TestKit) {
