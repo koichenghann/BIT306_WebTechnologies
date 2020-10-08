@@ -34,8 +34,8 @@
 .header-button-group a:hover{
   text-decoration: underline;
 }
-.header-button-group a span{
-}
+/* .header-button-group a span{
+} */
 mat-card{
   margin: auto;
   /* margin: 10% auto; */

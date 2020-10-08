@@ -1,3 +1,8 @@
+
+
+
+
+
 .wrapper{
   /* background-color: #439F9E; */
   height: 100%;
@@ -41,7 +46,7 @@ mat-card-subtitle{
 .header-button-group{
   position: sticky;
   margin-right: 2em;
-  padding-top: 0.1em;
+  padding-top: 0em;
 }
 .header-button-group a{
   text-decoration: none;
@@ -49,6 +54,21 @@ mat-card-subtitle{
 }
 .header-button-group a:hover{
   color: black;
+}
+.searchbar{
+  margin-right: 1em;
+  padding-top: 0.1em;
+}
+.searchbar input{
+  background-color: none;
+}
+.searchicon{
+  margin-right: 1em;
+  padding-top: 0.1em;
+  color: white;
+}
+.searchicon span{
+  font-size: 1.5em;
 }
 mat-card-content{
   padding: 0;
