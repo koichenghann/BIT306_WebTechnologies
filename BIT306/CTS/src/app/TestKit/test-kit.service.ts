@@ -66,6 +66,7 @@ export class TestKitService {
   }
 
   deleteTestKit(id:string) {
+    this.downloadTestKit();
     this.testKits.splice(this.testKits.findIndex(testKit => testKit.id == id), 1);
     this.uploadTestKit();
   }

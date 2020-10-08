@@ -41,9 +41,9 @@ export class TestCentreFormComponent implements OnInit {
     })
     this.id.disable();
     this.officer.disable();
-    this.currentOfficer = this.userService.getCurrentUser().username;
+    this.currentOfficer = this.userService.getCurrentUser();
     console.log('currentUser: ', this.userService.getCurrentUser());
-    this.officer.setValue(this.currentOfficer);
+    this.officer.setValue(this.currentOfficer.username);
     this.setMode();
   }
 
@@ -63,7 +63,7 @@ export class TestCentreFormComponent implements OnInit {
     return this.testCentreForm.get('address');
   }
 
-  currentOfficer = "Norhisshan";
+  currentOfficer;
   currentTestCentre;
   mode = "add";
 //@Input() testCentres: TestCentre[] = [];
@@ -93,7 +93,7 @@ export class TestCentreFormComponent implements OnInit {
       return;
     }
     if ( this.mode == 'add' ) {
-      this.testCentreService.addTestCentre(this.id.value, this.officer.value, this.contact.value, this.state.value, this.address.value);
+      this.testCentreService.addTestCentre(this.id.value, this.currentOfficer.id, this.contact.value, this.state.value, this.address.value);
     } else {
       this.testCentreService.updateTestCentre(this.id.value, this.officer.value, this.contact.value, this.state.value, this.address.value);
     }
@@ -108,7 +108,7 @@ export class TestCentreFormComponent implements OnInit {
   //else, load the test centre bound to current officer.
   setMode(){
     this.mode = 'add'; //change this value to 'new' if you want to replace the profile page with this page
-    this.currentTestCentre = this.testCentreService.getTestCentre(this.currentOfficer);
+    this.currentTestCentre = this.testCentreService.getTestCentre(this.currentOfficer.id);
     if ( this.currentTestCentre != undefined ) {
       this.mode = 'edit'; //change this value to 'view' if you want to replace the profile page with this page
       this.populateForm();
@@ -118,7 +118,7 @@ export class TestCentreFormComponent implements OnInit {
       // this.address.disable();
     } else {
       this.id.setValue(this.testCentreService.generateNewId());
-      this.officer.setValue(this.currentOfficer);
+      this.officer.setValue(this.currentOfficer.username);
     }
   }
 

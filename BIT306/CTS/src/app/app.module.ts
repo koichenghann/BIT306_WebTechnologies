@@ -49,6 +49,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { TesterManagementTableComponent } from './TesterManagement/tester-management-table/tester-management-table.component';
+import { TesterManagementFormComponent } from './TesterManagement/tester-management-form/tester-management-form.component';
 
 
 
@@ -79,7 +81,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     TesterUpdateTestComponent,
     TesterFormComponent,
     TestKitFormComponent,
-    TestKitTableComponent
+    TestKitTableComponent,
+    TesterManagementTableComponent,
+    TesterManagementFormComponent
 
   ],
   imports: [

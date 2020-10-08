@@ -14,7 +14,7 @@ export class TestCentreProfileComponent implements OnInit {
   constructor(public testCentreService: TestCentreService, public userService: UserService) { }
 
   ngOnInit(): void {
-    this.currentTestCentre = this.testCentreService.getTestCentre(this.userService.getCurrentUser().username);
+    this.currentTestCentre = this.testCentreService.getTestCentre(this.userService.getCurrentUser().id);
     this.setMode();
   }
 

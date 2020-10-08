@@ -37,8 +37,11 @@ export class TestKitTableComponent implements OnInit {
     this.route.navigate(['/test-kit-form']);
   }
   deleteClickedHandler(row: TestKit) {
-    this.testKitService.deleteTestKit(row.id);
-    this.setmode();
+    if (confirm('Do you want to delete Test Kit '+ row.id + ' ' + row.name)) {
+      this.testKitService.deleteTestKit(row.id);
+      this.setmode();
+    }
+
   }
 
   addClickedHandler() {
@@ -48,7 +51,7 @@ export class TestKitTableComponent implements OnInit {
 
   setmode() {
     this.mode = 'new';
-    if (this.checkTestCentreExist) {
+    if (this.checkTestCentreExist()) {
       this.mode = 'exist';
       this.loadTestKits();
       console.log(this.testKitService.getTestKits());
@@ -63,10 +66,10 @@ export class TestKitTableComponent implements OnInit {
 
 
   checkTestCentreExist() {
-    return this.testCentreService.getTestCentre(this.userService.getCurrentUser().username) != undefined
+    return this.testCentreService.getTestCentre(this.userService.getCurrentUser().id) != undefined
   }
   loadTestKits() {
-    this.currentTestKit = this.testKitService.getTestKitsByCentre(this.testCentreService.getTestCentre(this.userService.getCurrentUser().username).id);
+    this.currentTestKit = this.testKitService.getTestKitsByCentre(this.testCentreService.getTestCentre(this.userService.getCurrentUser().id).id);
     this.dataSource = this.currentTestKit;
   }
 
@@ -98,7 +101,9 @@ export class TestKitTableComponent implements OnInit {
       return;
     }
     this.search = true;
-    this.dataSource = this.currentTestKit.filter(testKit => testKit.id == criteria);
+    this.dataSource = this.currentTestKit.filter(testKit => testKit.id == criteria).concat(
+      this.currentTestKit.filter(testKit => testKit.name == criteria)
+    );
   }
   onBlurHandler(criteria: string) {
     console.log('blur handler ran: ', criteria);

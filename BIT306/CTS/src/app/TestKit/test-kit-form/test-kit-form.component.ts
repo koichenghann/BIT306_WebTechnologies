@@ -37,7 +37,7 @@ export class TestKitFormComponent implements OnInit {
     });
     this.id.disable();
     this.centre.disable();
-    this.currentTestCentre = this.testCentreService.getTestCentre(this.userService.getCurrentUser().username);
+    this.currentTestCentre = this.testCentreService.getTestCentre(this.userService.getCurrentUser().id);
     this.setMode();
   }
 
@@ -87,13 +87,13 @@ export class TestKitFormComponent implements OnInit {
     }
     this.close();
   }
-  clearTable(){
+  clearForm(){
     this.testKitForm.reset();
     this.formGroupDirective.resetForm();
     this.testKitForm.setErrors({'invalid': true});
   }
   close() {
-    this.clearTable;
+    this.clearForm;
     this.route.navigate(['/test-kit-table']);
   }
 

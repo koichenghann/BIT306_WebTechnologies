@@ -17,7 +17,7 @@
         Test centre not found. Click <a routerLink="/test-centre-form">here</a> to set up test centre.
       </div>
 
-      <div fxLayout="row wrap">
+      <div *ngIf="mode!='new'" fxLayout="row wrap">
          <div class="cell" fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="0%">
            <div class="cell-header">
              TCID

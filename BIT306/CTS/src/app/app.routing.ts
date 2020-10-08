@@ -16,6 +16,8 @@ import { TesterNewTestComponent } from './Tester/Tester-new-test/tester-new-test
 import { TesterUpdateTestComponent } from './Tester/Tester-update-test/tester-update-test.component';
 import { TestKitTableComponent } from './TestKit/test-kit-table/test-kit-table.component';
 import { TestKitFormComponent } from './TestKit/test-kit-form/test-kit-form.component';
+import { TesterManagementTableComponent } from './TesterManagement/tester-management-table/tester-management-table.component';
+import { TesterManagementFormComponent } from './TesterManagement/tester-management-form/tester-management-form.component';
 
 const APP_ROUTES: Routes = [
   {path:'', redirectTo: '/home', pathMatch: 'full'},
@@ -25,6 +27,8 @@ const APP_ROUTES: Routes = [
   {path:'4', redirectTo: '/login', pathMatch: 'full'},
   {path:'5', redirectTo: '/test-kit-table', pathMatch: 'full'},
   {path:'6', redirectTo: '/test-kit-form', pathMatch: 'full'},
+  {path:'7', redirectTo: '/tester-management-table', pathMatch: 'full'},
+  {path:'8', redirectTo: '/tester-management-form', pathMatch: 'full'},
   {path:'home', component: HomeComponent},
   {path:'test-centre-form', component: TestCentreFormComponent/*, canActivate: [TestCentreManagerGuard]*/},
   {path:'test-centre-profile', component: TestCentreProfileComponent/*, canActivate: [TestCentreManagerGuard]*/},
@@ -37,7 +41,9 @@ const APP_ROUTES: Routes = [
   {path:'tester-new-test', component: TesterNewTestComponent},
   {path:'tester-update-test', component: TesterUpdateTestComponent},
   {path:'test-kit-form', component: TestKitFormComponent},
-  {path:'test-kit-table', component: TestKitTableComponent}
+  {path:'test-kit-table', component: TestKitTableComponent},
+  {path:'tester-management-form', component: TesterManagementFormComponent},
+  {path:'tester-management-table', component: TesterManagementTableComponent}
 
 
 ];

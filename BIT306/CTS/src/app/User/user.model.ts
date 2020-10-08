@@ -5,4 +5,6 @@ export interface User {
   usertype: string;
   contact: string;
   address: string;
+  centre: string;
+
 }
