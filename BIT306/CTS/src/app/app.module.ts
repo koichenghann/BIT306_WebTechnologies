@@ -7,6 +7,8 @@ import { routing } from './app.routing';
 import { AppComponent } from './app.component';
 import { sidenavComponent } from './side-nav-component/side-nav.component'
 
+import { UserService } from './User/user.service';
+
 import { ManagerDashboardComponent } from './TestCentre/test-centre-manager-dashboard/manager-dashboard.component';
 import { CtsLoginComponent } from './CTS-Login/login.component';
 import { CtsSignupComponent } from './CTS-Signup/signup.component';
@@ -16,11 +18,9 @@ import { TestCentreProfileComponent } from './TestCentre/test-centre-profile/tes
 import { TestKitFormComponent } from './TestKit/test-kit-form/test-kit-form.component';
 import { TestKitTableComponent } from './TestKit/test-kit-table/test-kit-table.component';
 
-
 import { PatientDashboardComponent } from'./Patient/Patient-dashboard/patient-dashboard.component';
 import { PatientNavComponent } from'./Patient/Patient-nav/patient-nav.component';
 import { PatientViewHistoryComponent } from './Patient/Patient-view-history/patient-view-history.component';
-import { UserService } from './User/user.service';
 
 import { TesterDashboardComponent } from './Tester/Tester-dashboard/tester-dashboard.component';
 import { TesterNavComponent } from './Tester/Tester-nav/tester-nav.component';

@@ -1,58 +1,83 @@
-<div class="wrapper" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
-  <mat-card class="form-card mat-elevation-z10">
-    <mat-card-header>
-      <mat-card-title>{{mode === 'new' || mode === 'view' ? '' : mode === 'add' ? 'Add' : 'Edit'}} Test Centre</mat-card-title>
-      <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
-    </mat-card-header>
-
-    <mat-card-content>
-      <div *ngIf="mode=='new'" id="noEntryMessage">
-        Test centre not found. Click <a (click)="addNewEntry()">here</a> to set up test centre.
-      </div>
-      <form *ngIf="mode!='new'" [formGroup]="testCentreForm" (ngSubmit)="submitHandler()" fxLayout="row wrap" fxLayoutGap="20px grid">
-        <mat-form-field appearance="outline" fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
-          <mat-label>Centre ID</mat-label>
-          <input matInput formControlName="id" placeholder="ID should be auto generated" type="text" >
-          <mat-error *ngIf="id.errors?.invalid">ID is required and should be auto generated</mat-error>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
-          <mat-label>Responsible Officer</mat-label>
-          <input matInput formControlName="officer" placeholder="Placeholder" type="text" required>
-          <mat-error *ngIf="officer.errors?.required">Responsible officer is required</mat-error>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
-          <mat-label>Contact</mat-label>
-          <input matInput formControlName="contact" placeholder="Placeholder" type="text" required>
-          <mat-error *ngIf="contact.errors?.required">Contact is required</mat-error>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
-          <mat-label>State</mat-label>
-            <mat-select formControlName="state" required>
-               <mat-option *ngFor="let state of states" [value]="state.value">
-                 {{state.viewValue}}
-               </mat-option>
-             </mat-select>
-             <mat-error *ngIf="officer.errors?.required">State is required</mat-error>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" fxFlex="100%">
-          <mat-label>Address</mat-label>
-          <textarea   matInput formControlName="address" placeholder="Enter Address" rows="4" required>
-          </textarea>
-          <mat-error *ngIf="address.errors?.required">address is required</mat-error>
-        </mat-form-field>
-
-        <div class="form-button-group" fxFlex="100%">
-          <a (click)="editForm()" *ngIf="mode=='view'">Edit</a>
-          <a (click)="cancel()" *ngIf="mode!='view'">Cancel</a>
-          <!-- <button mat-raised-button color="warn" click="cancel()">Cancel</button> -->
-          <button mat-raised-button *ngIf="mode!='view'" color="primary" [disabled]="testCentreForm.invalid" type="submit">{{mode === 'add' ? 'Add' : 'Save'}}</button>
+<side-nav>
+   <!--title bar with pic-->
+   <div class="page-header">
+    <div class="container-fluid ">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="page-caption">
+                <h1 class="page-title"></h1>
+              </div>
+            </div>
         </div>
-      </form>
-    </mat-card-content>
-  </mat-card>
+    </div>
+  </div>
+  <main>
+    <mat-grid-list cols="1" rowsHeight="1:1">
+      <div class="content" fxLayout="row wrap">
 
-</div>
+
+
+        <div class="wrapper" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
+          <mat-card class="form-card mat-elevation-z10">
+            <mat-card-header>
+              <mat-card-title>{{mode === 'new' || mode === 'view' ? '' : mode === 'add' ? 'Add' : 'Edit'}} Test Centre</mat-card-title>
+              <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+            </mat-card-header>
+
+            <mat-card-content>
+              <div *ngIf="mode=='new'" id="noEntryMessage">
+                Test centre not found. Click <a (click)="addNewEntry()">here</a> to set up test centre.
+              </div>
+              <form *ngIf="mode!='new'" [formGroup]="testCentreForm" (ngSubmit)="submitHandler()" fxLayout="row wrap" fxLayoutGap="20px grid">
+                <mat-form-field appearance="outline" fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
+                  <mat-label>Centre ID</mat-label>
+                  <input matInput formControlName="id" placeholder="ID should be auto generated" type="text" >
+                  <mat-error *ngIf="id.errors?.invalid">ID is required and should be auto generated</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
+                  <mat-label>Responsible Officer</mat-label>
+                  <input matInput formControlName="officer" placeholder="Placeholder" type="text" required>
+                  <mat-error *ngIf="officer.errors?.required">Responsible officer is required</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
+                  <mat-label>Contact</mat-label>
+                  <input matInput formControlName="contact" placeholder="Placeholder" type="text" required>
+                  <mat-error *ngIf="contact.errors?.required">Contact is required</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
+                  <mat-label>State</mat-label>
+                    <mat-select formControlName="state" required>
+                       <mat-option *ngFor="let state of states" [value]="state.value">
+                         {{state.viewValue}}
+                       </mat-option>
+                     </mat-select>
+                     <mat-error *ngIf="officer.errors?.required">State is required</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" fxFlex="100%">
+                  <mat-label>Address</mat-label>
+                  <textarea   matInput formControlName="address" placeholder="Enter Address" rows="4" required>
+                  </textarea>
+                  <mat-error *ngIf="address.errors?.required">address is required</mat-error>
+                </mat-form-field>
+
+                <div class="form-button-group" fxFlex="100%">
+                  <a (click)="editForm()" *ngIf="mode=='view'">Edit</a>
+                  <a (click)="cancel()" *ngIf="mode!='view'">Cancel</a>
+                  <!-- <button mat-raised-button color="warn" click="cancel()">Cancel</button> -->
+                  <button mat-raised-button *ngIf="mode!='view'" color="primary" [disabled]="testCentreForm.invalid" type="submit">{{mode === 'add' ? 'Add' : 'Save'}}</button>
+                </div>
+              </form>
+            </mat-card-content>
+          </mat-card>
+        </div>
+
+
+
+      </div>
+    </mat-grid-list>
+  </main>
+</side-nav>

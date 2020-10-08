@@ -29,23 +29,25 @@ const APP_ROUTES: Routes = [
   {path:'6', redirectTo: '/test-kit-form', pathMatch: 'full'},
   {path:'7', redirectTo: '/tester-management-table', pathMatch: 'full'},
   {path:'8', redirectTo: '/tester-management-form', pathMatch: 'full'},
+
   {path:'home', component: HomeComponent},
-  {path:'test-centre-form', component: TestCentreFormComponent/*, canActivate: [TestCentreManagerGuard]*/},
-  {path:'test-centre-profile', component: TestCentreProfileComponent/*, canActivate: [TestCentreManagerGuard]*/},
-  {path:'manager-dashboard', component: ManagerDashboardComponent},
   {path:'signup', component: CtsSignupComponent},
   {path:'login', component: CtsLoginComponent},
+
   {path:'patient-dashboard', component: PatientDashboardComponent},
   {path:'patient-view-history', component: PatientViewHistoryComponent},
+
   {path:'tester-dashboard', component: TesterDashboardComponent},
   {path:'tester-new-test', component: TesterNewTestComponent},
   {path:'tester-update-test', component: TesterUpdateTestComponent},
-  {path:'test-kit-form', component: TestKitFormComponent},
+
+  {path:'manager-dashboard', component: ManagerDashboardComponent},
+  {path:'test-centre-profile', component: TestCentreProfileComponent/*, canActivate: [TestCentreManagerGuard]*/},
+  {path:'test-centre-profile/form', component: TestCentreFormComponent/*, canActivate: [TestCentreManagerGuard]*/},
   {path:'test-kit-table', component: TestKitTableComponent},
-  {path:'tester-management-form', component: TesterManagementFormComponent},
-  {path:'tester-management-table', component: TesterManagementTableComponent}
-
-
+  {path:'test-kit-table/form', component: TestKitFormComponent},
+  {path:'tester-management-table', component: TesterManagementTableComponent},
+  {path:'tester-management-table/form', component: TesterManagementFormComponent}
 ];
 
 export const routing = RouterModule.forRoot(APP_ROUTES);

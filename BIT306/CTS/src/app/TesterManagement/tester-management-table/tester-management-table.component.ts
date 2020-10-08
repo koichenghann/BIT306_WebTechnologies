@@ -69,9 +69,7 @@ export class TesterManagementTableComponent implements OnInit {
       return;
     }
     this.search = true;
-    this.dataSource = this.currentUsers.filter(user => user.username == criteria).concat(
-      this.currentUsers.filter(user => user.id == criteria)
-    );
+    this.dataSource = this.currentUsers.filter(user => user.username.includes(criteria) || user.id.includes(criteria));
   }
   onBlurHandler(criteria: string){
     if ( criteria == '' || criteria == undefined ) {

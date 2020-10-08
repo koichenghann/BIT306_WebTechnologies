@@ -48,15 +48,19 @@ export class CtsLoginComponent {
     this.formGroupDirective.resetForm();
     switch (this.userService.getCurrentUser().usertype) {
       case 'Patient':
+        this.route.navigate(['/patient-dashboard']);
+        break;
+
+      case 'Officer':
         this.route.navigate(['/signup']);
         break;
 
       case 'Tester':
-        this.route.navigate(['/signup']);
+        this.route.navigate(['/tester-dashboard']);
         break;
 
       case 'TestCentreManager':
-        this.route.navigate(['/test-centre-form']);
+        this.route.navigate(['/manager-dashboard']);
         break;
     }
     //this.route.navigate(['/signup']);

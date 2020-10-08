@@ -81,17 +81,6 @@ export class TestKitTableComponent implements OnInit {
       this.search = false;
       this.dataSource = this.currentTestKit;
     }
-    // if (this.search) {
-    //   this.searchCriteria = '';
-    //   this.search = !this.search;
-    //
-    //   console.log('value of search after close: ' + this.searchCriteria);
-    //
-    // } else {
-    //   this.search = !this.search;
-    //
-    // }
-    // console.log(this.search)
   }
   onSearchHandler(criteria: string) {
     console.log('seach triggered: ', this.searchCriteria);
@@ -101,9 +90,7 @@ export class TestKitTableComponent implements OnInit {
       return;
     }
     this.search = true;
-    this.dataSource = this.currentTestKit.filter(testKit => testKit.id == criteria).concat(
-      this.currentTestKit.filter(testKit => testKit.name == criteria)
-    );
+    this.dataSource = this.currentTestKit.filter(testKit => testKit.id == criteria || testKit.name.includes(criteria));
   }
   onBlurHandler(criteria: string) {
     console.log('blur handler ran: ', criteria);

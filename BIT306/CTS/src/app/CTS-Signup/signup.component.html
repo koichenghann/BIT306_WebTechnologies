@@ -26,7 +26,7 @@
 
         <mat-form-field appearance="outline" fxFlex={{usertypeflex}} fxFlex.xs="100%" fxFlex.sm="100%">
           <mat-label>User Type</mat-label>
-          <mat-select formControlName="usertype" (selectionChange)="userTypeChangeHandler()" required> <!--(selectionChange)="onUserTypeChange()">-->
+          <mat-select formControlName="usertype" <!--(selectionChange)="userTypeChangeHandler()"--> required> <!--(selectionChange)="onUserTypeChange()">-->
              <mat-option *ngFor="let userTypeChoice of userTypeChoices" [value]="userTypeChoice.value">
                {{userTypeChoice.viewValue}}
              </mat-option>
@@ -34,7 +34,7 @@
            <mat-error *ngIf="usertype.errors?.required">user type is required</mat-error>
         </mat-form-field>
 
-        <mat-form-field *ngIf="usertype.value == 'Officer'" appearance="outline" fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
+        <!-- <mat-form-field *ngIf="usertype.value == 'Officer'" appearance="outline" fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
           <mat-label>Officer Type</mat-label>
           <mat-select formControlName="officertype" required>
              <mat-option *ngFor="let officerTypeChoice of officerTypeChoices" [value]="officerTypeChoice.value">
@@ -42,7 +42,7 @@
              </mat-option>
            </mat-select>
            <mat-error *ngIf="officertype.invalid">officer type is required</mat-error>
-        </mat-form-field>
+        </mat-form-field> -->
 
         <mat-form-field appearance="outline" fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="100%">
           <mat-label>Contact</mat-label>

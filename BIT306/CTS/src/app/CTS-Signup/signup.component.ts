@@ -28,9 +28,9 @@ export class CtsSignupComponent {
       usertype: ['', [
         Validators.required
       ]],
-      officertype: ['', [
-        // Validators.required,
-      ]],
+      // officertype: ['', [
+      //   // Validators.required,
+      // ]],
       contact: ['', [
         // Validators.required,
       ]],
@@ -49,9 +49,9 @@ export class CtsSignupComponent {
   get usertype(){
     return this.userForm.get('usertype');
   }
-  get officertype(){
-    return this.userForm.get('officertype');
-  }
+  // get officertype(){
+  //   return this.userForm.get('officertype');
+  // }
   get contact(){
     return this.userForm.get('contact');
   }
@@ -59,11 +59,12 @@ export class CtsSignupComponent {
     return this.userForm.get('address');
   }
 
-  usertypeflex = "100%";
+  // usertypeflex = "100%";
 
   userTypeChoices = [
     {value: 'Patient', viewValue: 'Patient'},
-    {value: 'Officer', viewValue: 'Officer'}];
+    {value: 'Officer', viewValue: 'Test Centre Officer'},
+    {value: 'TestCentreManager', viewValue: 'Test Centre Manager'}];
 
   officerTypeChoices = [
     {value: 'Tester', viewValue: 'Tester'},
@@ -76,25 +77,25 @@ export class CtsSignupComponent {
       return null;
     }
 
-  userTypeChangeHandler(){
-    this.usertypeflex = "100%";
-    this.officertype.reset();
-    this.officertype.setErrors(null);
-    if (this.usertype.value == 'Officer') {
-      this.usertypeflex = "50%";
-    }
-  }
+  // userTypeChangeHandler(){
+  //   this.usertypeflex = "100%";
+  //   this.officertype.reset();
+  //   this.officertype.setErrors(null);
+  //   if (this.usertype.value == 'Officer') {
+  //     this.usertypeflex = "50%";
+  //   }
+  // }
 
   submitHandler(){
-    var actualUsertype = this.usertype.value;
-    if (this.usertype.value == 'Officer') {
-      actualUsertype = this.officertype.value;
-    }
+    // var actualUsertype = this.usertype.value;
+    // if (this.usertype.value == 'Officer') {
+    //   actualUsertype = this.officertype.value;
+    // }
 
     this.userService.register(
       this.username.value,
       this.password.value,
-      actualUsertype,
+      this.usertype.value,
       this.contact.value,
       this.address.value,
       ''
