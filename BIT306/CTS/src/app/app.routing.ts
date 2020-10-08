@@ -5,7 +5,7 @@ import { TestCentreManagerGuard } from "./User/RouteGuard/test-centre-manager.gu
 
 import { TestCentreFormComponent } from './TestCentre/test-centre-form/test-centre-form.component';
 import { TestCentreProfileComponent } from './TestCentre/test-centre-profile/test-centre-profile.component';
-import { OfficerDashboardComponent } from './TestCentre/test-centre-officer-dashboard/Officer-dashboard.component'
+import { OfficerDashboardComponent } from './Officer/test-centre-officer-dashboard/officer-dashboard.component'
 import { ManagerDashboardComponent } from './TestCentre/test-centre-manager-dashboard/manager-dashboard.component'
 import { HomeComponent } from './Home/home.component';
 import { CtsLoginComponent } from './CTS-Login/login.component';
