@@ -4,6 +4,9 @@ import { TestKit } from '../test-kit.model';
 import { TestCentreService } from '../../TestCentre/test-centre.service';
 import { UserService } from '../../User/user.service';
 import { Router } from '@angular/router';
+import { ViewChild } from '@angular/core';
+import { ElementRef } from '@angular/core';
+import { ViewChildren } from '@angular/core';
 
 
 @Component({
@@ -12,8 +15,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./test-kit-table.component.css']
 })
 export class TestKitTableComponent implements OnInit {
-
-
   currentTestKit: TestKit[] = [];
 
   displayedColumns = ['id', 'name', 'stock', 'action'];
@@ -28,6 +29,7 @@ export class TestKitTableComponent implements OnInit {
   ngOnInit(): void {
     this.setmode()
     this.testKitService.clearSelectedTestKit();
+
   }
 
   editClickedHandler(row: TestKit) {
@@ -71,21 +73,40 @@ export class TestKitTableComponent implements OnInit {
 
   //method for search feature
   searchClickedHandler() {
-    this.search = !this.search;
-    console.log(this.search)
+    if ( this.search ) {
+      this.searchCriteria = '';
+      this.search = false;
+      this.dataSource = this.currentTestKit;
+    }
+    // if (this.search) {
+    //   this.searchCriteria = '';
+    //   this.search = !this.search;
+    //
+    //   console.log('value of search after close: ' + this.searchCriteria);
+    //
+    // } else {
+    //   this.search = !this.search;
+    //
+    // }
+    // console.log(this.search)
   }
   onSearchHandler(criteria: string) {
     console.log('seach triggered: ', this.searchCriteria);
     if ( criteria == '' ) {
       this.dataSource = this.currentTestKit;
+      this.search = false;
       return;
     }
+    this.search = true;
     this.dataSource = this.currentTestKit.filter(testKit => testKit.id == criteria);
   }
   onBlurHandler(criteria: string) {
-    if ( criteria == '' ) {
+    console.log('blur handler ran: ', criteria);
+    if ( criteria == '' || criteria == undefined ) {
+      this.dataSource = this.currentTestKit;
       this.searchClickedHandler();
     }
+
   }
 
 
