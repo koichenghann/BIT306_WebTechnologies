@@ -1,4 +1,6 @@
-<mat-card mat-elevation-z4 class="card-form">
+
+<div class="centre">
+<mat-card mat-elevation-z8 class="card-form">
 
   <mat-card-header>
     <mat-card-title>
@@ -6,7 +8,7 @@
     </mat-card-title>
 
     <mat-card-subtitle>
-      Enter new test record.
+      Please enter the detail for new test result.
     </mat-card-subtitle>
   </mat-card-header>
 
@@ -16,14 +18,15 @@
 
     <form [formGroup]="testForm">
       <div class="content" fxLayout="row wrap">
-      <div fxFlex="32%" fxFlex.xs="100%" fxFlex.sm="30%">
+      <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
       <mat-form-field appearance="outline">
         <mat-label>Username</mat-label>
         <input matInput placeholder="Enter Username">
 
       </mat-form-field>
     </div>
-      <br>
+
+      <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
       <mat-form-field appearance="outline">
         <mat-label>Patient Type</mat-label>
         <mat-select>
@@ -35,9 +38,12 @@
         </mat-select>
 
       </mat-form-field>
+      </div>
 
+      <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
+
+      <mat-label>Symptoms:</mat-label>
       <section class="symptoms-section">
-        <mat-label>Symptoms:</mat-label>
         <mat-checkbox [formControl] class="symptoms-margin" [(ngModel)] ="fever">Fever</mat-checkbox>
         <mat-checkbox [formControl] class="symptoms-margin" [(ngModel)] ="soreThroat">Sore Throat</mat-checkbox>
         <mat-checkbox [formControl] class="symptoms-margin" [(ngModel)] ="cough">Cough</mat-checkbox>
@@ -46,14 +52,31 @@
 
 
 
-      <mat-form-field class="example-full-width" appearance="outline">
+      <section class="symptoms-section">
+        <mat-form-field class="symptoms-margin">
+          <mat-label>Other Symptoms:</mat-label>
+          <input matInput placeholder="Enter Username">
+        </mat-form-field>
+      </section>
+    </div>
+
+    <div fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="100%">
+      <mat-form-field class="full-width" appearance="outline">
         <mat-label>Description</mat-label>
         <textarea matInput></textarea>
       </mat-form-field>
+    </div>
+
+    <div class="form-button-group" fxFlex="100%">
+    <button mat-raised-button [ngStyle]="{background:'#439F9E' , color:'#fff'}">
+      Submit
+    </button>
+  </div>
+
     </div>
     </form>
 
   </mat-card-content>
 
 </mat-card>
-
+</div>
