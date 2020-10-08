@@ -16,7 +16,7 @@
 
   <mat-card-content>
 
-    <form [formGroup]="testForm">
+    <form [formGroup] ="testForm" (ngSubmit)="onSubmit()">
       <div class="content" fxLayout="row wrap">
 
         <div fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="100%">
@@ -27,7 +27,7 @@
 
       <mat-form-field appearance="outline" class="input-username">
         <mat-label>Username</mat-label>
-        <input matInput placeholder="Enter Username">
+        <input formControlName="username" matInput placeholder="Enter Username">
 
       </mat-form-field>
     </div>
@@ -35,7 +35,7 @@
       <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
       <mat-form-field appearance="outline" class="input-patientType">
         <mat-label mat-body>Patient Type</mat-label>
-        <mat-select>
+        <mat-select formControlName="patientType">
           <mat-option value="Refurnee">Refurnee</mat-option>
           <mat-option value="Quarantined">Quarantined</mat-option>
           <mat-option value="Close contact">Close contact</mat-option>
@@ -57,10 +57,13 @@
 
       <mat-label><h3 mat-h3 mat-subheading-2>Symptoms:</h3></mat-label>
       <section class="symptoms-section">
-        <mat-checkbox [formControl] class="symptoms-margin" [(ngModel)] ="fever">Fever</mat-checkbox>
-        <mat-checkbox [formControl] class="symptoms-margin" [(ngModel)] ="soreThroat">Sore Throat</mat-checkbox>
-        <mat-checkbox [formControl] class="symptoms-margin" [(ngModel)] ="cough">Cough</mat-checkbox>
-        <mat-checkbox [formControl] class="symptoms-margin" [(ngModel)] ="shortnessOfBreath">Shortness of breath</mat-checkbox>
+        <div class="checkGroup" formGroupName="symptoms">
+          <mat-checkbox formControlName="fever" class="symptoms-margin" >Fever</mat-checkbox>
+          <mat-checkbox formControlName="soreThroat" class="symptoms-margin"  >Sore Throat</mat-checkbox>
+          <mat-checkbox  formControlName="cough" class="symptoms-margin" >Cough</mat-checkbox>
+          <mat-checkbox  formControlName="shortnessOfBreath" class="symptoms-margin">Shortness of breath</mat-checkbox>
+          <mat-checkbox  formControlName="noSymptom" class="symptoms-margin noSymptom">No Symptom</mat-checkbox>
+        </div>
       </section>
 
 
@@ -68,7 +71,7 @@
       <section class="symptoms-section">
         <mat-form-field class="symptoms-margin">
           <mat-label>Other Symptoms:</mat-label>
-          <input matInput placeholder="Enter Username">
+          <input formControlName="otherSymptoms"  matInput placeholder="Enter Username">
         </mat-form-field>
       </section>
     </div>
