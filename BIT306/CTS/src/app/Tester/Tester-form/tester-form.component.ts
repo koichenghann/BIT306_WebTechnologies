@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector:'tester-form',
@@ -7,16 +7,37 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['tester-form.component.css']
 })
 
-export class TesterFormComponent {
-  testForm;
+export class TesterFormComponent implements OnInit{
+  testForm: FormGroup;
+
+  constructor(private fb: FormBuilder){
+
+  }
 
 
+  fever: false;
+  soreThroat: false;
+  cough: true;
+  shortnessOfBreath: true;
+  symptom;
 
-  fever= false;
-  soreThroat = false;
-  cough = true;
-  shortnessOfBreath = true;
+  ngOnInit(){
+    this.initializeForm();
+  }
 
+  initializeForm(): void {
+    this.testForm = this.fb.group({
+      username: 'username here',
+      patientType: '',
+      symptoms: this.fb.group({
+        fever: false,
+        soreThroat: false,
+        cough: true,
+        shortnessOfBreath: true
+      }),
+      description: this.fb.array([this.fb.control('')])
+    });
+  }
 
-
+  
 }

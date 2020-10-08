@@ -1,18 +1,81 @@
+
 .card-form{
-  margin:1em;
+  margin:2em;
+  margin-left:30%;
+  max-width: 34em;
 }
 
 ::ng-deep .mat-focused .mat-form-field-label {
   /*change color of label*/
-  color: green !important;
+    color:#439F9E!important;
  }
 
  ::ng-deep.mat-form-field-outline {
   /*change color of underline*/
-  color: green !important;
+    color:#439F9E !important;
+}
+
+::ng-deep.mat-form-field-underline {
+  /*change color of underline*/
+    color:#439F9E !important;
 }
 
 ::ng-deep.mat-form-field-ripple {
  /*change color of underline when focused*/
- background-color: green !important;;
+  background-color: #439F9E !important;;
+  color:#439F9E !important;
+}
+
+::ng-deep.mat-select-panel{
+  color: #439F9E !important;
+}
+
+::ng-deep.mat-select-value-text {
+  color: #439F9E !important;
+}
+
+
+.full-width{
+  width: 100%;
+  margin-bottom: 1em;
+}
+.symptoms-section{
+
+  align-content: center;
+  align-items: center;
+}
+
+.symptoms-margin{
+  margin-left: 1em;
+  margin-right:1em;
+  margin-bottom: 1em;
+}
+
+.form-button-group{
+  text-align: right;
+}
+
+
+@media (max-width: 991.98px) {
+  .card-form{
+
+    margin-left:5%;
+
+  }
+}
+
+@media (max-width: 768px) {
+  .card-form{
+
+    margin-left:5%;
+
+  }
+}
+
+@media (max-width: 576px) {
+  .card-form{
+
+    margin-left:5%;
+
+  }
 }
