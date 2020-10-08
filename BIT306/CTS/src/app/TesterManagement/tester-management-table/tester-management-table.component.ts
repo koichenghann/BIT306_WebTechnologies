@@ -47,7 +47,7 @@ export class TesterManagementTableComponent implements OnInit {
     }
   }
   loadUsers() {
-    this.currentUsers = this.userService.getUsersByCentre(this.testCentreService.getTestCentre(this.userService.getCurrentUser().id).id);
+    this.currentUsers = this.userService.getTestOfficerByCentre(this.testCentreService.getTestCentre(this.userService.getCurrentUser().id).id);
     this.dataSource = this.currentUsers;
   }
   checkTestCentreExist(){

@@ -30,15 +30,15 @@
                 <span (click)="searchClickedHandler()" class="material-icons">{{search ? 'close' : 'search' }}</span>
               </div>
 
-              <div class="header-button-group">
+              <!-- <div class="header-button-group">
                  <a *ngIf="mode!='new'" routerLink="/tester-new-test"><span class="material-icons">add</span></a>
-              </div>
+              </div> -->
 
             </mat-card-header>
 
             <mat-card-content>
               <div *ngIf="mode=='empty'" id="noEntryMessage">
-                No test kit recorded. <!--Click <a routerLink="/test-kit-table/form">here</a> to add new test kit.-->
+                No test recorded. <!--Click <a routerLink="/test-kit-table/form">here</a> to add new test kit.-->
               </div>
 
               <div *ngIf="mode=='exist'" class="table-container mat-elevation-z0">

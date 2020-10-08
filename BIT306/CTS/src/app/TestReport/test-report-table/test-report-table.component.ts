@@ -54,7 +54,7 @@ export class TestReportTableComponent implements OnInit {
     // console.log('all test: ', this.testerService.getTests());
     // console.log('test by centre: ', this.testerService.getTestsByCentre(this.userService.getCurrentUser().centre));
 
-    this.currentTestReports = this.testerService.getTestsByCentre('TC1');
+    this.currentTestReports = this.testerService.getTestsByCentre(this.userService.getCurrentUser().centre);
     this.dataSource = this.currentTestReports;
   }
 

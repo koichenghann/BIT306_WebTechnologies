@@ -98,7 +98,7 @@ export class UserService {
     var id = this.getCurrentUser().id;
   }
   updateUser(id: string, username: string, password: string, usertype: string, contact: string, address: string, centre: string) {
-    console.log('update user in servive ran');
+    console.log('user id: ', id);
     //this.downloadUsers();
     var user = this.users.find(user => user.id == id);
     user.username = username;
@@ -116,6 +116,13 @@ export class UserService {
     this.downloadUsers();
     if ( this.users.length != 0 ) {
       return this.users.filter(user => user.centre == centreId);
+    }
+    return [];
+  }
+  getTestOfficerByCentre(centreId: string) {
+    this.downloadUsers();
+    if ( this.users.length != 0 ) {
+      return this.users.filter(user => user.centre == centreId && user.usertype == 'Tester');
     }
     return [];
   }
