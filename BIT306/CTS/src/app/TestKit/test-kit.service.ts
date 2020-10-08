@@ -29,6 +29,7 @@ export class TestKitService {
   }
 
   getTestKits() {
+    this.downloadTestKit();
     return this.testKits;
   }
 
@@ -39,13 +40,20 @@ export class TestKitService {
     const newId = this.generateID();
     const testKit: TestKit = {id:newId, centre:centre, name:name, stock:stock};
     this.testKits.push(testKit);
+    this.uploadTestKit();
     console.log(this.testKits);
   }
 
   getTestKitsByCentre( centre: string ) {
-    return this.testKits.filter(testKit => testKit.centre == centre);
+    this.downloadTestKit();
+    if (this.testKits.length != 0 ) {
+      return this.testKits.filter(testKit => testKit.centre == centre);
+    }
+    return [];
+
   }
   getTestKitById( id: string ) {
+    this.downloadTestKit();
     return this.testKits.find(testKit => testKit.id == id);
   }
 
@@ -54,10 +62,12 @@ export class TestKitService {
     const testKit: TestKit = this.testKits.find(testKit => testKit.id == id);
     testKit.name = name;
     testKit.stock = stock;
+    this.uploadTestKit();
   }
 
   deleteTestKit(id:string) {
     this.testKits.splice(this.testKits.findIndex(testKit => testKit.id == id), 1);
+    this.uploadTestKit();
   }
 
   uploadTestKit() {
@@ -66,6 +76,9 @@ export class TestKitService {
 
   downloadTestKit() {
     this.testKits = JSON.parse(localStorage.getItem('testKit'));
+    if ( this.testKits == null ) {
+      this.testKits = [];
+    }
   }
 
   uploadSelectedTestKit() {

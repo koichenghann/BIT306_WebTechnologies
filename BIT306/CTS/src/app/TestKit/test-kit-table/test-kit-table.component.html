@@ -4,11 +4,11 @@
       <mat-card-title>Test Kit</mat-card-title>
       <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
       <div fxFlex></div>
-      <div class="searchbar">
-        <input matInput placeholder="search" type="text" >
+      <div *ngIf="search==true" class="searchbar">
+        <input matInput (input)="onSearchHandler(searchCriteria)" (blur)="onBlurHandler(searchCriteria)" placeholder="search by id" type="text" [(ngModel)]="searchCriteria">
       </div>
       <div class="searchicon">
-        <span class="material-icons">search</span>
+        <span (click)="searchClickedHandler()" class="material-icons">{{search ? 'close' : 'search' }}</span>
       </div>
       <div class="header-button-group">
          <a routerLink="/test-kit-form"><span class="material-icons">add</span></a>

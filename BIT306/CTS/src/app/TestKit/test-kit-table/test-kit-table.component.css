@@ -50,17 +50,27 @@ mat-card-subtitle{
 }
 .header-button-group a{
   text-decoration: none;
+  z-index: 10;
   color: white;
 }
 .header-button-group a:hover{
   color: black;
 }
 .searchbar{
-  margin-right: 1em;
-  padding-top: 0.1em;
+  margin-right: -2em;
+  margin-top: -0.1em;
+  padding-top: 0em;
 }
 .searchbar input{
-  background-color: none;
+  background-color: green;
+  background: none;
+  border: solid 1px white;
+  padding: 5px;
+  height: 1.1em;
+  width: 10em;
+}
+.searchbar input:focus{
+  outline: none;
 }
 .searchicon{
   margin-right: 1em;
