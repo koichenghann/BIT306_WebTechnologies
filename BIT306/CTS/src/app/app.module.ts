@@ -29,7 +29,7 @@ import { TesterNavComponent } from './Tester/Tester-nav/tester-nav.component';
 import { TesterNewTestComponent } from './Tester/Tester-new-test/tester-new-test.component';
 import { TesterUpdateTestComponent } from './Tester/Tester-update-test/tester-update-test.component';
 import { TesterFormComponent } from'./Tester/Tester-form/tester-form.component';
-
+import { TesterUpdateTableComponent } from './Tester/Tester-table/tester-update-table.component';
 
 import { FormsModule }   from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -83,6 +83,7 @@ import { TestReportDetailComponent } from './TestReport/test-report-detail/test-
     TesterNavComponent,
     TesterNewTestComponent,
     TesterUpdateTestComponent,
+    TesterUpdateTableComponent,
     TesterFormComponent,
     TestKitFormComponent,
     TestKitTableComponent,
