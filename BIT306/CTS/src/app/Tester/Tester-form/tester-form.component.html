@@ -1,9 +1,9 @@
 
 <div class="centre">
 <mat-card mat-elevation-z8 class="card-form">
-
+  <!--
   <mat-card-header>
-    <mat-card-title>
+   <mat-card-title>
       New Test Result
     </mat-card-title>
 
@@ -11,15 +11,21 @@
       Please enter the detail for new test result.
     </mat-card-subtitle>
   </mat-card-header>
-
+    -->
 
 
   <mat-card-content>
 
     <form [formGroup]="testForm">
       <div class="content" fxLayout="row wrap">
+
+        <div fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="100%">
+          <mat-label><h3 mat-h3 mat-subheading-2>Patient details:</h3></mat-label>
+        </div>
+
       <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
-      <mat-form-field appearance="outline">
+
+      <mat-form-field appearance="outline" class="input-username">
         <mat-label>Username</mat-label>
         <input matInput placeholder="Enter Username">
 
@@ -27,8 +33,8 @@
     </div>
 
       <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
-      <mat-form-field appearance="outline">
-        <mat-label>Patient Type</mat-label>
+      <mat-form-field appearance="outline" class="input-patientType">
+        <mat-label mat-body>Patient Type</mat-label>
         <mat-select>
           <mat-option value="Refurnee">Refurnee</mat-option>
           <mat-option value="Quarantined">Quarantined</mat-option>
@@ -40,9 +46,16 @@
       </mat-form-field>
       </div>
 
+      <div fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="100%">
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Description</mat-label>
+          <textarea matInput></textarea>
+        </mat-form-field>
+      </div>
+
       <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
 
-      <mat-label>Symptoms:</mat-label>
+      <mat-label><h3 mat-h3 mat-subheading-2>Symptoms:</h3></mat-label>
       <section class="symptoms-section">
         <mat-checkbox [formControl] class="symptoms-margin" [(ngModel)] ="fever">Fever</mat-checkbox>
         <mat-checkbox [formControl] class="symptoms-margin" [(ngModel)] ="soreThroat">Sore Throat</mat-checkbox>
@@ -60,12 +73,7 @@
       </section>
     </div>
 
-    <div fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="100%">
-      <mat-form-field class="full-width" appearance="outline">
-        <mat-label>Description</mat-label>
-        <textarea matInput></textarea>
-      </mat-form-field>
-    </div>
+
 
     <div class="form-button-group" fxFlex="100%">
     <button mat-raised-button [ngStyle]="{background:'#439F9E' , color:'#fff'}">
