@@ -8,5 +8,6 @@ export interface Test {
   testStatus: string;
   date: string;
   tester: string;
+  centre: string;
 
 }

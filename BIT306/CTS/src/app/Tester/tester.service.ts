@@ -39,10 +39,19 @@ export class TesterService {
     return 'TRD1';
   }
 
-  addTest(username: string, patientType: string, symptoms: string, otherSymptoms:string, description: string, testStatus: string, date: string, tester: string){
+  addTest(username: string, patientType: string, symptoms: string, otherSymptoms:string, description: string, testStatus: string, date: string, tester: string, centre: string){
     this.downloadTests();
     var testID = this.generateTestID();
-    const test: Test = { testID: testID, username: username, patientType: patientType,  symptoms: symptoms, description:description, otherSymptoms:otherSymptoms, testStatus: testStatus, date: date, tester: tester};
+    const test: Test = {  testID: testID,
+                          username: username,
+                          patientType: patientType,
+                          symptoms: symptoms,
+                          description:description,
+                          otherSymptoms:otherSymptoms,
+                          testStatus: testStatus,
+                          date: date,
+                          tester: tester,
+                          centre: centre};
     this.tests.push(test);
     this.uploadTests();
   }

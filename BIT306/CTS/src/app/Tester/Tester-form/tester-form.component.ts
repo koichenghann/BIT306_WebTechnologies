@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, ValidationErrors, FormControl, Form
 import { TesterService } from '../tester.service';
 import { Router } from '@angular/router';
 import { UserService } from '../../User/user.service';
+import { TestCentreService } from '../../TestCentre/test-centre.service';
 
 
 
@@ -14,8 +15,9 @@ import { UserService } from '../../User/user.service';
 
 export class TesterFormComponent implements OnInit{
   testForm: FormGroup;
+  currentTestCentreID;
   constructor(public testerService: TesterService
-    ,private fb: FormBuilder, private route:Router, public userService:UserService ){
+    ,private fb: FormBuilder, private route:Router, public userService:UserService, public testCentreService: TestCentreService ){
 
     }
 
@@ -25,7 +27,7 @@ export class TesterFormComponent implements OnInit{
     //this.currentTester = this.userService.getCurrentUser().username;
     console.log('currentUser: ', this.userService.getCurrentUser());
     //this.tester.setValue(this.currentTester.username);
-
+    this.currentTestCentreID = this.userService.getCurrentUser().centre;
 
   }
 
@@ -150,8 +152,14 @@ export class TesterFormComponent implements OnInit{
       console.log(this.currentTester);
 
 
-      this.testerService.addTest(this.username.value, this.patientType.value,
-        strAllSymptoms, this.otherSymptoms.value, this.description.value, testStatus, todayDate, this.currentTester);
+      this.testerService.addTest( this.username.value,
+                                  this.patientType.value,
+                                  strAllSymptoms,
+                                  this.otherSymptoms.value,
+                                  this.description.value,
+                                  testStatus, todayDate,
+                                  this.currentTester,
+                                  this.currentTestCentreID);
    }
 
 
