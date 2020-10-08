@@ -55,11 +55,25 @@
   text-align: right;
 }
 
+.input-username{
+  width: 90%;
+
+}
+
+.input-patientType{
+  width: 100%;
+
+}
 
 @media (max-width: 991.98px) {
   .card-form{
 
     margin-left:5%;
+
+  }
+
+  .input-username{
+    width: 100%;
 
   }
 }
