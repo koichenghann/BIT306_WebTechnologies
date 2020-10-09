@@ -105,7 +105,8 @@ export class TesterUpdateTableComponent implements OnInit{
       , this.selectedTest.symptoms, this.selectedTest.otherSymptopms, this.selectedTest.description, updatedTestStatus, this.selectedTest.date
       , this.selectedTest.tester, this.selectedTest.centre, updatedTestResult, updatedResultDate);
 
-      this.dataSource = this.testerService.getTests();
+      this.currentTestReports = this.testerService.getTestsByCentre(this.userService.getCurrentUser().centre);
+      this.dataSource = this.currentTestReports;
 
 
   }
