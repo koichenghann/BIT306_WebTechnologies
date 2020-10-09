@@ -41,6 +41,11 @@ export class TesterService {
     return this.tests.find(test => test.tester == tester)
   }
 
+  getTestByUsername(username: string){
+    this.downloadTests();
+    return this.tests.filter(test => test.username == username);
+  }
+
   generateTestID(){
     this.downloadTests();
     // return "TRD"+(this.getTests().length+1);
@@ -75,7 +80,7 @@ export class TesterService {
   //update exisitng test data
   updateTest(testID: string, username: string, patientType: string, symptoms: string, otherSymptoms: string, description: string, testStatus: string
     , date: string, tester: string, centre: string, testResult: string, resultDate: string ){
-    this.uploadTests();
+
     var test = this.tests.find(test => test.tester == tester);
     //test.username= username;
     //test.patientType = patientType;

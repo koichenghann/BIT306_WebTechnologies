@@ -83,7 +83,7 @@ export class TestCentreFormComponent implements OnInit {
     {value: 'Sarawak', viewValue: 'Sarawak'},
     {value: 'Selangor', viewValue: 'Selangor'},
     {value: 'Terengganu', viewValue: 'Terengganu'},
-    {value: 'Kualua Lumpur', viewValue: 'Kualua Lumpur'},
+    {value: 'Kuala Lumpur', viewValue: 'Kuala Lumpur'},
     {value: 'Labuan', viewValue: 'Labuan'},
     {value: 'Putrajaya', viewValue: 'Putrajaya'}];
 

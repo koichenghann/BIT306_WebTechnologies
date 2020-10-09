@@ -56,8 +56,10 @@ setmode() {
 }
 
 loadTestReports() {
-  //this.currentTestReports = this.testerService.getTestsByCentre(this.userService.getCurrentUser().centre);
-  this.currentTestReports = this.testerService.getTests();
+  console.log(this.userService.getCurrentUser().username);
+  var currentPatient = this.userService.getCurrentUser().username;
+  this.currentTestReports = this.testerService.getTestByUsername(currentPatient);
+  //this.currentTestReports = this.testerService.getTests();
     this.dataSource = this.currentTestReports;
 }
 

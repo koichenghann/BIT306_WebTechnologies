@@ -23,6 +23,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 export class TesterFormComponent implements OnInit{
   testForm: FormGroup;
   currentTestCentreID;
+  currentTester;
   constructor(public testerService: TesterService
     ,private fb: FormBuilder, private route:Router, public userService:UserService, public testCentreService: TestCentreService ){
 
@@ -31,7 +32,7 @@ export class TesterFormComponent implements OnInit{
 
   ngOnInit(){
     this.initializeForm();
-    //this.currentTester = this.userService.getCurrentUser().username;
+    this.currentTester = this.userService.getCurrentUser().username;
     console.log('currentUser: ', this.userService.getCurrentUser());
     //this.tester.setValue(this.currentTester.username);
     this.currentTestCentreID = this.userService.getCurrentUser().centre;
@@ -63,7 +64,7 @@ export class TesterFormComponent implements OnInit{
     });
   }
 
-  currentTester='Trump';
+  //currentTester='Trump';
 
 
   //get data
@@ -80,7 +81,7 @@ export class TesterFormComponent implements OnInit{
   }
 
   get date(){
-    return this.testForm.get('tester');
+    return this.testForm.get('date');
   }
 
   get patientType(){
