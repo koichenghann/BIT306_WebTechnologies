@@ -141,8 +141,18 @@ export class TesterFormComponent implements OnInit{
     var strAllSymptoms = a + b + c + d + e;
     console.log(strAllSymptoms);
 
-    var testResult = '';
-    var resultDate = '';
+    var testResult = ' - ';
+    var resultDate = ' - ';
+
+    var des = this.description.value;
+    var other = this.otherSymptoms.value;
+    if (this.description.value==''){
+      des = ' - ';
+    }
+
+    if (this.otherSymptoms.value==''){
+      other = ' - '
+    }
 
 
 
@@ -165,12 +175,14 @@ export class TesterFormComponent implements OnInit{
       this.testerService.addTest( this.username.value,
                                   this.patientType.value,
                                   strAllSymptoms,
-                                  this.otherSymptoms.value,
-                                  this.description.value,
+                                  other,
+                                  des,
                                   testStatus, todayDate,
                                   this.currentTester,
                                   this.currentTestCentreID, testResult, resultDate);
    }
+
+   this.route.navigate(['tester-update-test']);
 
 
   }

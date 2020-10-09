@@ -31,6 +31,7 @@ import { TesterNewTestComponent } from './Tester/Tester-new-test/tester-new-test
 import { TesterUpdateTestComponent } from './Tester/Tester-update-test/tester-update-test.component';
 import { TesterFormComponent } from'./Tester/Tester-form/tester-form.component';
 import { TesterUpdateTableComponent } from './Tester/Tester-table/tester-update-table.component';
+import { TesterViewDetailsComponent } from './Tester/Tester-view-details/tester-view-details.component'
 
 import { FormsModule }   from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -62,6 +63,7 @@ import { TestReportDetailComponent } from './TestReport/test-report-detail/test-
 
 
 
+
 // const appRoutes: Routes = [
 //   {path: 'TestCentreForm', component: TestCentreFormComponent}
 //   //{path: 'list', component: PostListComponent}
@@ -86,6 +88,7 @@ import { TestReportDetailComponent } from './TestReport/test-report-detail/test-
     TesterNewTestComponent,
     TesterUpdateTestComponent,
     TesterUpdateTableComponent,
+    TesterViewDetailsComponent,
     TesterFormComponent,
     TestKitFormComponent,
     TestKitTableComponent,
