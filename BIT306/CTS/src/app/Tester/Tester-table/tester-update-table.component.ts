@@ -104,7 +104,9 @@ export class TesterUpdateTableComponent implements OnInit{
     this.testerService.updateTestResults(this.selectedTest.testID, this.selectedTest.username, this.selectedTest.patientType
       , this.selectedTest.symptoms, this.selectedTest.otherSymptopms, this.selectedTest.description, updatedTestStatus, this.selectedTest.date
       , this.selectedTest.tester, this.selectedTest.centre, updatedTestResult, updatedResultDate);
-      this.route.navigate(['tester-update-test/details']);
+
+      this.dataSource = this.testerService.getTests();
+
 
   }
 
@@ -137,6 +139,8 @@ export class TesterUpdateTableComponent implements OnInit{
     //get test ID
     var selectedTestID = this.selectedTest.testID;
 
+    //get existing testResult
+    var exisitingTestResult = this.selectedTest.testResult;
     //getResultDate
     //var testStatus= 'pending';
     var today = new Date();
@@ -151,6 +155,7 @@ export class TesterUpdateTableComponent implements OnInit{
     this.testUpdateForm.controls.testID.setValue(selectedTestID);
     this.testUpdateForm.controls.username.setValue(selectedUsername);
     this.testUpdateForm.controls.resultDate.setValue(resultDate);
+    this.testUpdateForm.controls.testResult.setValue(exisitingTestResult);
     this.testUpdateForm.controls['testResult'].enable();
 
   }
