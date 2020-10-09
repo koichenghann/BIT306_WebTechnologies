@@ -78,12 +78,24 @@ export class TesterService {
     this.uploadTests();
     var test = this.tests.find(test => test.tester == tester);
     //test.username= username;
-    test.patientType = patientType;
-    test.symptoms = symptoms;
+    //test.patientType = patientType;
+    //test.symptoms = symptoms;
     test.testStatus = testStatus;
-    test.otherSymptoms = otherSymptoms;
     test.resultDate = resultDate;
     test.testResult = testResult;
+    this.uploadTests();
+   }
+
+   updateTestResults(testID: string, username: string, patientType: string, symptoms: string, otherSymptoms: string, description: string, testStatus: string
+    , date: string, tester: string, centre: string, testResult: string, resultDate: string ){
+    var test = this.tests.find(test => test.testID == testID);
+    //test.username= username;
+    //test.patientType = patientType;
+    //test.symptoms = symptoms;
+    test.testStatus = testStatus;
+    test.resultDate = resultDate;
+    test.testResult = testResult;
+    this.uploadTests();
    }
 
 

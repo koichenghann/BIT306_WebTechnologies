@@ -14,7 +14,9 @@ import { FormGroup, FormBuilder, Validators, ValidationErrors, FormControl, Form
 })
 export class TesterUpdateTableComponent implements OnInit{
   testUpdateForm: FormGroup;
+  selectedTest;
 
+  userName ='';
   currentTestReports: Test[] = [];
   displayedColumns = ['testID',
                       'username',
@@ -56,24 +58,53 @@ export class TesterUpdateTableComponent implements OnInit{
 
   initializeForm(): void{
     this.testUpdateForm = this.fb.group({
-      username: ['', [
+
+      testID: [{value:'', disabled: true,}, [
         Validators.required,
       ]],
 
-      resultDate: ['', [
+      username: [{value:'', disabled: true,}, [
         Validators.required,
       ]],
 
-      testResult: ['', [
+      resultDate: [{value:'', disabled: true,}, [
+        Validators.required,
+      ]],
+
+      testResult: [{value:'', disabled: true,}, [
         Validators.required,
       ]],
 
 
     });
   }
+  get testResult(){
+    return this.testUpdateForm.get('testResult');
+  }
 
+  //get data
 
   onSubmit(): void {
+    console.log("submit Update!");
+
+    var updatedTestStatus = 'completed';
+    var today = new Date();
+    var day = String(today.getDate()).padStart(2, '0');
+    var month = String(today.getMonth() + 1).padStart(2, '0');
+    var year = today.getFullYear();
+
+    var updatedResultDate = month + '/' + day + '/' + year;
+    console.log(updatedResultDate);
+
+    var updatedTestResult = this.testResult.value;
+
+    //testID: string, username: string, patientType: string, symptoms: string, otherSymptoms: string, description: string, testStatus: string
+   // , date: string, tester: string, centre: string, testResult: string, resultDate: string
+
+    this.testerService.updateTestResults(this.selectedTest.testID, this.selectedTest.username, this.selectedTest.patientType
+      , this.selectedTest.symptoms, this.selectedTest.otherSymptopms, this.selectedTest.description, updatedTestStatus, this.selectedTest.date
+      , this.selectedTest.tester, this.selectedTest.centre, updatedTestResult, updatedResultDate);
+      this.route.navigate(['tester-update-test/details']);
 
   }
 
@@ -97,6 +128,31 @@ export class TesterUpdateTableComponent implements OnInit{
 
   editClickedHandler(row: Test){
     this.testerService.setSelectedTest(row);
+    this.selectedTest = this.testerService.getSelectedTest()
+    console.log(this.selectedTest);
+
+    //get username
+    var selectedUsername = this.selectedTest.username;
+
+    //get test ID
+    var selectedTestID = this.selectedTest.testID;
+
+    //getResultDate
+    //var testStatus= 'pending';
+    var today = new Date();
+    var day = String(today.getDate()).padStart(2, '0');
+    var month = String(today.getMonth() + 1).padStart(2, '0');
+    var year = today.getFullYear();
+
+    var resultDate = month + '/' + day + '/' + year;
+    console.log(resultDate);
+
+
+    this.testUpdateForm.controls.testID.setValue(selectedTestID);
+    this.testUpdateForm.controls.username.setValue(selectedUsername);
+    this.testUpdateForm.controls.resultDate.setValue(resultDate);
+    this.testUpdateForm.controls['testResult'].enable();
+
   }
 
   //method for search feature

@@ -18,10 +18,18 @@
         </div>
 
       <div fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="100%">
+    <mat-form-field appearance="outline" class="input-date">
+      <mat-label>TestID</mat-label>
+      <input formControlName="testID" matInput>
+
+    </mat-form-field>
+  </div>
+
+      <div fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="100%">
 
       <mat-form-field appearance="outline" class="input-username">
         <mat-label>Username</mat-label>
-        <input class="full-width" formControlName="username" matInput>
+        <input [(ngModel)]="userName" class="full-width" formControlName="username" matInput>
 
       </mat-form-field>
     </div>
@@ -46,7 +54,11 @@
       </div>
 
     <div class="form-button-group" fxFlex="100%">
-    <button mat-raised-button [ngStyle]="{background:'#439F9E' , color:'#fff'}">
+    <button
+      mat-raised-button
+      [ngStyle]= "{background:'#439F9E' , color:'#fff'}"
+
+      [disabled]="userName === ''" >
       Submit
     </button>
   </div>
