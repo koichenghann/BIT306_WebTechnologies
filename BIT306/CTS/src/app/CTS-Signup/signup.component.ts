@@ -100,9 +100,9 @@ export class CtsSignupComponent {
       this.address.value,
       ''
     );
-    this.userForm.reset();
-    this.formGroupDirective.resetForm();
-    this.userForm.setErrors({ 'invalid': true }); //to make the submit button disabled again
-    this.route.navigate(['/login']);
+    // this.userForm.reset();
+    // this.formGroupDirective.resetForm();
+    // this.userForm.setErrors({ 'invalid': true });
+    // this.route.navigate(['/login']);
   }
 }

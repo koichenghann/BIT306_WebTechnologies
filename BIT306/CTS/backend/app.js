@@ -3,7 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require("path");
 
-const Post = require('./models/post');
+// const Post = require('./models/post');
 const User = require('./models/user');
 
 const mongoose = require('mongoose');
@@ -21,7 +21,7 @@ const app = express()
 
 
 
-mongoose.connect("mongodb+srv://max:pOEjPzvU79U5ABuC@cluster0.idtz7.mongodb.net/node-angular?retryWrites=true&w=majority")
+mongoose.connect("mongodb+srv://Admin:Angular4Ever@cluster0.yjitg.mongodb.net/node-angular?retryWrites=true&w=majority")
   .then(() => {
     console.log('Connected to database')
   })

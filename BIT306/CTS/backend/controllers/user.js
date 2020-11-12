@@ -13,11 +13,16 @@ exports.test = ( req, res, next ) => {
 
 
 exports.signup = (req, res, next) => {
+  console.log('signup ran');
   bcrypt.hash(req.body.password, 10)
     .then(hash => {
       const user = new User({
-        email: req.body.email,
-        password: hash
+        username: req.body.username,
+        password: hash,
+        usertype: req.body.usertype,
+        contact: req.body.contact,
+        address: req.body.address,
+        centre: req.body.centre
       });
       user.save()
         .then(result => {
@@ -37,35 +42,38 @@ exports.signup = (req, res, next) => {
 
 
 exports.login = (req, res, next) => {
+  console.log(req.body);
   let fetchedUser;
-  User.findOne({email:req.body.email})
+  User.findOne({username:req.body.username})
     .then(user => {
       if (!user) {
         return res.status(401).json({
-          message: 'Auth failed'
+          message: 'Auth failed - user not found'
         });
       }
-      fetchedUser = User
+      fetchedUser = user
       return bcrypt.compare(req.body.password, user.password)
     })
     .then(result => {
       if (!result){
         return res.status(401).json({
-          message: 'Auth failed'
+          message: 'Auth failed - wrong password'
         });
       }
       const token = jwt.sign(
-        {email: fetchedUser.email, userId: fetchedUser._id},
+        {username: fetchedUser.username, userId: fetchedUser._id},
         'secret_this_should_be_longer',
         {expiresIn: '1h'}
       );
+      console.log(fetchedUser);
       res.status(200).json({
-        token: token
+        token: token,
+        user: fetchedUser
       })
     })
       .catch(err => {
         return res.status(401).json({
-          message: 'Auth failed'
+          message: 'Auth failed - error'
         });
       });
 }

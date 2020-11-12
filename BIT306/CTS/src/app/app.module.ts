@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { routing } from './app.routing';
+import { HttpClientModule } from '@angular/common/http';
+
 
 import { AppComponent } from './app.component';
 import { sidenavComponent } from './side-nav-component/side-nav.component'
@@ -122,7 +124,8 @@ import { TestReportDetailComponent } from './TestReport/test-report-detail/test-
     MatMenuModule,
     MatTableModule,
     MatPaginatorModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    HttpClientModule
 
   ],
   providers: [

@@ -38,31 +38,32 @@ export class CtsLoginComponent {
   }
 
   submitHandler(){
-    if(!this.userService.login(this.username.value, this.password.value)){
-      for (let name in this.userForm.controls) {
-        this.userForm.controls[name].setErrors({invalidCredential: true});
-      }
-      return;
-    }
-    this.userForm.reset();
-    this.formGroupDirective.resetForm();
-    switch (this.userService.getCurrentUser().usertype) {
-      case 'Patient':
-        this.route.navigate(['/patient-dashboard']);
-        break;
-
-      case 'Officer':
-        this.route.navigate(['/signup']);
-        break;
-
-      case 'Tester':
-        this.route.navigate(['/tester-dashboard']);
-        break;
-
-      case 'TestCentreManager':
-        this.route.navigate(['/manager-dashboard']);
-        break;
-    }
+    this.userService.login(this.username.value, this.password.value)
+    // if(!this.userService.login(this.username.value, this.password.value)){
+    //   for (let name in this.userForm.controls) {
+    //     this.userForm.controls[name].setErrors({invalidCredential: true});
+    //   }
+    //   return;
+    // }
+    // this.userForm.reset();
+    // this.formGroupDirective.resetForm();
+    // switch (this.userService.getCurrentUser().usertype) {
+    //   case 'Patient':
+    //     this.route.navigate(['/patient-dashboard']);
+    //     break;
+    //
+    //   case 'Officer':
+    //     this.route.navigate(['/signup']);
+    //     break;
+    //
+    //   case 'Tester':
+    //     this.route.navigate(['/tester-dashboard']);
+    //     break;
+    //
+    //   case 'TestCentreManager':
+    //     this.route.navigate(['/manager-dashboard']);
+    //     break;
+    // }
     //this.route.navigate(['/signup']);
   }
 }

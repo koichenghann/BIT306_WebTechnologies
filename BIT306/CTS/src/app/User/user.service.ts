@@ -1,12 +1,20 @@
 import { Injectable } from '@angular/core';
 import { User } from './user.model';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+
+
+import { Subject } from 'rxjs';
+import { Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor() { }
+  public token: string;
+  private authStatusListener = new Subject<boolean>();
+
+  constructor(private http: HttpClient, private router:Router) { }
 
   private users: User[] = [];
   private currentUser: User;
@@ -15,9 +23,68 @@ export class UserService {
 
 
 
-test(){
-  
-}
+  test(){
+
+  }
+
+
+
+  getToken() {
+  return this.token;
+  }
+
+  getAuthStatusListener() {
+    return this.authStatusListener.asObservable();
+  }
+
+  register(username: string, password: string, usertype: string, contact: string, address: string, centre: string) {
+    // const user: User = {username: email, password: password};
+    const user: User = {id: null, username:username, password:password, usertype:usertype, contact:contact, address:address, centre:centre};
+    this.http.post('http://localhost:3000/api/user/signup', user)
+      .subscribe(response => {
+        console.log(response);
+      });
+  }
+
+  login(username: string, password: string){
+    const user: User = {id: null, username:username, password:password, usertype:null, contact:null, address:null, centre:null};
+    this.http.post <{token: string, user: any}> ('http://localhost:3000/api/user/login', user)
+      .subscribe( response => {
+        console.log('logged in');
+        console.log(response.user);
+        const token = response.token;
+        const fetchedUser = {id: response.user._id, username:response.user.username, password:null, usertype:response.user.usertype, contact:response.user.contact, address:response.user.address, centre:response.user.centre};
+        this.token = token;
+        this.setCurrentUser(fetchedUser);
+        this.authStatusListener.next(true);
+        // this.router.navigate(['/']);
+      });
+
+
+      // switch (this.userService.getCurrentUser().usertype) {
+      //   case 'Patient':
+      //     this.route.navigate(['/patient-dashboard']);
+      //     break;
+      //
+      //   case 'Officer':
+      //     this.route.navigate(['/signup']);
+      //     break;
+      //
+      //   case 'Tester':
+      //     this.route.navigate(['/tester-dashboard']);
+      //     break;
+      //
+      //   case 'TestCentreManager':
+      //     this.route.navigate(['/manager-dashboard']);
+      //     break;
+      // }
+  }
+
+  logout(){
+    this.token = null;
+    this.authStatusListener.next(false);
+    // this.router.navigate(['/']);
+  }
 
 
 
@@ -49,34 +116,36 @@ test(){
 
 
 
-  register(username: string, password: string, usertype: string, contact: string, address: string, centre: string){
-    this.downloadUsers();
-    if(this.users.find(user => user.username == username)){
-      return false;
-    }
-    const id = this.generateID();
-    const user: User = {id:id, username:username, password:password, usertype:usertype, contact:contact, address:address, centre:centre};
-    this.users.push(user);
-    // console.log(this.users);
-    this.uploadUsers();
-  }
-  login(username: string, password: string){
-    this.downloadUsers();
-    var currentUser = this.users.find(user => user.username == username && user.password == password);
-    if(currentUser!=undefined){
-      this.setCurrentUser(currentUser);
-      this.uploadCurrentUser();
-      return true;
-    }
-    return false;
-  }
+  // register(username: string, password: string, usertype: string, contact: string, address: string, centre: string){
+  //   this.downloadUsers();
+  //   if(this.users.find(user => user.username == username)){
+  //     return false;
+  //   }
+  //   const id = this.generateID();
+  //   const user: User = {id:id, username:username, password:password, usertype:usertype, contact:contact, address:address, centre:centre};
+  //   this.users.push(user);
+  //   this.uploadUsers();
+  // }
+
+  // login(username: string, password: string){
+  //   this.downloadUsers();
+  //   var currentUser = this.users.find(user => user.username == username && user.password == password);
+  //   if(currentUser!=undefined){
+  //     this.setCurrentUser(currentUser);
+  //     this.uploadCurrentUser();
+  //     return true;
+  //   }
+  //   return false;
+  // }
+
   checkUsernameIsUnique(username: string){
-    this.downloadUsers();
-    if(this.users.find(user => user.username == username)){
-      return false;
-    }
+    // this.downloadUsers();
+    // if(this.users.find(user => user.username == username)){
+    //   return false;
+    // }
     return true;
   }
+
   generateID() {
     this.downloadUsers();
     //return "U"+(this.users.length + 1);
@@ -96,13 +165,16 @@ test(){
     return this.currentUser;
   }
   setCurrentUser(user: User){
+    console.log('setCurrentUser ran');
+    console.log(user);
     this.downloadCurrentUser();
     this.currentUser = user;
+    this.uploadCurrentUser();
   }
-  logout(){
-    this.currentUser = undefined;
-    this.clearCurrentUser();
-  }
+  // logout(){
+  //   this.currentUser = undefined;
+  //   this.clearCurrentUser();
+  // }
   updateCurrentUser(username: string, password: string, usertype: string, contact: string, address: string, centre: string){
     var id = this.getCurrentUser().id;
   }
