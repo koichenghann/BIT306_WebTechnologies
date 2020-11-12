@@ -13,6 +13,15 @@ export class UserService {
   private selectedTester: User;
 
 
+
+
+test(){
+  
+}
+
+
+
+
   //methods related to selected User
   setSelectedTester(tester: User){
     this.selectedTester = tester;
