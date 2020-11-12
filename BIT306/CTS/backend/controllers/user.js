@@ -5,8 +5,8 @@ const User = require("../models/user");
 
 
 exports.test = ( req, res, next ) => {
-  console.log('test');
-  res.status(201).json({message: 'test ran'});
+  console.log('test - user controller');
+  res.status(201).json({message: 'test ran - user controller'});
 }
 
 

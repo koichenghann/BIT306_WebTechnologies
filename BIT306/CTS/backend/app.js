@@ -12,8 +12,10 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const checkAuth = require("./middleware/check-auth");
 
-
-
+const userRoutes = require('./routes/user.js');
+const testCentreRoutes = require('./routes/test-centre.js');
+const testKitRoutes = require('./routes/test-kit.js');
+const testReportRoutes = require('./routes/test-report.js');
 
 const app = express()
 
@@ -36,10 +38,13 @@ app.use((req, res, next) => {
   next();
 });
 
-const userRoutes = require('./routes/user.js');
+
 // const userRoutes = require('./routes/user1.js');
 
 app.use("/api/user", userRoutes);
+app.use("/api/test-centre", testCentreRoutes);
+app.use("/api/test-kit", testKitRoutes);
+app.use("/api/test-report", testReportRoutes);
 
 
 
