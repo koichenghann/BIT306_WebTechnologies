@@ -12,6 +12,7 @@
         <mat-form-field appearance="outline" fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
           <mat-label>Username</mat-label>
           <input matInput formControlName="username" placeholder="Enter Username" type="text" required>
+          <mat-spinner *ngIf="validatingUsername" matSuffix [diameter]="18" style="float: right; margin-left: 8px"></mat-spinner>
           <mat-error *ngIf="username.errors?.required">username is required</mat-error>
           <mat-error *ngIf="username.errors?.minlength">username must be longer than {{username.errors.minlength.requiredLength}} characters</mat-error>
           <mat-error *ngIf="username.errors?.isUnique">username taken</mat-error>
@@ -58,7 +59,7 @@
         </mat-form-field>
 
         <div class="form-button-group" fxFlex="100%">
-          <button mat-raised-button color="primary" [disabled]="userForm.invalid" type="submit" id="submitButton">Sign Up</button>
+          <button mat-raised-button color="primary" [disabled]="userForm.invalid || validatingUsername" type="submit" id="submitButton">Sign Up</button>
           Already have an account? <a routerLink="/login">Login</a>
           <!-- <button mat-button color="warn" click="cancel()">Login</button> -->
           <!-- <button mat-button color="warn" click="cancel()">Cancel</button> -->

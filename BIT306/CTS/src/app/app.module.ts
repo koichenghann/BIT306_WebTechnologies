@@ -37,6 +37,8 @@ import { TesterViewDetailsComponent } from './Tester/Tester-view-details/tester-
 
 import { FormsModule }   from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 
 //Angular Material
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -125,7 +127,8 @@ import { TestReportDetailComponent } from './TestReport/test-report-detail/test-
     MatTableModule,
     MatPaginatorModule,
     MatCheckboxModule,
-    HttpClientModule
+    HttpClientModule,
+    MatProgressSpinnerModule
 
   ],
   providers: [

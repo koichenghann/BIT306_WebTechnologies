@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ValidationErrors, FormControl, FormGroupDirective  } from '@angular/forms';
 import { UserService } from '../User/user.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-cts-signup',
@@ -10,6 +11,10 @@ import { Router } from '@angular/router';
 })
 
 export class CtsSignupComponent {
+  validatingUsername: boolean = false;
+  usernameIsUnique: boolean;
+  usernameValidated: Subscription;
+
   userForm: FormGroup;
   @ViewChild(FormGroupDirective) formGroupDirective: FormGroupDirective;
   constructor(public userService: UserService, private fb: FormBuilder, private route:Router) {}
@@ -17,7 +22,7 @@ export class CtsSignupComponent {
   ngOnInit(): void {
     this.userForm = this.fb.group({
       username: ['', [
-        this.usernameIsUniqueValidator.bind(this),
+        // this.usernameIsUniqueValidator.bind(this),
         Validators.required,
         Validators.minLength(7)
       ]],
@@ -38,6 +43,27 @@ export class CtsSignupComponent {
         // Validators.required,
       ]]
     })
+
+
+    //set username error base on uniqueness
+    this.usernameValidated = this.userService.getUsernameValidatedListerner().subscribe(response => {
+      if (this.username.value == response.username) {
+        if (!response.unique) {
+          this.username.setErrors({isUnique: true});
+        }
+        this.validatingUsername = false;
+        console.log(this.username.errors);
+      }
+    });
+    //send username to be check if it's unique 
+    this.username.valueChanges.subscribe(value => {
+      this.userService.checkUsernameIsUnique(this.username.value);
+      this.validatingUsername = true;
+    });
+  }
+
+  ngOnDestroy(){
+    this.usernameValidated.unsubscribe();
   }
 
   get username(){
@@ -71,8 +97,12 @@ export class CtsSignupComponent {
     {value: 'TestCentreManager', viewValue: 'Test Centre Manager'}];
 
     usernameIsUniqueValidator(control: FormControl): ValidationErrors {
-      if(!this.userService.checkUsernameIsUnique(control.value)){
+      if(this.validatingUsername){
         return {isUnique: true};
+      } else if (!this.validatingUsername) {
+        if (this.usernameIsUnique) {
+          return {isUnique: true};
+        }
       }
       return null;
     }
@@ -83,10 +113,9 @@ export class CtsSignupComponent {
   //   this.officertype.setErrors(null);
   //   if (this.usertype.value == 'Officer') {
   //     this.usertypeflex = "50%";
-  //   }
-  // }
 
   submitHandler(){
+    // alert('submitted');
     // var actualUsertype = this.usertype.value;
     // if (this.usertype.value == 'Officer') {
     //   actualUsertype = this.officertype.value;

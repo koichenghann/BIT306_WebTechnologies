@@ -7,7 +7,7 @@ const UserController = require("../controllers/user");
 router.post("/signup", UserController.signup);
 router.post("/login", UserController.login);
 router.get("/test", UserController.test);
-
+router.post("/usernameIsUnique", UserController.checkUsernameIsUnique);
 
 
 

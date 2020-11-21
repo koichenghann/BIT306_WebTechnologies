@@ -14,7 +14,7 @@ export class UserService {
   public token: string;
   private authStatusListener = new Subject<boolean>();
   private loginResponseListener = new Subject<any>();
-  private uniqueUsernameListener = new Subject<boolean>();
+  private usernameValidatedListener = new Subject<any>();
 
   constructor(private http: HttpClient, private router:Router) { }
 
@@ -41,8 +41,8 @@ export class UserService {
   getLoginResponseListner() {
     return this.loginResponseListener.asObservable();
   }
-  getUniqueUsernameListerner() {
-    return this.uniqueUsernameListener.asObservable();
+  getUsernameValidatedListerner() {
+    return this.usernameValidatedListener.asObservable();
   }
 
   register(username: string, password: string, usertype: string, contact: string, address: string, centre: string) {
@@ -51,6 +51,7 @@ export class UserService {
     this.http.post('http://localhost:3000/api/user/signup', user)
       .subscribe(response => {
         console.log(response);
+        this.router.navigate(['/login']);
       });
   }
 
@@ -155,6 +156,15 @@ export class UserService {
     // if(this.users.find(user => user.username == username)){
     //   return false;
     // }
+    // const user: User = {id: null, username:username, password:password, usertype:usertype, contact:contact, address:address, centre:centre};
+    this.http.post('http://localhost:3000/api/user/usernameIsUnique', {username: username})
+      .subscribe(response => {
+        console.log(response);
+        this.usernameValidatedListener.next(response);
+      }, (error) => {
+        this.usernameValidatedListener.next(error.error);
+      });
+
     return true;
   }
 

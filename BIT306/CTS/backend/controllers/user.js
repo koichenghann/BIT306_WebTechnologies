@@ -10,7 +10,22 @@ exports.test = ( req, res, next ) => {
 }
 
 
-
+exports.checkUsernameIsUnique = (req, res, next) => {
+  console.log('check username is unique ran' + req.body.username);
+  User.findOne({username:req.body.username}).then( user => {
+    if (!user) {
+      return res.status(201).json({
+        username: req.body.username,
+        unique: true
+      })
+    } else {
+      return res.status(401).json({
+        username: req.body.username,
+        unique: false
+      })
+    }
+  })
+}
 
 exports.signup = (req, res, next) => {
   console.log('signup ran');
