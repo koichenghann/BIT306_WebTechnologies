@@ -27,6 +27,7 @@ export class TestCentreService {
     return this.testCentres;
   }
   getCurrentTestCentre() {
+    this.downloadTestCentre();
     return this.currentTestCentre;
   }
   // getTestCentre(officer: string){
@@ -61,11 +62,13 @@ export class TestCentreService {
       this.testCentre = response.testCentre;
       this.updateTestCentre;
       this.testCentreRetrievedListener.next(response.testCentre);
+      this.uploadTestCentre();
     }, error => {
       console.log('test centre not found: ' + error)
       this.testCentre = undefined;
       this.updateTestCentre;
       this.testCentreRetrievedListener.next(undefined);
+      this.uploadTestCentre();
     })
   }
 

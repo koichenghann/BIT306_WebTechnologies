@@ -96,23 +96,23 @@ mat-card-content{
 /**/}
 /* css from google, change it later */
 table td:nth-child(1), table th:nth-child(1){
-
+  width: 30%;
 }
 table td:nth-child(2), table th:nth-child(2){
-
+  width: calc(60% - 5em);
 }
 table td:nth-child(3), table th:nth-child(3){
-
-}
-table td:nth-child(4), table th:nth-child(4){
   width: 5em;
   text-align: center;
 }
-table td:nth-child(4) span:nth-child(1){
+table td:nth-child(4), table th:nth-child(4){
+
+}
+table td:nth-child(3) span:nth-child(1){
   margin-right: 0.5em;
   color: lightblue;
 }
-table td:nth-child(4) span:nth-child(2){
+table td:nth-child(3) span:nth-child(2){
   color: pink;
 }
 /* table td:nth-child(4) span:nth-child(1):hover{

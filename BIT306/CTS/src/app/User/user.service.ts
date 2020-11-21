@@ -16,6 +16,9 @@ export class UserService {
   private loginResponseListener = new Subject<any>();
   private usernameValidatedListener = new Subject<any>();
 
+  private testerRetrievedListener = new Subject<any>();
+  private userUpdatedListener = new Subject<any>();
+
   constructor(private http: HttpClient, private router:Router) { }
 
   private users: User[] = [];
@@ -44,6 +47,12 @@ export class UserService {
   getUsernameValidatedListerner() {
     return this.usernameValidatedListener.asObservable();
   }
+  getTesterRetrievedListener() {
+    return this.testerRetrievedListener;
+  }
+  getUserUpdatedListener() {
+    return this.userUpdatedListener;
+  }
 
   register(username: string, password: string, usertype: string, contact: string, address: string, centre: string) {
     // const user: User = {username: email, password: password};
@@ -52,6 +61,15 @@ export class UserService {
       .subscribe(response => {
         console.log(response);
         this.router.navigate(['/login']);
+      });
+  }
+  createTester(username: string, password: string, centre: string) {
+    // const user: User = {username: email, password: password};
+    const user: User = {id: null, username:username, password:password, usertype:'Tester', contact:null, address:null, centre:centre};
+    this.http.post('http://localhost:3000/api/user/signup', user)
+      .subscribe(response => {
+        console.log(response);
+        this.router.navigate(['/tester-management-table']);
       });
   }
 
@@ -99,58 +117,6 @@ export class UserService {
     // this.router.navigate(['/']);
   }
 
-
-
-
-  //methods related to selected User
-  setSelectedTester(tester: User){
-    this.selectedTester = tester;
-    this.uploadSelectedTester();
-  }
-  getSelectedTester(){
-    this.downloadSelectedTester();
-    return this.selectedTester;
-  }
-  clearSelectedTester(){
-    this.selectedTester = undefined;
-    this.RemoveSelectedTester();
-  }
-  uploadSelectedTester(){
-    localStorage.setItem('selectedTester', JSON.stringify(this.selectedTester));
-  }
-  downloadSelectedTester(){
-    this.selectedTester = JSON.parse(localStorage.getItem('selectedTester'));
-  }
-  RemoveSelectedTester(){
-    localStorage.removeItem('selectedTester')
-  }
-
-
-
-
-
-  // register(username: string, password: string, usertype: string, contact: string, address: string, centre: string){
-  //   this.downloadUsers();
-  //   if(this.users.find(user => user.username == username)){
-  //     return false;
-  //   }
-  //   const id = this.generateID();
-  //   const user: User = {id:id, username:username, password:password, usertype:usertype, contact:contact, address:address, centre:centre};
-  //   this.users.push(user);
-  //   this.uploadUsers();
-  // }
-
-  // login(username: string, password: string){
-  //   this.downloadUsers();
-  //   var currentUser = this.users.find(user => user.username == username && user.password == password);
-  //   if(currentUser!=undefined){
-  //     this.setCurrentUser(currentUser);
-  //     this.uploadCurrentUser();
-  //     return true;
-  //   }
-  //   return false;
-  // }
-
   checkUsernameIsUnique(username: string){
     // this.downloadUsers();
     // if(this.users.find(user => user.username == username)){
@@ -181,6 +147,32 @@ export class UserService {
 
 
 
+  //methods related to selected User
+  setSelectedTester(tester: User){
+    this.selectedTester = tester;
+    this.uploadSelectedTester();
+  }
+  getSelectedTester(){
+    this.downloadSelectedTester();
+    return this.selectedTester;
+  }
+  clearSelectedTester(){
+    this.selectedTester = undefined;
+    this.RemoveSelectedTester();
+  }
+  uploadSelectedTester(){
+    localStorage.setItem('selectedTester', JSON.stringify(this.selectedTester));
+  }
+  downloadSelectedTester(){
+    this.selectedTester = JSON.parse(localStorage.getItem('selectedTester'));
+  }
+  RemoveSelectedTester(){
+    localStorage.removeItem('selectedTester')
+  }
+
+
+
+
 
   getCurrentUser(){
     this.downloadCurrentUser();
@@ -193,34 +185,48 @@ export class UserService {
     this.currentUser = user;
     this.uploadCurrentUser();
   }
-  // logout(){
-  //   this.currentUser = undefined;
-  //   this.clearCurrentUser();
-  // }
+
   updateCurrentUser(username: string, password: string, usertype: string, contact: string, address: string, centre: string){
     var id = this.getCurrentUser().id;
   }
+
   updateUser(id: string, username: string, password: string, usertype: string, contact: string, address: string, centre: string) {
-    console.log('user id: ', id);
-    //this.downloadUsers();
-    var user = this.users.find(user => user.id == id);
-    user.username = username;
-    user.password = password;
-    user.contact = contact;
-    user.address = address;
-    user.centre = centre;
-    this.uploadUsers();
+    const user = {
+      id: id,
+      username: username,
+      password: password,
+      contact: contact,
+      address: address,
+      centre: centre
+    }
+
+    this.http.post('http://localhost:3000/api/user/update', user).subscribe( response => {
+      console.log('user updated succefully');
+      this.userUpdatedListener.next(true);
+
+    }, error => {
+      console.log('user update failed');
+      this.userUpdatedListener.next(false);
+    });
   }
   getUsers(){
     this.downloadUsers();
     return this.users;
   }
   getUsersByCentre(centreId: string) {
-    this.downloadUsers();
-    if ( this.users.length != 0 ) {
-      return this.users.filter(user => user.centre == centreId);
-    }
-    return [];
+    // this.downloadUsers();
+    // if ( this.users.length != 0 ) {
+    //   return this.users.filter(user => user.centre == centreId);
+    // }
+    // return [];
+    console.log('get tester: ' + centreId);
+    this.http.post<{message: string, testers: any}>('http://localhost:3000/api/user/getTester', {testCentre: centreId}).subscribe( response => {
+      console.log('tester retrieved');
+      this.testerRetrievedListener.next(response.testers);
+    }, error => {
+      console.log('tester retrieval failed: ' + error.message);
+      this.testerRetrievedListener.next([]);
+    });
   }
   getTestOfficerByCentre(centreId: string) {
     this.downloadUsers();
@@ -230,10 +236,25 @@ export class UserService {
     return [];
   }
   deleteUser(id: string) {
-    this.downloadUsers();
-    this.users.splice(this.users.findIndex(user => user.id == id), 1);
-    this.uploadUsers();
+    // this.downloadUsers();
+    // this.users.splice(this.user
+    // s.findIndex(user => user.id == id), 1);
+    // this.uploadUsers();
+    console.log('delete ran: ' + id);
+    this.http.delete('http://localhost:3000/api/user/' + id ).subscribe( response => {
+      // this.getUsersByCentre(this.getCurrentUser().id);
+    }, error => {
+
+    })
   }
+
+
+
+
+
+
+
+
 
   uploadUsers(){
     localStorage.setItem('user', JSON.stringify(this.users));

@@ -6,13 +6,13 @@ const User = require("../models/user");
 
 
 exports.test = ( req, res, next ) => {
-  console.log('test - test centre controller');
+  // console.log('test - test centre controller');
   res.status(201).json({message: 'test ran - test centre controller'});
 }
 
 
 exports.createTestCentre = ( req, res, next ) => {
-  console.log('create test centre ran');
+  // console.log('create test centre ran');
   const testCentre = new TestCentre({
     state: req.body.state,
     address: req.body.address,
@@ -20,7 +20,7 @@ exports.createTestCentre = ( req, res, next ) => {
     contact: req.body.contact
   });
   testCentre.save().then(createdTestCentre => {
-    console.log(createdTestCentre);
+    // console.log(createdTestCentre);
     User.updateOne({_id: req.body.officer}, {centre: createdTestCentre._id}).then( updateUser => {
       res.status(201).json({message: 'Test Centre Created Successfully'});
     })
@@ -61,9 +61,9 @@ exports.updateTestCentre = ( req, res, next ) => {
 
 exports.findTestCentre = (req, res, next ) => {
   // generateTestCentreId();
-  console.log('find test centre ran '+ req.body.officer);
+  // console.log('find test centre ran '+ req.body.officer);
   TestCentre.findOne({officer: req.body.officer}).populate('officer').then( testCentre => {
-    console.log(testCentre);
+    // console.log(testCentre);
     if ( !testCentre ) {
       return res.status(401).json({
         message: "test centre not found"
