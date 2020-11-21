@@ -5,7 +5,7 @@ const reportSchema = mongoose.Schema({
   username:        {type: String, required: true},
   patientType:     {type: String, required: true},
   symptoms:        {type: String, required: true},
-  otherSymptom:    {type: String, required: true},
+  otherSymptoms:    {type: String, required: true},
   description:     {type: String, required: true},
   testStatus:      {type: String, required: true},
   date:            {type: String, required: true},
