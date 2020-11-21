@@ -10,6 +10,11 @@
   font-style: italic;
 }
 
+.new-button-style{
+  padding-top: 1.5em;
+  padding-right: 3.5em;
+  text-align: right;
+}
 
 ::ng-deep .mat-focused .mat-form-field-label {
   /*change color of label*/
