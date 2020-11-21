@@ -1,5 +1,6 @@
 import { Input } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { UserService } from '../../User/user.service';
 import { TestCentre } from '../test-centre.model';
 import { TestCentreService } from '../test-centre.service';
@@ -11,21 +12,38 @@ import { TestCentreService } from '../test-centre.service';
 })
 export class TestCentreProfileComponent implements OnInit {
 
+  currentTestCentre;
+  mode = 'new';
+
+  testCentreExist: boolean;
+  retrievingTestCentre: boolean;
+  testCentreRetrieved: Subscription;
+
   constructor(public testCentreService: TestCentreService, public userService: UserService) { }
 
   ngOnInit(): void {
-    this.currentTestCentre = this.testCentreService.getTestCentre(this.userService.getCurrentUser().id);
+    this.testCentreRetrieved = this.testCentreService.getTestCentreRetrievedListener().subscribe( response => {
+      this.currentTestCentre = response;
+      this.retrievingTestCentre = false;
+      this.setMode()
+    });
     this.setMode();
+    this.retrievingTestCentre = true;
+    this.testCentreService.getTestCentre(this.userService.getCurrentUser().id);
+
+  }
+
+  ngOnDestroy(){
+    this.testCentreRetrieved.unsubscribe();
   }
 
   //@Input() testCentres: TestCentre[] = [];
 
-  currentTestCentre;
-  mode = 'new';
+
 
   setMode() {
     this.mode = 'new';
-    if( this.currentTestCentre != undefined ) {
+    if( this.currentTestCentre != undefined || this.currentTestCentre != null ) {
       this.mode = 'exist';
     } else {
 

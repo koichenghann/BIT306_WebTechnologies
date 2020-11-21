@@ -2,6 +2,7 @@
 // const jwt = require("jsonwebtoken");
 
 const TestCentre = require("../models/test-centre");
+const User = require("../models/user");
 
 
 exports.test = ( req, res, next ) => {
@@ -10,19 +11,71 @@ exports.test = ( req, res, next ) => {
 }
 
 
-export.createTestCentre = ( req, res, next ) => {
+exports.createTestCentre = ( req, res, next ) => {
+  console.log('create test centre ran');
   const testCentre = new TestCentre({
+    state: req.body.state,
+    address: req.body.address,
+    officer: req.body.officer,
+    contact: req.body.contact
+  });
+  testCentre.save().then(createdTestCentre => {
+    console.log(createdTestCentre);
+    User.updateOne({_id: req.body.officer}, {centre: createdTestCentre._id}).then( updateUser => {
+      res.status(201).json({message: 'Test Centre Created Successfully'});
+    })
+    .catch(err => {
+      res.status(401).json({message: 'Test Centre creation failed 2 at update user part'});
+    })
+  }).catch( err => {
+    res.status(401).json({message: 'Test Centre creation failed 1'});
+  })
+
+}
+//
+// function generateTestCentreId() {
+//   TestCentre.findOne({}, {}, {sort:{'created_at' : -1}}).then( response => {
+//     console.log('last test centre: ' + response);
+//     if (!response) {
+//       return 'TC0001';
+//     }
+//   }).catch( err => {
+//
+//   })
+// }
+
+
+
+exports.updateTestCentre = ( req, res, next ) => {
+  const testCentre = new  new TestCentre({
+    _id: req.body.id,
     title: req.body.title,
     content: req.body.content
   });
-  testCentre.save().then(createdTestCentre => {
+
+  TestCentre.updateOne({_id: req.params.id}, testCentre).then(result => {
+    res.status(200).json({message: "Test Centre Updated successfully!"})
+  });
+}
+
+exports.findTestCentre = (req, res, next ) => {
+  // generateTestCentreId();
+  console.log('find test centre ran '+ req.body.officer);
+  TestCentre.findOne({officer: req.body.officer}).populate('officer').then( testCentre => {
     console.log(testCentre);
+    if ( !testCentre ) {
+      return res.status(401).json({
+        message: "test centre not found"
+      });
+    }
     res.status(200).json({
-      message: 'Test Centre added successfully',
-      centreId: createdTestCentre._id
+      testCentre: testCentre,
+      message: "test centre found"
     });
   })
-
-  console.log(testCentre);
-  res.status(201).json({message: 'Test Centre added successfully'});
+  .catch( err => {
+    return res.status(401).json({
+      message: 'test centre not found'
+    });
+  })
 }

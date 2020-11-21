@@ -1,10 +1,14 @@
 const express = require("express");
 const router = express.Router();
 
-const UserController = require("../controllers/user");
+// const TestCentreController = require("../controllers/test-centre");
+const TestCentreController = require("../controllers/test-centre");
 
-
-router.get("/test", UserController.test);
+//
+router.get("/test", TestCentreController.test);
+router.post("/find", TestCentreController.findTestCentre);
+router.post("/create", TestCentreController.createTestCentre);
+router.put("/:id", TestCentreController.updateTestCentre);
 
 
 

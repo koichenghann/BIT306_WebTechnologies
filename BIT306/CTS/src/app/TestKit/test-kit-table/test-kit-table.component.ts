@@ -69,7 +69,7 @@ export class TestKitTableComponent implements OnInit {
     return this.testCentreService.getTestCentre(this.userService.getCurrentUser().id) != undefined
   }
   loadTestKits() {
-    this.currentTestKit = this.testKitService.getTestKitsByCentre(this.testCentreService.getTestCentre(this.userService.getCurrentUser().id).id);
+    this.currentTestKit = this.testKitService.getTestKitsByCentre(this.testCentreService.getCurrentTestCentre().id);
     this.dataSource = this.currentTestKit;
   }
 

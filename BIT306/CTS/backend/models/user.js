@@ -7,7 +7,7 @@ const userSchema = mongoose.Schema({
   usertype: {type: String, required: true},
   contact: {type: String},
   address: {type: String},
-  centre: {type: String}
+  centre: {type: mongoose.Schema.Types.ObjectId, ref: 'TestCentre'}
 });
 
 userSchema.plugin(uniqueValidator);

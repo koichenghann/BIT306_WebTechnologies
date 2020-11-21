@@ -39,6 +39,7 @@ export class TestCentreFormComponent implements OnInit {
         Validators.required
       ]]
     })
+
     this.id.disable();
     this.officer.disable();
     this.currentOfficer = this.userService.getCurrentUser();
@@ -97,13 +98,13 @@ export class TestCentreFormComponent implements OnInit {
 
       //assign the test centre to the currentOfficer
       var updatedOfficer = this.currentOfficer;
-      this.userService.updateUser(this.currentOfficer.id,
-                                  this.currentOfficer.username,
-                                  this.currentOfficer.password,
-                                  this.currentOfficer.usertype,
-                                  this.currentOfficer.contact,
-                                  this.currentOfficer.address,
-                                  this.id.value);
+      // this.userService.updateUser(this.currentOfficer.id,
+      //                             this.currentOfficer.username,
+      //                             this.currentOfficer.password,
+      //                             this.currentOfficer.usertype,
+      //                             this.currentOfficer.contact,
+      //                             this.currentOfficer.address,
+      //                             this.id.value);
     } else {
       this.testCentreService.updateTestCentre(this.id.value, this.officer.value, this.contact.value, this.state.value, this.address.value);
     }
@@ -118,7 +119,7 @@ export class TestCentreFormComponent implements OnInit {
   //else, load the test centre bound to current officer.
   setMode(){
     this.mode = 'add'; //change this value to 'new' if you want to replace the profile page with this page
-    this.currentTestCentre = this.testCentreService.getTestCentre(this.currentOfficer.id);
+    // this.currentTestCentre = this.testCentreService.getTestCentre(this.currentOfficer.id);
     if ( this.currentTestCentre != undefined ) {
       this.mode = 'edit'; //change this value to 'view' if you want to replace the profile page with this page
       this.populateForm();
