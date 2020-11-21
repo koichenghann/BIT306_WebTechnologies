@@ -18,6 +18,7 @@ export class UserService {
 
   private testerRetrievedListener = new Subject<any>();
   private userUpdatedListener = new Subject<any>();
+  private userDeletedListener = new Subject<boolean>();
 
   constructor(private http: HttpClient, private router:Router) { }
 
@@ -52,6 +53,9 @@ export class UserService {
   }
   getUserUpdatedListener() {
     return this.userUpdatedListener;
+  }
+  getUserDeletedListener() {
+    return this.userDeletedListener;
   }
 
   register(username: string, password: string, usertype: string, contact: string, address: string, centre: string) {
@@ -243,6 +247,7 @@ export class UserService {
     console.log('delete ran: ' + id);
     this.http.delete('http://localhost:3000/api/user/' + id ).subscribe( response => {
       // this.getUsersByCentre(this.getCurrentUser().id);
+      this.userDeletedListener.next(true);
     }, error => {
 
     })

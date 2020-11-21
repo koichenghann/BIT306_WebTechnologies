@@ -54,7 +54,7 @@
                     <td mat-cell *matCellDef="let tester"> {{tester._id}} </td>
                   </ng-container>
 
-                  
+
 
                   <ng-container matColumnDef="username">
                     <th mat-header-cell *matHeaderCellDef> Username </th>
@@ -70,7 +70,10 @@
                     <th mat-header-cell *matHeaderCellDef> Action </th>
                     <td mat-cell *matCellDef="let tester" >
                       <span (click)="editClickedHandler(tester)" class="material-icons">create</span>
-                      <span (click)="deleteClickedHandler(tester)"class="material-icons">delete</span>
+                      <span *ngIf="tester.usertype == 'Tester'" (click)="deleteClickedHandler(tester)"class="material-icons">delete</span>
+                      <!-- use another icon with white background to fill the empty space -->
+                      <span *ngIf="tester.usertype != 'Tester'" class="material-icons" style="color: white">delete</span>
+
                     </td>
                   </ng-container>
 

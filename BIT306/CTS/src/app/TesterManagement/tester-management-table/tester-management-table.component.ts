@@ -20,6 +20,7 @@ export class TesterManagementTableComponent implements OnInit {
   currentTestCentre: any;
   retrievingTester: boolean;
   testerRetrieved: Subscription;
+  testerDeleted: Subscription;
 
   currentUsers: User[] = [];
   displayedColumns = ['id', 'username', /*'password',*/ 'action'];
@@ -41,6 +42,10 @@ export class TesterManagementTableComponent implements OnInit {
     this.userService.clearSelectedTester();
 
 
+    this.testerDeleted = this.userService.getUserDeletedListener().subscribe( response => {
+      this.retrievingTester = true;
+      this.userService.getUsersByCentre(this.currentTestCentre._id);
+    })
     this.testerRetrieved = this.userService.getTesterRetrievedListener().subscribe( response => {
       this.currentUsers = response;
       this.retrievingTester = false;
@@ -65,6 +70,7 @@ export class TesterManagementTableComponent implements OnInit {
   ngOnDestroy() {
     this.testerRetrieved.unsubscribe();
     this.testCentreRetrieved.unsubscribe();
+    this.testerDeleted.unsubscribe();
   }
   editClickedHandler(row: User){
     this.userService.setSelectedTester(row);
@@ -74,7 +80,7 @@ export class TesterManagementTableComponent implements OnInit {
     if ( confirm('Do you want to delete Tester: '  + row.username + ' (' + row._id + ')')) {
       this.userService.deleteUser(row._id);
       // this.setmode()
-      this.userService.getUsersByCentre(this.currentTestCentre._id);
+      // this.userService.getUsersByCentre(this.currentTestCentre._id);
       this.retrievingTester = true;
     }
   }
