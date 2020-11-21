@@ -5,6 +5,7 @@ import { TestCentre } from '../test-centre.model';
 import { TestCentreService } from '../test-centre.service';
 import { UserService } from '../../User/user.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 
 
@@ -14,6 +15,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./test-centre-form.component.css']
 })
 export class TestCentreFormComponent implements OnInit {
+  retrievingTestCentre: boolean;
+  testCentreRetrieved: Subscription;
+
   testCentreForm: FormGroup;
   @ViewChild(FormGroupDirective) formGroupDirective: FormGroupDirective;
   constructor(public testCentreService: TestCentreService, public userService: UserService, private fb: FormBuilder, private route:Router) { }
@@ -42,9 +46,19 @@ export class TestCentreFormComponent implements OnInit {
     this.id.disable();
     this.officer.disable();
     this.currentOfficer = this.userService.getCurrentUser();
-    console.log('currentUser: ', this.userService.getCurrentUser());
+    // console.log('currentUser: ', this.userService.getCurrentUser());
     this.officer.setValue(this.currentOfficer.username);
+    // this.setMode();
+
+
+    this.testCentreRetrieved = this.testCentreService.getTestCentreRetrievedListener().subscribe( response => {
+      this.currentTestCentre = response;
+      this.retrievingTestCentre = false;
+      this.setMode()
+    });
     this.setMode();
+    this.retrievingTestCentre = true;
+    this.testCentreService.getTestCentre(this.userService.getCurrentUser().id);
   }
 
   get id(){
@@ -127,15 +141,15 @@ export class TestCentreFormComponent implements OnInit {
       // this.state.disable();
       // this.address.disable();
     } else {
-      this.id.setValue(this.testCentreService.generateNewId());
+      // this.id.setValue(this.testCentreService.generateNewId());
       this.officer.setValue(this.currentOfficer.username);
     }
   }
 
   populateForm(){
     if ( this.currentTestCentre != undefined ) {
-      this.id.setValue(this.currentTestCentre.id);
-      this.officer.setValue(this.currentTestCentre.officer);
+      this.id.setValue(this.currentTestCentre._id);
+      this.officer.setValue(this.currentTestCentre.officer.username);
       this.contact.setValue(this.currentTestCentre.contact);
       this.state.setValue(this.currentTestCentre.state);
       this.address.setValue(this.currentTestCentre.address);
@@ -163,4 +177,3 @@ export class TestCentreFormComponent implements OnInit {
   }
 
 }
-

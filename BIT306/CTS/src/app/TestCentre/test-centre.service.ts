@@ -86,6 +86,8 @@ export class TestCentreService {
     this.http.post('http://localhost:3000/api/test-centre/create', testCentre).subscribe(response => {
       console.log(response);
 
+    }, error => {
+
     });
   }
 
@@ -94,11 +96,19 @@ export class TestCentreService {
 
   updateTestCentre(id: string,  officer: string, contact: string, state: string, address: string){
     // this.downloadTestCentres();
-    var testCentre = this.testCentres.find(testCentre => testCentre.officer == officer);
-    testCentre.contact = contact;
-    testCentre.state = state;
-    testCentre.address = address;
+    // var testCentre = this.testCentres.find(testCentre => testCentre.officer == officer);
+    // testCentre.contact = contact;
+    // testCentre.state = state;
+    // testCentre.address = address;
     // this.uploadTestCentres();
+
+    const testCentre: TestCentre = { id:id, state: state, address: address, officer: officer, contact: contact};
+    this.http.put('http://localhost:3000/api/test-centre/' + testCentre.id, testCentre).subscribe(response => {
+      console.log('test centre updated: ' + response)
+    }, error => {
+
+    });
+
   }
 
   uploadTestCentre(){
