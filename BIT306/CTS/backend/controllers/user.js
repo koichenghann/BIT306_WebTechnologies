@@ -48,6 +48,8 @@ exports.login = (req, res, next) => {
     .then(user => {
       if (!user) {
         return res.status(401).json({
+          token: null,
+          user: null,
           message: 'Auth failed - user not found'
         });
       }

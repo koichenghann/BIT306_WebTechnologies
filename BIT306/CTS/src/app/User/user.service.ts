@@ -13,6 +13,8 @@ export class UserService {
 
   public token: string;
   private authStatusListener = new Subject<boolean>();
+  private loginResponseListener = new Subject<any>();
+  private uniqueUsernameListener = new Subject<boolean>();
 
   constructor(private http: HttpClient, private router:Router) { }
 
@@ -36,6 +38,12 @@ export class UserService {
   getAuthStatusListener() {
     return this.authStatusListener.asObservable();
   }
+  getLoginResponseListner() {
+    return this.loginResponseListener.asObservable();
+  }
+  getUniqueUsernameListerner() {
+    return this.uniqueUsernameListener.asObservable();
+  }
 
   register(username: string, password: string, usertype: string, contact: string, address: string, centre: string) {
     // const user: User = {username: email, password: password};
@@ -48,8 +56,9 @@ export class UserService {
 
   login(username: string, password: string){
     const user: User = {id: null, username:username, password:password, usertype:null, contact:null, address:null, centre:null};
-    this.http.post <{token: string, user: any}> ('http://localhost:3000/api/user/login', user)
+    this.http.post <{token: string, user: any, message: string}> ('http://localhost:3000/api/user/login', user)
       .subscribe( response => {
+        // alert('ran');
         console.log('logged in');
         console.log(response.user);
         const token = response.token;
@@ -57,27 +66,30 @@ export class UserService {
         this.token = token;
         this.setCurrentUser(fetchedUser);
         this.authStatusListener.next(true);
+        this.loginResponseListener.next(true);
         // this.router.navigate(['/']);
+        switch (fetchedUser.usertype) {
+          case 'Patient':
+            this.router.navigate(['/patient-dashboard']);
+            break;
+
+          case 'Officer':
+            this.router.navigate(['/signup']);
+            break;
+
+          case 'Tester':
+            this.router.navigate(['/tester-dashboard']);
+            break;
+
+          case 'TestCentreManager':
+            this.router.navigate(['/manager-dashboard']);
+            break;
+        }
+        // alert(fetchedUser.usertype);
+      }, (error) => {
+        // alert('error');
+        this.loginResponseListener.next(error);
       });
-
-
-      // switch (this.userService.getCurrentUser().usertype) {
-      //   case 'Patient':
-      //     this.route.navigate(['/patient-dashboard']);
-      //     break;
-      //
-      //   case 'Officer':
-      //     this.route.navigate(['/signup']);
-      //     break;
-      //
-      //   case 'Tester':
-      //     this.route.navigate(['/tester-dashboard']);
-      //     break;
-      //
-      //   case 'TestCentreManager':
-      //     this.route.navigate(['/manager-dashboard']);
-      //     break;
-      // }
   }
 
   logout(){
