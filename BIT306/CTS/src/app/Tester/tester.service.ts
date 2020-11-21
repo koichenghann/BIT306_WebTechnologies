@@ -1,6 +1,7 @@
-import { ThrowStmt } from '@angular/compiler';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Test } from './test.model';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -8,8 +9,7 @@ import { Test } from './test.model';
 export class TesterService {
 
 
-  constructor(){}
-
+  constructor(private http: HttpClient, private router:Router){}
   private tests: Test[] = [];
   private selectedTest: Test;
 
@@ -26,19 +26,25 @@ export class TesterService {
   }
 
   getTestsByCentre(centre: string) {
-
-    this.downloadTests();
+   // this.downloadTests();
     // console.log('downloaded test: ', this.tests);
-    if ( this.tests.length != 0 ) {
-      return this.tests.filter(test => test.centre == centre);
-    }
-    return [];
+    //if ( this.tests.length != 0 ) {
+      //return this.tests.filter(test => test.centre == centre);
+   // }
+    //return [];
+    this.http.post<{message: string, testReports: any}>('http://localhost:3000/api/test-report/getTestReport', {centre : centre})
+    .subscribe (response => {
+      console.log('test found: ' + response.testReports);
+      this.tests = response.testReports;
+    })
+    return this.tests;
   }
 
 
   getTest(tester: string){
     this.downloadTests();
     return this.tests.find(test => test.tester == tester)
+
   }
 
   getTestByUsername(username: string){
@@ -72,8 +78,12 @@ export class TesterService {
                           testResult: testResult,
                           resultDate: resultDate
                           };
-    this.tests.push(test);
-    this.uploadTests();
+    //this.tests.push(test);
+    //this.uploadTests();
+    this.http.post('http://localhost:3000/api/test-report/createTestReport', test).subscribe(response => {
+      console.log(response);
+    })
+
   }
 
 
