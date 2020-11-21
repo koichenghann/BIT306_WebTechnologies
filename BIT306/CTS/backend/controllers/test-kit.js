@@ -35,18 +35,19 @@ exports.create = ( req, res, next ) => {
 
 
 exports.retrieve = ( req, res, next ) => {
+  console.log('retrieve testkit ran: ' + JSON.stringify(req.body.centre));
   TestKit.find({centre: req.body.centre}).then( response => {
+    // console.log('testkit retrieved: ' + response);
     if ( !response ) {
       return res.status(401).json({
         message: 'TestKit not found',
         testKits: []
       })
-
-      res.status(201).json({
-        message: 'TestKit retrieved succefully!',
-        testKits: response
-      })
     }
+    res.status(201).json({
+      message: 'TestKit retrieved succefully!',
+      testKits: response
+    })
   })
   .catch( error => {
     res.status(500).json({
@@ -80,7 +81,7 @@ exports.update = ( req, res, next ) => {
 
 
 exports.delete = ( req, res, next ) => {
-  TestKit.delete({_id: req.params.id}).then( response => {
+  TestKit.deleteOne({_id: req.params.id}).then( response => {
     console.log("TestKit Deleted: " + response);
     res.status(200).json({message: "TestKit deleted succefully!"});
   })

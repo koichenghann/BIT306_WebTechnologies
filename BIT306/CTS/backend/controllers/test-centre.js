@@ -47,13 +47,6 @@ exports.createTestCentre = ( req, res, next ) => {
 
 
 exports.updateTestCentre = ( req, res, next ) => {
-  // console.log('update test centre ran: ' + req.params.id);
-  // const testCentre = new TestCentre({
-  //   _id: req.body.id,
-  //   title: req.body.title,
-  //   content: req.body.content
-  // });
-
   TestCentre.updateOne({_id: req.params.id}, {state: req.body.state, address: req.body.address, contact: req.body.contact,}).then(result => {
     res.status(200).json({message: "Test Centre Updated successfully!"})
   });

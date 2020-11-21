@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 import { ViewChild } from '@angular/core';
 import { ElementRef } from '@angular/core';
 import { ViewChildren } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { MatTableDataSource } from '@angular/material/table';
 
 
 @Component({
@@ -15,10 +17,19 @@ import { ViewChildren } from '@angular/core';
   styleUrls: ['./test-kit-table.component.css']
 })
 export class TestKitTableComponent implements OnInit {
+
+  testCentreExist: boolean = false;
+  retrievingTestCentre: boolean;
+  testCentreRetrieved: Subscription;
+  currentTestCentre: any;
+  retrievingTestKit: boolean;
+  testKitRetrieved: Subscription;
   currentTestKit: TestKit[] = [];
+  testKitDeleted: Subscription;
+
 
   displayedColumns = ['id', 'name', 'stock', 'action'];
-  dataSource = this.currentTestKit;
+  dataSource = new MatTableDataSource();
 
   tables = [0];
   mode = 'new';
@@ -30,76 +41,80 @@ export class TestKitTableComponent implements OnInit {
     this.setmode()
     this.testKitService.clearSelectedTestKit();
 
+
+    this.testKitDeleted = this.testKitService.getTestKitDeletedListener().subscribe( response => {
+      this.retrievingTestCentre = true;
+      this.testCentreService.getTestCentre(this.userService.getCurrentUser().id);
+    });
+    this.testKitRetrieved = this.testKitService.getTestKitRetrievedListener().subscribe( response => {
+      this.currentTestKit = response;
+      this.retrievingTestKit = false;
+      this.setmode();
+    });
+    this.testCentreRetrieved = this.testCentreService.getTestCentreRetrievedListener().subscribe( response => {
+      this.currentTestCentre = response;
+      this.testCentreExist = response != null;
+      this.retrievingTestCentre = false;
+      this.setmode()
+      if ( this.testCentreExist ) {
+        // console.log('current test centre: ' + this.currentTestCentre._id)
+        this.testKitService.getTestKitsByCentre(this.currentTestCentre._id);
+        this.retrievingTestKit = true;
+      }
+    });
+    this.setmode();
+    this.retrievingTestCentre = true;
+    this.testCentreService.getTestCentre(this.userService.getCurrentUser().id);
+
   }
+
+
+  ngOnDestroy() {
+    this.testCentreRetrieved.unsubscribe();
+    this.testKitRetrieved.unsubscribe();
+    this.testKitDeleted.unsubscribe();
+  }
+
 
   editClickedHandler(row: TestKit) {
     this.testKitService.setSelectedTestKit(row);
     this.route.navigate(['/test-kit-table/form']);
   }
+
+
   deleteClickedHandler(row: TestKit) {
-    if (confirm('Do you want to delete Test Kit '+ row.id + ' ' + row.name)) {
+    if (confirm('Do you want to delete Test Kit: ' + row.name + ' (' + row.id + ')')) {
       this.testKitService.deleteTestKit(row.id);
-      this.setmode();
+      // this.setmode();
+
+      // this.testKitService.getTestKitsByCentre(this.currentTestCentre._id);
+      this.retrievingTestKit = true;
     }
-
   }
-
-  addClickedHandler() {
-  }
-
 
 
   setmode() {
     this.mode = 'new';
-    if (this.checkTestCentreExist()) {
+    if (this.currentTestCentre != undefined) {
       this.mode = 'exist';
-      this.loadTestKits();
+      this.dataSource = new MatTableDataSource(this.currentTestKit);
       console.log(this.testKitService.getTestKits());
       if (this.currentTestKit.length == 0) {
         this.mode = 'empty';
-        //this.loadDummyEntries();
       }
     }
   }
 
-
-
-
-  checkTestCentreExist() {
-    return this.testCentreService.getTestCentre(this.userService.getCurrentUser().id) != undefined
-  }
-  loadTestKits() {
-    this.currentTestKit = this.testKitService.getTestKitsByCentre(this.testCentreService.getCurrentTestCentre().id);
-    this.dataSource = this.currentTestKit;
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
 
-  //method for search feature
-  searchClickedHandler() {
-    if ( this.search ) {
-      this.searchCriteria = '';
-      this.search = false;
-      this.dataSource = this.currentTestKit;
-    }
-  }
-  onSearchHandler(criteria: string) {
-    console.log('seach triggered: ', this.searchCriteria);
-    if ( criteria == '' ) {
-      this.dataSource = this.currentTestKit;
-      this.search = false;
-      return;
-    }
-    this.search = true;
-    this.dataSource = this.currentTestKit.filter(testKit => testKit.id == criteria || testKit.name.includes(criteria));
-  }
-  onBlurHandler(criteria: string) {
-    console.log('blur handler ran: ', criteria);
-    if ( criteria == '' || criteria == undefined ) {
-      this.dataSource = this.currentTestKit;
-      this.searchClickedHandler();
-    }
 
-  }
+
+
+
 
 
 }

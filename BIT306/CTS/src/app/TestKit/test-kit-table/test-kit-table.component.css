@@ -98,7 +98,7 @@ mat-card-content{
 /**/}
 /* css from google, change it later */
 table td:nth-child(1), table th:nth-child(1){
-
+  width: 40%;
 }
 table td:nth-child(2), table th:nth-child(2){
 

@@ -6,6 +6,7 @@ import { UserService } from '../../User/user.service';
 import { TestKit } from '../test-kit.model';
 import { Router } from '@angular/router';
 import { Input } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-test-kit-form',
@@ -13,6 +14,13 @@ import { Input } from '@angular/core';
   styleUrls: ['./test-kit-form.component.css']
 })
 export class TestKitFormComponent implements OnInit {
+  selectedTestKit;
+
+  retrievingTestCentre: boolean;
+  testCentreRetrieved: Subscription;
+  currentTestCentre: any;
+
+
   testKitForm: FormGroup;
   @ViewChild(FormGroupDirective) formGroupDirective: FormGroupDirective;
   //@Input() selectedTestKit: TestKit;
@@ -37,8 +45,19 @@ export class TestKitFormComponent implements OnInit {
     });
     this.id.disable();
     this.centre.disable();
-    this.currentTestCentre = this.testCentreService.getTestCentre(this.userService.getCurrentUser().id);
-    this.setMode();
+    // this.currentTestCentre = this.testCentreService.getTestCentre(this.userService.getCurrentUser().id);
+    // this.setMode();
+
+    this.testCentreRetrieved = this.testCentreService.getTestCentreRetrievedListener().subscribe( response => {
+      this.currentTestCentre = response;
+      this.retrievingTestCentre = false;
+      // this.centre.setValue(this.currentTestCentre._id);
+      this.setMode()
+    });
+    // this.setmode();
+    this.retrievingTestCentre = true;
+    this.testCentreService.getTestCentre(this.userService.getCurrentUser().id);
+
   }
 
   get id(){
@@ -54,8 +73,8 @@ export class TestKitFormComponent implements OnInit {
     return this.testKitForm.get('stock');
   }
 
-  selectedTestKit;
-  currentTestCentre;
+
+  // currentTestCentre;
   mode = 'add';
 
   setMode(){
@@ -66,8 +85,8 @@ export class TestKitFormComponent implements OnInit {
       this.populateForm();
       return;
     }
-    this.id.setValue(this.testKitService.generateID());
-    this.centre.setValue(this.currentTestCentre.id);
+    // this.id.setValue(this.testKitService.generateID());
+    this.centre.setValue(this.currentTestCentre._id);
   }
   populateForm() {
     this.id.setValue(this.selectedTestKit.id);
