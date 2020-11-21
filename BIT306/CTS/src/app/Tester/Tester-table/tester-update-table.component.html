@@ -57,7 +57,7 @@
     <button
       mat-raised-button
       [ngStyle]= "{background:'#439F9E' , color:'#fff'}"
-
+      (click)="openSnackBar()"
       [disabled]="userName === ''" >
       Submit
     </button>
