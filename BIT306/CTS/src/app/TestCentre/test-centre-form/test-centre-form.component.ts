@@ -13,7 +13,6 @@ import { Router } from '@angular/router';
   templateUrl: './test-centre-form.component.html',
   styleUrls: ['./test-centre-form.component.css']
 })
-
 export class TestCentreFormComponent implements OnInit {
   testCentreForm: FormGroup;
   @ViewChild(FormGroupDirective) formGroupDirective: FormGroupDirective;
@@ -164,3 +163,4 @@ export class TestCentreFormComponent implements OnInit {
   }
 
 }
+

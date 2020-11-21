@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ValidationErrors, FormControl, FormGroupDirective} from '@angular/forms';
 import { TesterService } from '../tester.service';
 import { Router } from '@angular/router';
 import { UserService } from '../../User/user.service';
 import { TestCentreService } from '../../TestCentre/test-centre.service';
 import {animate, state, style, transition, trigger} from '@angular/animations';
-
+import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
+import { TesterFormDialogComponent } from'../Tester-form/Tester-form-dialog/tester-form.dialog.component';
 
 @Component({
   selector:'tester-form',
@@ -21,14 +22,33 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 })
 
 export class TesterFormComponent implements OnInit{
+
+
+
   testForm: FormGroup;
   currentTestCentreID;
   currentTester;
   constructor(public testerService: TesterService
-    ,private fb: FormBuilder, private route:Router, public userService:UserService, public testCentreService: TestCentreService ){
+    ,private fb: FormBuilder, private route:Router, public userService:UserService
+    , public testCentreService: TestCentreService
+    , private dialog: MatDialog){
 
     }
 
+    //popout dialog after submit button pressed
+  onCreate(){
+    let dialogRef = this.dialog.open( TesterFormDialogComponent );
+    dialogRef.afterClosed().subscribe( result => {
+      console.log(`Dialog Result: ${result}`);
+      if(result == "true"){
+        this.onSubmit();
+        console.log("new report submmited");
+        this.route.navigate(['tester-update-test']);
+      }else{
+        console.log("dialog closed!");
+      }
+    });
+  }
 
   ngOnInit(){
     this.initializeForm();

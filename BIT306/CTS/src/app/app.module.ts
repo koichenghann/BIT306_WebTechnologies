@@ -31,16 +31,18 @@ import { TesterDashboardComponent } from './Tester/Tester-dashboard/tester-dashb
 import { TesterNavComponent } from './Tester/Tester-nav/tester-nav.component';
 import { TesterNewTestComponent } from './Tester/Tester-new-test/tester-new-test.component';
 import { TesterUpdateTestComponent } from './Tester/Tester-update-test/tester-update-test.component';
+import { TesterFormDialogComponent } from'./Tester/Tester-form/Tester-form-dialog/tester-form.dialog.component';
 import { TesterFormComponent } from'./Tester/Tester-form/tester-form.component';
 import { TesterUpdateTableComponent } from './Tester/Tester-table/tester-update-table.component';
-import { TesterViewDetailsComponent } from './Tester/Tester-view-details/tester-view-details.component'
+import { TesterViewDetailsComponent } from './Tester/Tester-view-details/tester-view-details.component';
 
 import { FormsModule }   from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
-
 //Angular Material
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -93,6 +95,7 @@ import { TestReportDetailComponent } from './TestReport/test-report-detail/test-
     TesterUpdateTestComponent,
     TesterUpdateTableComponent,
     TesterViewDetailsComponent,
+    TesterFormDialogComponent,
     TesterFormComponent,
     TestKitFormComponent,
     TestKitTableComponent,
@@ -111,6 +114,8 @@ import { TestReportDetailComponent } from './TestReport/test-report-detail/test-
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    MatSnackBarModule,
+    MatDialogModule,
     MatToolbarModule,
     MatIconModule,
     MatGridListModule,
@@ -134,6 +139,14 @@ import { TestReportDetailComponent } from './TestReport/test-report-detail/test-
   providers: [
     UserService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [
+    AppComponent
+  ],
+  entryComponents:[
+    TesterNewTestComponent,
+    TesterFormComponent,
+    TesterFormDialogComponent
+  ]
+
 })
 export class AppModule { }

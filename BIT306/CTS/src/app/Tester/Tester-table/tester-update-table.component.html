@@ -1,5 +1,12 @@
 <div class="content" fxLayout="row wrap">
 
+  <div fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="100%" class="new-button-style">
+    <button routerLink="/tester-new-test" mat-raised-button >
+      <mat-icon>add</mat-icon>
+      <span>Add New Tests</span>
+
+    </button>
+  </div>
 
 
 <div fxFlex="30%" fxFlex.xs="100%" fxFlex.sm="100%">
@@ -57,7 +64,7 @@
     <button
       mat-raised-button
       [ngStyle]= "{background:'#439F9E' , color:'#fff'}"
-
+      (click)="openSnackBar()"
       [disabled]="userName === ''" >
       Submit
     </button>
@@ -72,12 +79,14 @@
 </div>
 
 <div fxFlex="70%" fxFlex.xs="100%" fxFlex.sm="100%">
+
   <mat-card class="form-card mat-elevation-z10 mat_card_table">
+
     <mat-card-header class="mat_card_header">
+
       <mat-card-title>Test Reports</mat-card-title>
-      <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
       <div fxFlex></div>
-      <div  *ngIf="mode=='exist'" class="searchbar">
+      <div *ngIf="mode=='exist'" class="searchbar">
         <input #searchbar matInput (input)="onSearchHandler(searchCriteria)" (blur)="onBlurHandler(searchCriteria)" placeholder="search" type="text" [(ngModel)]="searchCriteria">
       </div>
       <div *ngIf="mode=='exist'" class="searchicon">
@@ -91,6 +100,8 @@
     </mat-card-header>
 
     <mat-card-content>
+
+
       <div *ngIf="mode=='empty'" id="noEntryMessage">
         No test recorded. <!--Click <a routerLink="/test-kit-table/form">here</a> to add new test kit.-->
       </div>

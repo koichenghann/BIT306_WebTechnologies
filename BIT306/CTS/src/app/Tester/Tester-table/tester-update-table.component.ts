@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { Test } from '../../Tester/test.model';
 import { TesterService } from '../../Tester/tester.service';
 import { FormGroup, FormBuilder, Validators, ValidationErrors, FormControl, FormGroupDirective} from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector:'tester-update-table',
@@ -40,7 +41,12 @@ export class TesterUpdateTableComponent implements OnInit{
   mode = 'new';
 
 
-  constructor(private fb: FormBuilder, public testCentreService: TestCentreService, public userService: UserService, public testerService: TesterService, private route:Router){}
+  constructor(private fb: FormBuilder,
+              public testCentreService: TestCentreService,
+              public userService: UserService,
+              public testerService: TesterService,
+              private route:Router,
+              private snackBar: MatSnackBar){}
 
   ngOnInit(){
     this.initializeForm();
@@ -83,9 +89,13 @@ export class TesterUpdateTableComponent implements OnInit{
   }
 
   //get data
-
+  openSnackBar() {
+    this.snackBar.open('Test result has updated!','', {
+      duration: 2000,
+    });
+  }
   onSubmit(): void {
-    console.log("submit Update!");
+    console.log("update submitted!");
 
     var updatedTestStatus = 'completed';
     var today = new Date();
