@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { TesterService } from '../../Tester/tester.service';
-import { UserService } from '../../User/user.service';
 
 @Component({
   selector:'patient-view-details',
@@ -10,12 +9,10 @@ import { UserService } from '../../User/user.service';
 
 export class PatientTableDetailsComponent implements OnInit {
   selectedTest;
-  constructor( public testerService: TesterService,
-              public userService: UserService
-    ) { }
+  constructor( public testerService: TesterService) { }
 
   ngOnInit(): void {
-    this.selectedTest = this.testerService.getTestsByUsername(this.userService.getCurrentUser().username);
+    this.selectedTest = this.testerService.getSelectedTest();
     this.setmode();
     console.log(this.selectedTest);
   }
