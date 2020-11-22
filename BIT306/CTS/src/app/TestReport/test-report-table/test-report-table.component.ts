@@ -4,6 +4,7 @@ import { UserService } from '../../User/user.service';
 import { Router } from '@angular/router';
 import { Test } from '../../Tester/test.model';
 import { TesterService } from '../../Tester/tester.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-test-report-table',
@@ -31,10 +32,20 @@ export class TestReportTableComponent implements OnInit {
   searchCriteria;
   mode = 'new';
 
+
+  testReportRetrieved: Subscription;
+  retrievingTestReport: boolean;
+
   constructor(public testCentreService: TestCentreService, public userService: UserService, public testerService: TesterService, private route:Router) { }
 
   ngOnInit(): void {
     this.setmode();
+
+    this.testReportRetrieved = this.testerService.getTestReportRetrievedListener().subscribe( response => {
+      this.currentTestReports = response;
+      this.retrievingTestReport = false;
+      this.setmode();
+    });
   }
 
   setmode() {
@@ -54,7 +65,7 @@ export class TestReportTableComponent implements OnInit {
     // console.log('all test: ', this.testerService.getTests());
     // console.log('test by centre: ', this.testerService.getTestsByCentre(this.userService.getCurrentUser().centre));
 
-    this.currentTestReports = this.testerService.getTestsByCentre(this.userService.getCurrentUser().centre);
+    //this.currentTestReports = this.testerService.getTestsByCentre(this.userService.getCurrentUser().centre);
     this.dataSource = this.currentTestReports;
   }
 

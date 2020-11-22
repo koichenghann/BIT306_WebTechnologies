@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Test } from './test.model';
 import { HttpClient } from '@angular/common/http';
+import { Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +15,7 @@ export class TesterService {
   private tests: Test[] = [];
   private selectedTest: Test;
 
+
   testID: string;
   username: string;
   patientType: string;
@@ -20,25 +23,30 @@ export class TesterService {
   testStatus: string;
   date: string;
 
+  private testReportRetrievedListener = new Subject<Test[]>();
+  private testReportCreatedListener = new Subject<Test[]>();
+  private testReportUpdatedListener = new Subject<Test[]>();
+  private testReportDeletedListener = new Subject<boolean>();
+
+  getTestReportRetrievedListener() {
+    return this.testReportRetrievedListener;
+  }
+  getTestReportCreatedListener() {
+    return this.testReportCreatedListener;
+  }
+  getTestReportUpdatedListener() {
+    return this.testReportUpdatedListener;
+  }
+  getTestReportDeletedListener() {
+    return this.testReportDeletedListener;
+  }
+
   getTests(){
     this.downloadTests();
     return this.tests;
   }
 
-  getTestsByCentre(centre: string) {
-   // this.downloadTests();
-    // console.log('downloaded test: ', this.tests);
-    //if ( this.tests.length != 0 ) {
-      //return this.tests.filter(test => test.centre == centre);
-   // }
-    //return [];
-    this.http.post<{message: string, testReports: any}>('http://localhost:3000/api/test-report/getTestReport', {centre : centre})
-    .subscribe (response => {
-      console.log('test found: ' + response.testReports);
-      this.tests = response.testReports;
-    })
-    return this.tests;
-  }
+
 
 
   getTest(tester: string){
@@ -52,6 +60,8 @@ export class TesterService {
     return this.tests.filter(test => test.username == username);
   }
 
+
+  //testID generator
   generateTestID(){
     this.downloadTests();
     // return "TRD"+(this.getTests().length+1);
@@ -61,11 +71,15 @@ export class TesterService {
     return 'TRD1';
   }
 
+
+  //add new test report
   addTest(username: string, patientType: string, symptoms: string, otherSymptoms:string, description: string, testStatus: string, date: string, tester: string
     , centre: string, testResult: string, resultDate: string){
-    this.downloadTests();
-    var testID = this.generateTestID();
-    const test: Test = {  testID: testID,
+    //this.downloadTests();
+    //var testID = this.generateTestID();
+    const testReport: Test = {
+                          id: null,
+                          testID: null,
                           username: username,
                           patientType: patientType,
                           symptoms: symptoms,
@@ -80,11 +94,53 @@ export class TesterService {
                           };
     //this.tests.push(test);
     //this.uploadTests();
-    this.http.post('http://localhost:3000/api/test-report/createTestReport', test).subscribe(response => {
+    this.http.post<{message: string, id: string}>('http://localhost:3000/api/test-report/createTestReport', testReport).subscribe(response => {
       console.log(response);
-    })
+      testReport.id = response.id;
+      this.tests.push(testReport);
+      this.testReportCreatedListener.next([...this.tests]);
+    }, error => {
 
+    })
   }
+
+  getTestsByCentre(centre: string) {
+    // this.downloadTests();
+     // console.log('downloaded test: ', this.tests);
+     //if ( this.tests.length != 0 ) {
+       //return this.tests.filter(test => test.centre == centre);
+    // }
+     //return [];
+     this.http.post<{message: string, testReports: any}>('http://localhost:3000/api/test-report/getTestReport', {centre : centre})
+     .pipe(map(data =>{
+       return data.testReports.map( testReports =>{
+         return {
+                          id: testReports._id,
+                          testID: testReports.testID,
+                           username: testReports.username,
+                           patientType: testReports.patientType,
+                           symptoms: testReports.symptoms,
+                           description: testReports.description,
+                           otherSymptoms: testReports.otherSymptoms,
+                           testStatus: testReports.testStatus,
+                           date: testReports.date,
+                           tester: testReports.tester,
+                           centre: testReports.centre,
+                           testResult: testReports.testResult,
+                           resultDate: testReports.resultDate
+         }
+       });
+     }))
+     .subscribe( response =>{
+      this.tests = response;
+      this.testReportRetrievedListener.next([...this.tests]);
+      console.log(response);
+     }, error => {
+      // console.log('get Test Report failed');
+    })
+     //console.log("getTestsByCentre's response: " +this.tests);
+     //return this.tests;
+   }
 
 
   //update exisitng test data
@@ -101,6 +157,8 @@ export class TesterService {
     this.uploadTests();
    }
 
+
+   //update test result used
    updateTestResults(testID: string, username: string, patientType: string, symptoms: string, otherSymptoms: string, description: string, testStatus: string
     , date: string, tester: string, centre: string, testResult: string, resultDate: string ){
     var test = this.tests.find(test => test.testID == testID);
@@ -112,6 +170,14 @@ export class TesterService {
     test.testResult = testResult;
     this.uploadTests();
    }
+
+
+
+
+
+
+
+
 
 
   //update data to localstorage

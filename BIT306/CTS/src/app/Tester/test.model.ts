@@ -1,4 +1,5 @@
 export interface Test {
+  id: any;
   testID: string;
   username: string;
   patientType: string;

@@ -7,6 +7,7 @@ import { Test } from '../../Tester/test.model';
 import { TesterService } from '../../Tester/tester.service';
 import { FormGroup, FormBuilder, Validators, ValidationErrors, FormControl, FormGroupDirective} from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector:'tester-update-table',
@@ -18,8 +19,15 @@ export class TesterUpdateTableComponent implements OnInit{
   selectedTest;
 
   userName ='';
+
   currentTestReports: Test[] = [];
-  displayedColumns = ['testID',
+  testCentreExist: boolean = false; //variable to check whether or not test centre exist
+  testReportsSub: Subscription;
+  retrievingTestReport: boolean;
+
+
+  //table
+  displayedColumns = ['id',
                       'username',
                       'patientType',
                       // 'symptoms',
@@ -41,6 +49,7 @@ export class TesterUpdateTableComponent implements OnInit{
   mode = 'new';
 
 
+
   constructor(private fb: FormBuilder,
               public testCentreService: TestCentreService,
               public userService: UserService,
@@ -48,15 +57,32 @@ export class TesterUpdateTableComponent implements OnInit{
               private route:Router,
               private snackBar: MatSnackBar){}
 
-  ngOnInit(){
+  ngOnInit(): void{
     this.initializeForm();
     this.setmode();
+
+    this.testerService.getTestsByCentre(this.userService.getCurrentUser().centre); //call service to get post
+    this.testReportsSub = this.testerService.getTestReportRetrievedListener()
+    .subscribe( response => {
+      this.currentTestReports = response;
+      this.retrievingTestReport = false;
+      this.setmode();
+
+
+    });
+
+  }
+
+  ngOnDestroy() {
+    this.testReportsSub.unsubscribe();
+
   }
 
   setmode() {
     this.mode = 'exist';
     this.loadTestReports();
-    console.log(this.testerService.getTests());
+
+    //console.log(this.testerService.getTests());
     if (this.currentTestReports.length == 0) {
       this.mode = 'empty';
     }
@@ -95,7 +121,7 @@ export class TesterUpdateTableComponent implements OnInit{
     });
   }
   onSubmit(): void {
-    console.log("update submitted!");
+
 
     var updatedTestStatus = 'completed';
     var today = new Date();
@@ -115,8 +141,12 @@ export class TesterUpdateTableComponent implements OnInit{
       , this.selectedTest.symptoms, this.selectedTest.otherSymptopms, this.selectedTest.description, updatedTestStatus, this.selectedTest.date
       , this.selectedTest.tester, this.selectedTest.centre, updatedTestResult, updatedResultDate);
 
-      this.currentTestReports = this.testerService.getTestsByCentre(this.userService.getCurrentUser().centre);
-      this.dataSource = this.currentTestReports;
+
+      console.log("update submitted!");
+
+      //this.testerService.getTestsByCentre(this.userService.getCurrentUser().centre);
+      //console.log(this.testerService.getTestsByCentre(this.userService.getCurrentUser().centre));
+      //this.dataSource = this.currentTestReports;
 
 
   }
@@ -129,8 +159,13 @@ export class TesterUpdateTableComponent implements OnInit{
     // console.log('all test: ', this.testerService.getTests());
     // console.log('test by centre: ', this.testerService.getTestsByCentre(this.userService.getCurrentUser().centre));
 
-    this.currentTestReports = this.testerService.getTestsByCentre(this.userService.getCurrentUser().centre);
+    //this.currentTestReports = this.testerService.getTestsByCentre(this.userService.getCurrentUser().centre);
+    //this.dataSource = this.currentTestReports;
+
+    //this.testerService.getTestsByCentre(this.userService.getCurrentUser().centre);
+    //console.log(this.testerService.getTestsByCentre(this.userService.getCurrentUser().centre));
     this.dataSource = this.currentTestReports;
+    console.log(this.currentTestReports);
   }
 
   //edit test result
@@ -150,8 +185,13 @@ export class TesterUpdateTableComponent implements OnInit{
     //get test ID
     var selectedTestID = this.selectedTest.testID;
 
+    //get testID
+    var selectedID = this.selectedTest.id;
+
     //get existing testResult
     var exisitingTestResult = this.selectedTest.testResult;
+
+
     //getResultDate
     //var testStatus= 'pending';
     var today = new Date();
@@ -162,8 +202,8 @@ export class TesterUpdateTableComponent implements OnInit{
     var resultDate = month + '/' + day + '/' + year;
     console.log(resultDate);
 
-
-    this.testUpdateForm.controls.testID.setValue(selectedTestID);
+    //bring data into the update form
+    this.testUpdateForm.controls.testID.setValue(selectedID);
     this.testUpdateForm.controls.username.setValue(selectedUsername);
     this.testUpdateForm.controls.resultDate.setValue(resultDate);
     this.testUpdateForm.controls.testResult.setValue(exisitingTestResult);
