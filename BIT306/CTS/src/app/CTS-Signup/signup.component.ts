@@ -55,7 +55,7 @@ export class CtsSignupComponent {
         console.log(this.username.errors);
       }
     });
-    //send username to be check if it's unique 
+    //send username to be check if it's unique
     this.username.valueChanges.subscribe(value => {
       this.userService.checkUsernameIsUnique(this.username.value);
       this.validatingUsername = true;
@@ -127,7 +127,7 @@ export class CtsSignupComponent {
       this.usertype.value,
       this.contact.value,
       this.address.value,
-      ''
+      null
     );
     // this.userForm.reset();
     // this.formGroupDirective.resetForm();
