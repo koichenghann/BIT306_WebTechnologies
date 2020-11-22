@@ -4,6 +4,9 @@ import { TesterService } from '../../Tester/tester.service';
 import { Test } from '../../Tester/test.model';
 import { UserService } from '../../User/user.service';
 import { Router } from '@angular/router';
+import { Observable,Subscription, interval } from 'rxjs';
+import { MatTableDataSource } from '@angular/material/table';
+
 
 @Component({
   selector:'patient-view-history',
@@ -19,6 +22,9 @@ import { Router } from '@angular/router';
 })
 
 export class PatientViewHistoryComponent implements OnInit {
+  testReportsSub: Subscription;
+  retrievingTestReport: boolean;
+
   currentTestReports: Test[] = [];
   displayedColumns = ['testID',
                       'username',
@@ -32,7 +38,7 @@ export class PatientViewHistoryComponent implements OnInit {
                       'action'
                     ];
 
-                    dataSource = this.currentTestReports;
+  dataSource = new MatTableDataSource();
 
   tables = [0];
   search = false;
@@ -45,11 +51,29 @@ export class PatientViewHistoryComponent implements OnInit {
 
 ngOnInit(): void{
   this.setmode();
+
+
+  this.testerService.getTestsByUsername(this.userService.getCurrentUser().username);
+  this.testReportsSub = this.testerService.getTestReportRetrievedListener()
+    .subscribe( response => {
+      console.log(response);
+      this.currentTestReports = response;
+      this.setmode();
+      this.retrievingTestReport = false;
+    });
 }
+
+ngOnDestroy() {
+  this.testReportsSub.unsubscribe();
+}
+
+
 setmode() {
   this.mode = 'exist';
-  this.loadTestReports();
-  console.log(this.testerService.getTests());
+  this.dataSource = new MatTableDataSource(this.currentTestReports);
+  console.log(this.currentTestReports);
+  //this.loadTestReports();
+  //console.log(this.testerService.getTests());
   if (this.currentTestReports.length == 0) {
     this.mode = 'empty';
   }
@@ -57,10 +81,11 @@ setmode() {
 
 loadTestReports() {
   console.log(this.userService.getCurrentUser().username);
-  var currentPatient = this.userService.getCurrentUser().username;
-  this.currentTestReports = this.testerService.getTestByUsername(currentPatient);
+  console.log(this.testerService.getTestsByUsername(this.userService.getCurrentUser().username));
+  //var currentPatient = this.userService.getCurrentUser().username;
+  //this.currentTestReports = this.testerService.getTestByUsername(currentPatient);
   //this.currentTestReports = this.testerService.getTests();
-    this.dataSource = this.currentTestReports;
+    //this.dataSource = new MatTableDataSource(this.currentTestReports);
 }
 
 viewClickedHandler(row: Test) {

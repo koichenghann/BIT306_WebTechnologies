@@ -104,8 +104,8 @@ export class TesterService {
     })
   }
 
-  getTestsByTester(tester: string) {
-    this.http.post<{message: string, testResports: any}>('http://localhost:3000/api/test-report/getTestsByTester', {tester: tester})
+  getTestsByUsername(username: string) {
+    this.http.post<{message: string, testResports: any}>('http://localhost:3000/api/test-report/getTestsByUsername', { username : username})
     .pipe(map(data => {
       return data.testResports.map ( testReports => {
         return {
@@ -128,7 +128,7 @@ export class TesterService {
     .subscribe( response =>{
       this.tests = response;
       this.testReportRetrievedListener.next([...this.tests]);
-      console.log(response);
+      console.log(this.testReportRetrievedListener.next([...this.tests]));
      }, error => {
       // console.log('get Test Report failed');
     })
@@ -279,6 +279,9 @@ export class TesterService {
   }
   downloadSelectedTest() {
     this.selectedTest = JSON.parse(localStorage.getItem('selectedTest'));
+    if ( this.tests == null ) {
+      this.tests = [];
+    }
   }
   removeSelectedTester() {
     localStorage.removeItem('selectedTest');

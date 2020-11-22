@@ -68,8 +68,8 @@ exports.getTestReport = (req, res, next) => {
 }
 
 //get test report (retrieve report)
-exports.getTestsByTester = (req, res, next) => {
-  TestReport.find({tester: req.body.tester}).then( response =>{
+exports.getTestsByUsername = (req, res, next) => {
+  TestReport.find({username: req.body.username}).then( response =>{
     if ( !response ){
       res.status(401).json({
         message: 'no test report found',
@@ -78,7 +78,7 @@ exports.getTestsByTester = (req, res, next) => {
     }
 
     return res.status(201).json({
-      message: 'tester retrieved',
+      message: 'test report retrieved',
       testReports: response
     })
   })

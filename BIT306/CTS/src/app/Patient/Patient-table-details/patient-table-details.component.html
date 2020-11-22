@@ -26,7 +26,7 @@
         </mat-card-header>
         <mat-card-content>
           <div *ngIf="mode=='new'" id="noEntryMessage">
-            No test report selected. Click <a routerLink="/test-report">here</a> to set select.
+            No test report has shown.
           </div>
 
           <div *ngIf="mode!='new'" fxLayout="row wrap">
@@ -35,7 +35,7 @@
                  TestID
                </div>
                <div class="cell-body">
-                 {{selectedTest.testID}}
+                 {{selectedTest.id}}
                </div>
              </div>
 

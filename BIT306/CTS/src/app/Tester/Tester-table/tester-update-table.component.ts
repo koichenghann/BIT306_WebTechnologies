@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TestCentreService } from '../../TestCentre/test-centre.service';
 import { UserService } from '../../User/user.service';
-import { User } from '../../User/user.model';
 import { Router } from '@angular/router';
 import { Test } from '../../Tester/test.model';
 import { TesterService } from '../../Tester/tester.service';
@@ -27,7 +26,7 @@ export class TesterUpdateTableComponent implements OnInit{
   testReportsSub: Subscription;
   testDeletedSub: Subscription;
   retrievingTestReport: boolean;
-  private updateSubscription: Subscription;
+
 
 
   //table
@@ -62,25 +61,8 @@ export class TesterUpdateTableComponent implements OnInit{
               private snackBar: MatSnackBar,
               private dialog: MatDialog){}
 
-       //popout dialog after submit button pressed
-       /*
-  onCreate(){
-    let dialogRef = this.dialog.open( TesterUpdateFormDialogComponent );
-    dialogRef.afterClosed().subscribe( result => {
-      console.log(`Dialog Result: ${result}`);
-      if(result == "true"){
-        this.onSubmit();
-        console.log("new report submmited");
-        this.route.navigate(['tester-update-test']);
-      }else{
-        console.log("dialog closed!");
-      }
-    });
-  }*/
-
   ngOnInit(): void{
     this.initializeForm();
-    this.setmode();
 
     this.testerService.getTestsByCentre(this.userService.getCurrentUser().centre); //call service to get post
     this.testReportsSub = this.testerService.getTestReportRetrievedListener()
