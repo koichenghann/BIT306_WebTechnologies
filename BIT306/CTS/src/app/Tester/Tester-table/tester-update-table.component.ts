@@ -7,7 +7,9 @@ import { Test } from '../../Tester/test.model';
 import { TesterService } from '../../Tester/tester.service';
 import { FormGroup, FormBuilder, Validators, ValidationErrors, FormControl, FormGroupDirective} from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Subscription } from 'rxjs';
+import { Observable,Subscription, interval } from 'rxjs';
+import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
+import { TesterUpdateFormDialogComponent } from'../Tester-update-form-dialog/tester-update-form-dialog.component';
 
 @Component({
   selector:'tester-update-table',
@@ -23,7 +25,9 @@ export class TesterUpdateTableComponent implements OnInit{
   currentTestReports: Test[] = [];
   testCentreExist: boolean = false; //variable to check whether or not test centre exist
   testReportsSub: Subscription;
+  testDeletedSub: Subscription;
   retrievingTestReport: boolean;
+  private updateSubscription: Subscription;
 
 
   //table
@@ -55,7 +59,24 @@ export class TesterUpdateTableComponent implements OnInit{
               public userService: UserService,
               public testerService: TesterService,
               private route:Router,
-              private snackBar: MatSnackBar){}
+              private snackBar: MatSnackBar,
+              private dialog: MatDialog){}
+
+       //popout dialog after submit button pressed
+       /*
+  onCreate(){
+    let dialogRef = this.dialog.open( TesterUpdateFormDialogComponent );
+    dialogRef.afterClosed().subscribe( result => {
+      console.log(`Dialog Result: ${result}`);
+      if(result == "true"){
+        this.onSubmit();
+        console.log("new report submmited");
+        this.route.navigate(['tester-update-test']);
+      }else{
+        console.log("dialog closed!");
+      }
+    });
+  }*/
 
   ngOnInit(): void{
     this.initializeForm();
@@ -65,17 +86,29 @@ export class TesterUpdateTableComponent implements OnInit{
     this.testReportsSub = this.testerService.getTestReportRetrievedListener()
     .subscribe( response => {
       this.currentTestReports = response;
+      //this.dataSource = this.currentTestReports;
       this.retrievingTestReport = false;
+      this.loadTestReports();
       this.setmode();
-
-
     });
+
+
+
+
+    this.testDeletedSub = this.testerService.getTestReportDeletedListener()
+    .subscribe( response => {
+
+
+      this.setmode();
+    });
+
+
 
   }
 
   ngOnDestroy() {
     this.testReportsSub.unsubscribe();
-
+    this.testDeletedSub.unsubscribe();
   }
 
   setmode() {
@@ -121,8 +154,6 @@ export class TesterUpdateTableComponent implements OnInit{
     });
   }
   onSubmit(): void {
-
-
     var updatedTestStatus = 'completed';
     var today = new Date();
     var day = String(today.getDate()).padStart(2, '0');
@@ -137,16 +168,17 @@ export class TesterUpdateTableComponent implements OnInit{
     //testID: string, username: string, patientType: string, symptoms: string, otherSymptoms: string, description: string, testStatus: string
    // , date: string, tester: string, centre: string, testResult: string, resultDate: string
 
-    this.testerService.updateTestResults(this.selectedTest.testID, this.selectedTest.username, this.selectedTest.patientType
+    this.testerService.updateTestReport(this.selectedTest.id, this.selectedTest.testID, this.selectedTest.username, this.selectedTest.patientType
       , this.selectedTest.symptoms, this.selectedTest.otherSymptopms, this.selectedTest.description, updatedTestStatus, this.selectedTest.date
       , this.selectedTest.tester, this.selectedTest.centre, updatedTestResult, updatedResultDate);
 
 
       console.log("update submitted!");
-
+      this.route.navigate(['tester-update-test']);
       //this.testerService.getTestsByCentre(this.userService.getCurrentUser().centre);
       //console.log(this.testerService.getTestsByCentre(this.userService.getCurrentUser().centre));
       //this.dataSource = this.currentTestReports;
+
 
 
   }
@@ -190,8 +222,6 @@ export class TesterUpdateTableComponent implements OnInit{
 
     //get existing testResult
     var exisitingTestResult = this.selectedTest.testResult;
-
-
     //getResultDate
     //var testStatus= 'pending';
     var today = new Date();
@@ -201,6 +231,7 @@ export class TesterUpdateTableComponent implements OnInit{
 
     var resultDate = month + '/' + day + '/' + year;
     console.log(resultDate);
+    console.log(this.selectedTest.patientType);
 
     //bring data into the update form
     this.testUpdateForm.controls.testID.setValue(selectedID);
@@ -209,6 +240,11 @@ export class TesterUpdateTableComponent implements OnInit{
     this.testUpdateForm.controls.testResult.setValue(exisitingTestResult);
     this.testUpdateForm.controls['testResult'].enable();
 
+  }
+
+  deleteClickedHandler(row: Test){
+    var selectedDeleteID = row.id;
+    this.testerService.deleteTestReport(selectedDeleteID);
   }
 
   //method for search feature

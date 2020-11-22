@@ -17,7 +17,7 @@ exports.test = ( req, res, next ) => {
 exports.createTestReport = (req, res, next) => {
   console.log ("create test report method ran.");
   const testReport = new TestReport({
-    testID: req.body._id,
+    testID: req.body.id,
     username: req.body.username,
     patientType: req.body.patientType,
     symptoms: req.body.symptoms,
@@ -67,11 +67,35 @@ exports.getTestReport = (req, res, next) => {
   });
 }
 
+//get test report (retrieve report)
+exports.getTestsByTester = (req, res, next) => {
+  TestReport.find({tester: req.body.tester}).then( response =>{
+    if ( !response ){
+      res.status(401).json({
+        message: 'no test report found',
+        testReport: []
+      })
+    }
+
+    return res.status(201).json({
+      message: 'tester retrieved',
+      testReports: response
+    })
+  })
+  .catch ( err => {
+    res.status(500).json({
+      message: 'error occured on getting TestReport',
+      error: err
+    })
+  });
+}
+
 //update test report
 exports.updateTestReport = (req, res, next) =>{
   const updatedTestReport = {
+
     username: req.body.username,
-    patientType: req.body.patientTyp,
+    patientType: req.body.patientType,
     symptoms: req.body.symptoms,
     otherSymptoms: req.body.otherSymptoms,
     description: req.body.description,
@@ -95,7 +119,7 @@ exports.updateTestReport = (req, res, next) =>{
   }
 
 //delete test report
-exports.delete = (req, res, next)=> {
+exports.deleteTestReport = (req, res, next)=> {
   TestReport.deleteOne({_id: req.params.id}).then( response => {
     console.log("Test Report deleted: " + response);
     res.status(200).json({message: "Test report deleted successfully!"});

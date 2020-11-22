@@ -34,6 +34,7 @@ import { TesterUpdateTestComponent } from './Tester/Tester-update-test/tester-up
 import { TesterFormDialogComponent } from'./Tester/Tester-form/Tester-form-dialog/tester-form.dialog.component';
 import { TesterFormComponent } from'./Tester/Tester-form/tester-form.component';
 import { TesterUpdateTableComponent } from './Tester/Tester-table/tester-update-table.component';
+import { TesterUpdateFormDialogComponent } from './Tester/Tester-update-form-dialog/tester-update-form-dialog.component';
 import { TesterViewDetailsComponent } from './Tester/Tester-view-details/tester-view-details.component';
 
 import { FormsModule }   from '@angular/forms';
@@ -94,6 +95,7 @@ import { TestReportDetailComponent } from './TestReport/test-report-detail/test-
     TesterNewTestComponent,
     TesterUpdateTestComponent,
     TesterUpdateTableComponent,
+    TesterUpdateFormDialogComponent,
     TesterViewDetailsComponent,
     TesterFormDialogComponent,
     TesterFormComponent,
@@ -145,7 +147,8 @@ import { TestReportDetailComponent } from './TestReport/test-report-detail/test-
   entryComponents:[
     TesterNewTestComponent,
     TesterFormComponent,
-    TesterFormDialogComponent
+    TesterFormDialogComponent,
+    TesterUpdateFormDialogComponent
   ]
 
 })

@@ -104,6 +104,37 @@ export class TesterService {
     })
   }
 
+  getTestsByTester(tester: string) {
+    this.http.post<{message: string, testResports: any}>('http://localhost:3000/api/test-report/getTestsByTester', {tester: tester})
+    .pipe(map(data => {
+      return data.testResports.map ( testReports => {
+        return {
+          id: testReports._id,
+          testID: testReports.testID,
+           username: testReports.username,
+           patientType: testReports.patientType,
+           symptoms: testReports.symptoms,
+           description: testReports.description,
+           otherSymptoms: testReports.otherSymptoms,
+           testStatus: testReports.testStatus,
+           date: testReports.date,
+           tester: testReports.tester,
+           centre: testReports.centre,
+           testResult: testReports.testResult,
+           resultDate: testReports.resultDate
+        }
+      })
+    }))
+    .subscribe( response =>{
+      this.tests = response;
+      this.testReportRetrievedListener.next([...this.tests]);
+      console.log(response);
+     }, error => {
+      // console.log('get Test Report failed');
+    })
+  }
+
+
   getTestsByCentre(centre: string) {
     // this.downloadTests();
      // console.log('downloaded test: ', this.tests);
@@ -144,8 +175,30 @@ export class TesterService {
 
 
   //update exisitng test data
-  updateTest(testID: string, username: string, patientType: string, symptoms: string, otherSymptoms: string, description: string, testStatus: string
+  updateTestReport(id: string, testID: string, username: string, patientType: string, symptoms: string, otherSymptoms: string, description: string, testStatus: string
     , date: string, tester: string, centre: string, testResult: string, resultDate: string ){
+
+    const testReport :Test = {
+                          id: id,
+                          testID: testID,
+                          username: username,
+                          patientType: patientType,
+                          symptoms: symptoms,
+                          description:description,
+                          otherSymptoms:otherSymptoms,
+                          testStatus: testStatus,
+                          date: date,
+                          tester: tester,
+                          centre: centre,
+                          testResult: testResult,
+                          resultDate: resultDate
+    };
+    this.http.put('http://localhost:3000/api/test-report/' + id, testReport)
+    .subscribe(response => {
+      console.log(response);
+    }, error => {
+      console.log(error);
+    });
 
     var test = this.tests.find(test => test.tester == tester);
     //test.username= username;
@@ -157,8 +210,21 @@ export class TesterService {
     this.uploadTests();
    }
 
+  deleteTestReport(id:string){
+    this.http.delete('http://localhost:3000/api/test-report/' + id)
+    .subscribe(response =>{
+      console.log('test report deleted: ' + response);
+      this.testReportDeletedListener.next(true);
+    }, error => {
+      console.log(error);
+    })
+  }
+
+
+
 
    //update test result used
+   /*
    updateTestResults(testID: string, username: string, patientType: string, symptoms: string, otherSymptoms: string, description: string, testStatus: string
     , date: string, tester: string, centre: string, testResult: string, resultDate: string ){
     var test = this.tests.find(test => test.testID == testID);
@@ -170,7 +236,7 @@ export class TesterService {
     test.testResult = testResult;
     this.uploadTests();
    }
-
+   */
 
 
 

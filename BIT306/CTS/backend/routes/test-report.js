@@ -8,8 +8,10 @@ router.get("/test", UserController.test);
 router.get("/test", TestReportController.test);
 router.post("/getTestReport", TestReportController.getTestReport);
 //router.post("/find", TestReportController.findTestReport);
+router.post("/getTestsByTester",TestReportController.getTestsByTester)
 router.post("/createTestReport", TestReportController.createTestReport);
 router.put("/:id", TestReportController.updateTestReport);
+router.delete("/:id", TestReportController.deleteTestReport);
 
 
 
