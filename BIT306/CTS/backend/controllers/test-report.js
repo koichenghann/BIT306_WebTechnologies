@@ -69,15 +69,18 @@ exports.getTestReport = (req, res, next) => {
 
 //get test report (retrieve report)
 exports.getTestsByUsername = (req, res, next) => {
+  console.log('get test by username ran: ' + JSON.stringify(req.body.username));
   TestReport.find({username: req.body.username}).then( response =>{
+    // console.log('tests retrieved by username \'' + req.body.username +'\': ' + JSON.stringify(response));
     if ( !response ){
-      res.status(401).json({
+      console.log('test retrieved by username failed');
+      return  res.status(401).json({
         message: 'no test report found',
-        testReport: []
+        testReports: []
       })
     }
-
-    return res.status(201).json({
+    console.log('test retrieved by username success');
+    res.status(201).json({
       message: 'test report retrieved',
       testReports: response
     })

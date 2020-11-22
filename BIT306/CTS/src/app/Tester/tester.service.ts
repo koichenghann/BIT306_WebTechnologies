@@ -105,9 +105,10 @@ export class TesterService {
   }
 
   getTestsByUsername(username: string) {
-    this.http.post<{message: string, testResports: any}>('http://localhost:3000/api/test-report/getTestsByUsername', { username : username})
+    console.log('get report ran');
+    this.http.post<{message: string, testReports: any}>('http://localhost:3000/api/test-report/getTestsByUsername', { username : username})
     .pipe(map(data => {
-      return data.testResports.map ( testReports => {
+      return data.testReports.map ( testReports => {
         return {
           id: testReports._id,
           testID: testReports.testID,
@@ -126,6 +127,7 @@ export class TesterService {
       })
     }))
     .subscribe( response =>{
+      console.log('test report retrieved succefully: ' + response);
       this.tests = response;
       this.testReportRetrievedListener.next([...this.tests]);
       console.log(this.testReportRetrievedListener.next([...this.tests]));
