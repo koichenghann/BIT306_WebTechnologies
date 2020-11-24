@@ -5,6 +5,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 import { Subject } from 'rxjs';
 import { Router} from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
+
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +22,7 @@ export class UserService {
   private userUpdatedListener = new Subject<any>();
   private userDeletedListener = new Subject<boolean>();
 
-  constructor(private http: HttpClient, private router:Router) { }
+  constructor(private http: HttpClient, private router:Router, private _snackBar: MatSnackBar) { }
 
   private users: User[] = [];
   private currentUser: User;
@@ -65,6 +67,7 @@ export class UserService {
       .subscribe(response => {
         console.log(response);
         this.router.navigate(['/login']);
+        this.openSnackBar('Account registered successfully.', null);
       });
   }
   createTester(username: string, password: string, centre: string) {
@@ -74,6 +77,7 @@ export class UserService {
       .subscribe(response => {
         console.log(response);
         this.router.navigate(['/tester-management-table']);
+        this.openSnackBar('Test Officer account created successfully.', null);
       });
   }
 
@@ -207,10 +211,12 @@ export class UserService {
     this.http.post('http://localhost:3000/api/user/update', user).subscribe( response => {
       console.log('user updated succefully');
       this.userUpdatedListener.next(true);
+      this.openSnackBar('User profile updated succefully.', null);
 
     }, error => {
       console.log('user update failed');
       this.userUpdatedListener.next(false);
+      this.openSnackBar('User profile update failed.', null);
     });
   }
   getUsers(){
@@ -248,6 +254,7 @@ export class UserService {
     this.http.delete('http://localhost:3000/api/user/' + id ).subscribe( response => {
       // this.getUsersByCentre(this.getCurrentUser().id);
       this.userDeletedListener.next(true);
+      this.openSnackBar('User deleted successfully.', null);
     }, error => {
 
     })
@@ -278,6 +285,12 @@ export class UserService {
   }
   clearCurrentUser(){
     localStorage.removeItem('currentUser');
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration:  2000,
+    });
   }
 
 

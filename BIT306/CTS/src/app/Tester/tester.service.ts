@@ -4,6 +4,8 @@ import { Test } from './test.model';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
+import {MatSnackBar} from '@angular/material/snack-bar';
+
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +13,7 @@ import { map } from 'rxjs/operators';
 export class TesterService {
 
 
-  constructor(private http: HttpClient, private router:Router){}
+  constructor(private http: HttpClient, private router:Router, private _snackBar: MatSnackBar){}
   private tests: Test[] = [];
   private selectedTest: Test;
 
@@ -287,6 +289,12 @@ export class TesterService {
   }
   removeSelectedTester() {
     localStorage.removeItem('selectedTest');
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration:  2000,
+    });
   }
 
 

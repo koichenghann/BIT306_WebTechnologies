@@ -27,7 +27,7 @@
                 <input #searchbar matInput (keyup)="applyFilter($event)" placeholder="search" type="text" [(ngModel)]="searchCriteria">
               </div>
               <div *ngIf="mode=='exist'" class="searchicon">
-                <span (click)="searchClickedHandler()" class="material-icons">{{search ? 'close' : 'search' }}</span>
+                <span  class="material-icons">search</span>
               </div>
               <div class="header-button-group">
                  <a *ngIf="mode!='new'" routerLink="/test-kit-table/form"><span class="material-icons">add</span></a>

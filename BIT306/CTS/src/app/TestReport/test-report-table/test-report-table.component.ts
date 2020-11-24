@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Test } from '../../Tester/test.model';
 import { TesterService } from '../../Tester/tester.service';
 import { Subscription } from 'rxjs';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-test-report-table',
@@ -12,7 +13,14 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./test-report-table.component.css']
 })
 export class TestReportTableComponent implements OnInit {
+  testCentreExist: boolean = false;
+  retrievingTestCentre: boolean;
+  testCentreRetrieved: Subscription;
+  currentTestCentre: any;
+  retrievingTestReport: boolean;
+  testReportRetrieved: Subscription;
   currentTestReports: Test[] = [];
+  dataSource = new MatTableDataSource();
 
   displayedColumns = ['testID',
                       'username',
@@ -25,16 +33,13 @@ export class TestReportTableComponent implements OnInit {
                       // 'tester',
                       'action'
                     ];
-  dataSource = this.currentTestReports;
 
   tables = [0];
-  search = false;
-  searchCriteria;
+  // search = false;
+  // searchCriteria;
   mode = 'new';
 
 
-  testReportRetrieved: Subscription;
-  retrievingTestReport: boolean;
 
   constructor(public testCentreService: TestCentreService, public userService: UserService, public testerService: TesterService, private route:Router) { }
 
@@ -42,68 +47,60 @@ export class TestReportTableComponent implements OnInit {
     this.setmode();
 
     this.testReportRetrieved = this.testerService.getTestReportRetrievedListener().subscribe( response => {
+      this.dataSource = new MatTableDataSource(response);
       this.currentTestReports = response;
       this.retrievingTestReport = false;
       this.setmode();
     });
+    this.testCentreRetrieved = this.testCentreService.getTestCentreRetrievedListener().subscribe( response => {
+      this.currentTestCentre = response;
+      this.testCentreExist = response != null;
+      this.retrievingTestCentre = false;
+      this.setmode()
+      if ( this.testCentreExist ) {
+        // console.log('current test centre: ' + this.currentTestCentre._id)
+        // this.testKitService.getTestKitsByCentre(this.currentTestCentre._id);
+        this.testerService.getTestsByCentre(this.currentTestCentre._id);
+        this.retrievingTestReport = true;
+      }
+    });
+    this.setmode();
+    this.retrievingTestCentre = true;
+    this.testCentreService.getTestCentre(this.userService.getCurrentUser().id);
+
+  }
+
+  ngOnDestroy() {
+    this.testCentreRetrieved.unsubscribe();
+    this.testReportRetrieved.unsubscribe();
   }
 
   setmode() {
-    this.mode = 'exist';
-    this.loadTestReports();
-    console.log(this.testerService.getTests());
     if (this.currentTestReports.length == 0) {
       this.mode = 'empty';
     }
+    this.mode = 'new';
+    if (this.currentTestCentre != undefined) {
+      this.mode = 'exist';
+      if (this.currentTestReports.length == 0) {
+        this.mode = 'empty';
+      }
+    }
   }
-  // checkTestCentreExist() {
-  //   return this.testCentreService.getTestCentre(this.userService.getCurrentUser().id) != undefined
-  // }
-  loadTestReports() {
-    // console.log('currentUser: ', this.userService.getCurrentUser())
-    // console.log('test centre: ', this.userService.getCurrentUser().centre);
-    // console.log('all test: ', this.testerService.getTests());
-    // console.log('test by centre: ', this.testerService.getTestsByCentre(this.userService.getCurrentUser().centre));
 
-    //this.currentTestReports = this.testerService.getTestsByCentre(this.userService.getCurrentUser().centre);
-    this.dataSource = this.currentTestReports;
-  }
+
 
   viewClickedHandler(row: Test) {
     this.testerService.setSelectedTest(row);
     this.route.navigate(['/test-report/detail'])
   }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 
-  //method for search feature
-  searchClickedHandler() {
-    if ( this.search ) {
-      this.searchCriteria = '';
-      this.search = false;
-      this.dataSource = this.currentTestReports;
-    }
-  }
-  onSearchHandler(criteria: string) {
-    if ( criteria == '' ) {
-      this.dataSource = this.currentTestReports;
-      this.search = false;
-      return;
-    }
-    this.search = true;
-    this.dataSource = this.currentTestReports.filter(
-      item => item.testID.includes(criteria) ||
-      item.username.includes(criteria) ||
-      item.patientType.includes(criteria) ||
-      item.testStatus.includes(criteria) ||
-      item.date.includes(criteria));
-  }
-  onBlurHandler(criteria: string) {
-    console.log('blur handler ran: ', criteria);
-    if ( criteria == '' || criteria == undefined ) {
-      this.dataSource = this.currentTestReports;
-      this.searchClickedHandler();
-    }
 
-  }
+
 
 }

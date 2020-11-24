@@ -24,10 +24,10 @@
               <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
               <div fxFlex></div>
               <div  *ngIf="mode=='exist'" class="searchbar">
-                <input #searchbar matInput (input)="onSearchHandler(searchCriteria)" (blur)="onBlurHandler(searchCriteria)" placeholder="search" type="text" [(ngModel)]="searchCriteria">
+                <input #searchbar matInput (keyup)="applyFilter($event)" placeholder="search" type="text" [(ngModel)]="searchCriteria">
               </div>
               <div *ngIf="mode=='exist'" class="searchicon">
-                <span (click)="searchClickedHandler()" class="material-icons">{{search ? 'close' : 'search' }}</span>
+                <span  class="material-icons">search</span>
               </div>
 
               <!-- <div class="header-button-group">
@@ -37,16 +37,22 @@
             </mat-card-header>
 
             <mat-card-content>
-              <div *ngIf="mode=='empty'" id="noEntryMessage">
+              <div *ngIf="mode=='new' && !retrievingTestCentre && !retrievingTestReport" id="noEntryMessage">
+                Test centre not found. Click <a routerLink="/test-centre-table/form">here</a> to set up test centre.
+              </div>
+              <div *ngIf="mode=='empty' && !retrievingTestCentre && !retrievingTestReport" id="noEntryMessage">
                 No test recorded. <!--Click <a routerLink="/test-kit-table/form">here</a> to add new test kit.-->
               </div>
+              <div>
+                <mat-spinner *ngIf="retrievingTestCentre || retrievingTestReport"  [diameter]="18" style="margin: 2em auto 1em auto"></mat-spinner>
+              </div>
 
-              <div *ngIf="mode=='exist'" class="table-container mat-elevation-z0">
+              <div *ngIf="mode=='exist' && !retrievingTestCentre && !retrievingTestReport" class="table-container mat-elevation-z0">
                 <table mat-table [dataSource]="dataSource">
 
                   <ng-container matColumnDef="testID">
-                    <th mat-header-cell *matHeaderCellDef> TestID </th>
-                    <td mat-cell *matCellDef="let test"> {{test.testID}} </td>
+                    <th mat-header-cell *matHeaderCellDef> ID </th>
+                    <td mat-cell *matCellDef="let test"> {{test.id}} </td>
                   </ng-container>
 
                   <ng-container matColumnDef="username">
