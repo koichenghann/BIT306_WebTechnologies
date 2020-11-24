@@ -43,14 +43,14 @@ const APP_ROUTES: Routes = [
   {path:'test-report', component: TestReportTableComponent},
   {path:'test-report/detail', component: TestReportDetailComponent},
 
-  {path:'patient-dashboard', component: PatientDashboardComponent},
-  {path:'patient-view-history', component: PatientViewHistoryComponent},
-  {path:'patient-view-history/detail', component: PatientTableDetailsComponent},
+  {path:'patient-dashboard', component: PatientDashboardComponent, canActivate: [PatientGuard]},
+  {path:'patient-view-history', component: PatientViewHistoryComponent, canActivate: [PatientGuard]},
+  {path:'patient-view-history/detail', component: PatientTableDetailsComponent, canActivate: [PatientGuard]},
 
-  {path:'tester-dashboard', component: TesterDashboardComponent},
-  {path:'tester-new-test', component: TesterNewTestComponent},
-  {path:'tester-update-test', component: TesterUpdateTestComponent},
-  {path:'tester-update-test/details', component: TesterViewDetailsComponent},
+  {path:'tester-dashboard', component: TesterDashboardComponent, canActivate: [TesterGuard]},
+  {path:'tester-new-test', component: TesterNewTestComponent, canActivate: [TesterGuard]},
+  {path:'tester-update-test', component: TesterUpdateTestComponent, canActivate: [TesterGuard]},
+  {path:'tester-update-test/details', component: TesterViewDetailsComponent, canActivate: [TesterGuard]},
 
   {path:'officer-dashboard', component: OfficerDashboardComponent},
   {path:'manager-dashboard', component: ManagerDashboardComponent, canActivate: [TestCentreManagerGuard]},

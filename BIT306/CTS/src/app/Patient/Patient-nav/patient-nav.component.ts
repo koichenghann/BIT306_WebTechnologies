@@ -3,6 +3,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import { UserService } from 'src/app/User/user.service';
 
 @Component({
   selector:'patient-nav',
@@ -17,7 +18,7 @@ export class PatientNavComponent {
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(private breakpointObserver: BreakpointObserver, public userService: UserService) {}
     userType = 'Patient';
     //userType    = this.getUserType();
 
@@ -89,7 +90,7 @@ export class PatientNavComponent {
     }
 
     logout(){
-      //this.auhtService.logout();
+      this.userService.logout();
     }
 
 }

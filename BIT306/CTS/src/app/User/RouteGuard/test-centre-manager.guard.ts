@@ -14,8 +14,8 @@ export class TestCentreManagerGuard implements CanActivate {
       if (this.userService.getCurrentUser() != undefined && this.userService.getCurrentUser().usertype == 'TestCentreManager') {
         return true;
       }
+      
       this.router.navigate(['./']);
-
       if (this.userService.getCurrentUser() != undefined && this.userService.getCurrentUser().usertype != 'TestCentreManager') {
         alert('Access denied.');
       } else {
