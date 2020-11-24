@@ -53,13 +53,13 @@ const APP_ROUTES: Routes = [
   {path:'tester-update-test/details', component: TesterViewDetailsComponent},
 
   {path:'officer-dashboard', component: OfficerDashboardComponent},
-  {path:'manager-dashboard', component: ManagerDashboardComponent},
-  {path:'test-centre-profile', component: TestCentreProfileComponent/*, canActivate: [TestCentreManagerGuard]*/},
-  {path:'test-centre-profile/form', component: TestCentreFormComponent/*, canActivate: [TestCentreManagerGuard]*/},
-  {path:'test-kit-table', component: TestKitTableComponent},
-  {path:'test-kit-table/form', component: TestKitFormComponent},
-  {path:'tester-management-table', component: TesterManagementTableComponent},
-  {path:'tester-management-table/form', component: TesterManagementFormComponent}
+  {path:'manager-dashboard', component: ManagerDashboardComponent, canActivate: [TestCentreManagerGuard]},
+  {path:'test-centre-profile', component: TestCentreProfileComponent, canActivate: [TestCentreManagerGuard]},
+  {path:'test-centre-profile/form', component: TestCentreFormComponent, canActivate: [TestCentreManagerGuard]},
+  {path:'test-kit-table', component: TestKitTableComponent, canActivate: [TestCentreManagerGuard]},
+  {path:'test-kit-table/form', component: TestKitFormComponent, canActivate: [TestCentreManagerGuard]},
+  {path:'tester-management-table', component: TesterManagementTableComponent, canActivate: [TestCentreManagerGuard]},
+  {path:'tester-management-table/form', component: TesterManagementFormComponent, canActivate: [TestCentreManagerGuard]}
 ];
 
 export const routing = RouterModule.forRoot(APP_ROUTES);

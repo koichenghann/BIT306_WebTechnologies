@@ -120,6 +120,8 @@ export class UserService {
   logout(){
     this.token = null;
     this.authStatusListener.next(false);
+    this.clearCurrentUser();
+    this.openSnackBar('Logged out', null);
     // this.router.navigate(['/']);
   }
 

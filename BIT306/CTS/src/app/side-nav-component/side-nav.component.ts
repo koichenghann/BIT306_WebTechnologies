@@ -31,7 +31,7 @@ export class sidenavComponent {
   }
 
   logout() {
-    //this.authService.logout();
+    this.userService.logout();
   }
 
   //titleName(){
