@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { TestCentre } from './test-centre.model';
+import {MatSnackBar} from '@angular/material/snack-bar';
+
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +13,7 @@ import { TestCentre } from './test-centre.model';
 export class TestCentreService {
   private testCentreRetrievedListener = new Subject<TestCentre>();
 
-  constructor(private http: HttpClient, private router:Router) { }
+  constructor(private http: HttpClient, private router:Router, private _snackBar: MatSnackBar) { }
 
   private testCentres: TestCentre[] = [];
   private testCentre: TestCentre;
@@ -30,30 +32,7 @@ export class TestCentreService {
     this.downloadTestCentre();
     return this.currentTestCentre;
   }
-  // getTestCentre(officer: string){
-  //
-  //   this.http.get<{message: string, testCentre: any}>('http://localhost:3000/api/test-centre', {officerId: officer})
-  //   .pipe(map((testCentreData) => {
-  //     return testCentreData.testCentre.map(testCentre => {
-  //       return {
-  //         id: testCentre._id,
-  //         state: testCentre.state,
-  //         address: testCentre.address,
-  //         officer: testCentre.officer,
-  //         contact: testCentre.contact,
-  //       };
-  //     });
-  //   }))
-  //   .subscribe((transformedTestCentre) => {
-  //     this.testCentre = transformedTestCentre;
-  //     this.uploadTestCentre();
-  //     this.testCentreRetrievedListener.next(this.testCentre);
-  //   }, (error) => {
-  //     this.testCentre = undefined;
-  //     this.uploadTestCentre();
-  //     this.testCentreRetrievedListener.next(undefined);
-  //   });
-  // }
+
 
   getTestCentre(officer: string) {
     this.http.post<{message: string, testCentre: any}>('http://localhost:3000/api/test-centre/find', {officer: officer})
@@ -74,7 +53,6 @@ export class TestCentreService {
 
 
   generateNewId(){
-    // this.downloadTestCentres();
     if ( this.testCentres.length > 0) {
       return 'TC' + (parseInt(this.testCentres[this.testCentres.length-1].id.replace('TC',''), 10)+1);
     }
@@ -82,13 +60,9 @@ export class TestCentreService {
   }
 
   addTestCentre(id: string,  officer: string, contact: string, state: string, address: string){
-    // this.downloadTestCentres();
     const testCentre: TestCentre = { id:null, state: state, address: address, officer: officer, contact: contact};
-    // this.testCentres.push(testCentre);
-    // this.uploadTestCentres()
     this.http.post('http://localhost:3000/api/test-centre/create', testCentre).subscribe(response => {
-      console.log(response);
-
+      this.openSnackBar('Test centre added successfully.', null);
     }, error => {
 
     });
@@ -98,16 +72,9 @@ export class TestCentreService {
 
 
   updateTestCentre(id: string,  officer: string, contact: string, state: string, address: string){
-    // this.downloadTestCentres();
-    // var testCentre = this.testCentres.find(testCentre => testCentre.officer == officer);
-    // testCentre.contact = contact;
-    // testCentre.state = state;
-    // testCentre.address = address;
-    // this.uploadTestCentres();
-
     const testCentre: TestCentre = { id:id, state: state, address: address, officer: officer, contact: contact};
     this.http.put('http://localhost:3000/api/test-centre/' + testCentre.id, testCentre).subscribe(response => {
-      console.log('test centre updated: ' + response)
+      this.openSnackBar('Test centre updated successfully.', null);
     }, error => {
 
     });
@@ -120,13 +87,11 @@ export class TestCentreService {
   downloadTestCentre(){
     this.currentTestCentre = JSON.parse(localStorage.getItem('currentTestCentres'));
   }
-  // uploadCurrentUser(){
-  //   localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
-  // }
-  // downloadCurrentUser(){
-  //   this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-  // }
-  // clearCurrentUser(){
-  //   localStorage.setItem('currentUser', null);
-  // }
+
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration:  2000,
+    });
+  }
 }

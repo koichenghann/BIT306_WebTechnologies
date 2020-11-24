@@ -5,6 +5,8 @@ import { Subject } from 'rxjs';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
+import {MatSnackBar} from '@angular/material/snack-bar';
+
 
 
 @Injectable({
@@ -12,7 +14,7 @@ import { map } from 'rxjs/operators';
 })
 export class TestKitService {
 
-  constructor(private http: HttpClient, private router:Router) { }
+  constructor(private http: HttpClient, private router:Router, private _snackBar: MatSnackBar) { }
 
   private testKits: TestKit[] = [];
   private currentTestCentre: TestCentre;
@@ -68,6 +70,7 @@ export class TestKitService {
       testKit.id = response.id;
       this.testKits.push(testKit)
       this.testKitCreatedListener.next([...this.testKits]);
+      this.openSnackBar('Test kit added successfully.', null);
     }, error => {
 
     })
@@ -108,6 +111,7 @@ export class TestKitService {
     .subscribe(response => {
       // console.log(response);
       this.router.navigate(['/test-kit-table']);
+      this.openSnackBar('Test kit updated successfully.', null);
     }, error => {
 
     });
@@ -123,7 +127,7 @@ export class TestKitService {
       // this.testKitUpdatedListener.next([...this.testKits]);
       console.log('testkit deleted: ' + response);
       this.testKitDeletedListener.next(true);
-
+      this.openSnackBar('Test kit deleted successfully.', null);
     }, error => {
 
     })
@@ -145,23 +149,25 @@ export class TestKitService {
   uploadTestKit() {
     localStorage.setItem('testKit', JSON.stringify(this.testKits));
   }
-
   downloadTestKit() {
     this.testKits = JSON.parse(localStorage.getItem('testKit'));
     if ( this.testKits == null ) {
       this.testKits = [];
     }
   }
-
   uploadSelectedTestKit() {
     localStorage.setItem('selectedTestKit', JSON.stringify(this.selectedTestKit));
   }
-
   downloadSelectedTestKit() {
     this.selectedTestKit = JSON.parse(localStorage.getItem('selectedTestKit'));
   }
-
   removeSelectedTestKit() {
     localStorage.removeItem('selectedTestKit');
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration:  2000,
+    });
   }
 }

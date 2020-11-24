@@ -9,6 +9,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable,Subscription, interval } from 'rxjs';
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { TesterUpdateFormDialogComponent } from'../Tester-update-form-dialog/tester-update-form-dialog.component';
+import { MatTableDataSource } from '@angular/material/table';
+
 
 @Component({
   selector:'tester-update-table',
@@ -25,6 +27,7 @@ export class TesterUpdateTableComponent implements OnInit{
   testCentreExist: boolean = false; //variable to check whether or not test centre exist
   testReportsSub: Subscription;
   testDeletedSub: Subscription;
+  testUpdatedSub: Subscription;
   retrievingTestReport: boolean;
 
 
@@ -44,7 +47,9 @@ export class TesterUpdateTableComponent implements OnInit{
                       'action'
 
                     ];
-  dataSource = this.currentTestReports;
+  // dataSource = this.currentTestReports;
+  dataSource = new MatTableDataSource();
+
 
   tables = [0];
   search = false;
@@ -64,25 +69,28 @@ export class TesterUpdateTableComponent implements OnInit{
   ngOnInit(): void{
     this.initializeForm();
 
-    this.testerService.getTestsByCentre(this.userService.getCurrentUser().centre); //call service to get post
     this.testReportsSub = this.testerService.getTestReportRetrievedListener()
     .subscribe( response => {
       this.currentTestReports = response;
-      //this.dataSource = this.currentTestReports;
+      this.dataSource = new MatTableDataSource(response);
       this.retrievingTestReport = false;
       this.loadTestReports();
       this.setmode();
     });
 
+    this.testerService.getTestsByCentre(this.userService.getCurrentUser().centre); //call service to get post
 
 
 
-    this.testDeletedSub = this.testerService.getTestReportDeletedListener()
-    .subscribe( response => {
 
-
+    this.testDeletedSub = this.testerService.getTestReportDeletedListener().subscribe( response => {
+      this.dataSource = new MatTableDataSource(response);
       this.setmode();
     });
+    this.testUpdatedSub = this.testerService.getTestReportUpdatedListener().subscribe( response => {
+      this.dataSource = new MatTableDataSource(response);
+      this.setmode();
+    })
 
 
 
@@ -91,11 +99,12 @@ export class TesterUpdateTableComponent implements OnInit{
   ngOnDestroy() {
     this.testReportsSub.unsubscribe();
     this.testDeletedSub.unsubscribe();
+    this.testUpdatedSub.unsubscribe();
   }
 
   setmode() {
     this.mode = 'exist';
-    this.loadTestReports();
+    // this.loadTestReports();
 
     //console.log(this.testerService.getTests());
     if (this.currentTestReports.length == 0) {
@@ -178,8 +187,8 @@ export class TesterUpdateTableComponent implements OnInit{
 
     //this.testerService.getTestsByCentre(this.userService.getCurrentUser().centre);
     //console.log(this.testerService.getTestsByCentre(this.userService.getCurrentUser().centre));
-    this.dataSource = this.currentTestReports;
-    console.log(this.currentTestReports);
+    // this.dataSource = this.currentTestReports;
+    // console.log(this.currentTestReports);
   }
 
   //edit test result

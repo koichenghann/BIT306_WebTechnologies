@@ -28,7 +28,7 @@ export class TesterService {
   private testReportRetrievedListener = new Subject<Test[]>();
   private testReportCreatedListener = new Subject<Test[]>();
   private testReportUpdatedListener = new Subject<Test[]>();
-  private testReportDeletedListener = new Subject<boolean>();
+  private testReportDeletedListener = new Subject<Test[]>();
 
   getTestReportRetrievedListener() {
     return this.testReportRetrievedListener;
@@ -101,6 +101,7 @@ export class TesterService {
       testReport.id = response.id;
       this.tests.push(testReport);
       this.testReportCreatedListener.next([...this.tests]);
+      this.openSnackBar('Test report has been added.', null);
     }, error => {
 
     })
@@ -200,6 +201,8 @@ export class TesterService {
     this.http.put('http://localhost:3000/api/test-report/' + id, testReport)
     .subscribe(response => {
       console.log(response);
+      this.tests[this.tests.indexOf(this.tests.find(test => test.id == id))] = testReport;
+      this.testReportUpdatedListener.next([...this.tests]);
     }, error => {
       console.log(error);
     });
@@ -218,7 +221,8 @@ export class TesterService {
     this.http.delete('http://localhost:3000/api/test-report/' + id)
     .subscribe(response =>{
       console.log('test report deleted: ' + response);
-      this.testReportDeletedListener.next(true);
+      this.tests.splice(this.tests.indexOf(this.tests.find(test => test.id == id)), 1);
+      this.testReportDeletedListener.next([...this.tests]);
     }, error => {
       console.log(error);
     })
