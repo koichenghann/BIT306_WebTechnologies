@@ -243,27 +243,27 @@ export class TesterUpdateTableComponent implements OnInit{
     if ( this.search ) {
       this.searchCriteria = '';
       this.search = false;
-      this.dataSource = this.currentTestReports;
+      //this.dataSource = this.currentTestReports;
     }
   }
   onSearchHandler(criteria: string) {
     if ( criteria == '' ) {
-      this.dataSource = this.currentTestReports;
+      //this.dataSource = this.currentTestReports;
       this.search = false;
       return;
     }
     this.search = true;
-    this.dataSource = this.currentTestReports.filter(
+    //this.dataSource = this.currentTestReports.filter(
       item => item.testID.includes(criteria) ||
       item.username.includes(criteria) ||
       item.patientType.includes(criteria) ||
       item.testStatus.includes(criteria) ||
-      item.date.includes(criteria));
+      item.date.includes(criteria);
   }
   onBlurHandler(criteria: string) {
     console.log('blur handler ran: ', criteria);
     if ( criteria == '' || criteria == undefined ) {
-      this.dataSource = this.currentTestReports;
+      //this.dataSource = this.currentTestReports;
       this.searchClickedHandler();
     }
 
